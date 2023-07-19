@@ -1,0 +1,14 @@
+{
+  "name": "sketch.io",
+  "version": "1.0.0",
+  "description": "A clone of skribbl.io made using React, Socket.io and Javascript.",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "socket.io": "^4.7.1"
+  }
+}
