@@ -13,3 +13,7 @@ document.querySelector('button').onclick = () => {
     button.innerText = "Send"
     input.value = ""
 }
+
+socket.on('canvasData', (data) => {
+    data.forEach(drawAction)
+})
