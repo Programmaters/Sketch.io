@@ -1,16 +1,15 @@
+let x, y, px, py = 0
 let drawColor = 'black'
 const eraseColor = 'white'
 const drawWeight = 5
 const eraseWeight = 10
+const easing = 0.3
+const canvasWidth = 800
+const canvasHeight = 600
 
-var x = 0,
-    y = 0,
-    px = 0,
-    py = 0,
-    easing = 0.3;
 
 function setup() {
-    const canvas = createCanvas(800, 600)
+    const canvas = createCanvas(canvasWidth, canvasHeight)
     background(255) // set the background color to white
     socket.on('drawingAction', drawAction) // listen for drawing actions from the server
     canvas.elt.addEventListener('contextmenu', (e) => e.preventDefault()) // disable right-click context menu on canvas
@@ -18,54 +17,33 @@ function setup() {
 
 
 function mouseDragged() {
-
-    // determine if it's a left-click (draw) or right-click (erase) action
     const selectElement = document.getElementById("color-select")
-    const selectedColor = selectElement.options[selectElement.selectedIndex].value;
-
+    const selectedColor = selectElement.options[selectElement.selectedIndex].value
+    
+    // determine if it's a left-click (draw) or right-click (erase) action
     const color = mouseButton === LEFT ? selectedColor : eraseColor
     const weight = mouseButton === LEFT ? drawWeight : eraseWeight
-    const data = {
-      x: mouseX,
-      y: mouseY,
-      px: pmouseX,
-      py: pmouseY,
-      color,
-      weight
-    }
+
+    x += (mouseX- x) * easing
+    y += (mouseY - y) * easing
+
+    const data = { x, y, px, py, color, weight }
     socket.emit('drawingAction', data) // send drawing action to the server
     drawAction(data) // draw the action immediately on the client-side
-}
 
-function reset() {
     px = x
     py = y
 }
 
-// function to draw the received action on the canvas
 function mousePressed() {
-    // Assign current mouse position to variables.
-    x = mouseX;
-    y = mouseY;
-    px = mouseX;
-    py = mouseY; 
-    // Prevent default functionality.
-    return false;
+    x = mouseX
+    px = mouseX
+    y = mouseY
+    py = mouseY
 }
-
 
 function drawAction(data) {
-    x += (data.x - x) * easing;
-    y += (data.y - y) * easing;
-    stroke(data.color) // set stroke color
-    strokeWeight(data.weight);
-    line(x, y, px, py);
-    px = x;
-    py = y; 
-}
-
-function receiveDraw(data) {
-    stroke(data.color) // set stroke color
-    strokeWeight(data.weight);
-    line(data.x, data.y, data.px, data.py);
+    stroke(data.color)
+    strokeWeight(data.weight)
+    line(data.x, data.y, data.px, data.py)
 }

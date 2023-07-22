@@ -7,8 +7,7 @@ socket.on('message', text => {
 })
 
 socket.on('canvasData', (data) => {
-    data.forEach(receiveDraw)
-    reset()
+    data.forEach(drawAction)
 })
 
 socket.on('clearCanvas', () => {
