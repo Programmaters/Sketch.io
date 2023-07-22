@@ -1,0 +1,11 @@
+body {
+    background-color: darkgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+* {
+    overflow-x: hidden;
+}

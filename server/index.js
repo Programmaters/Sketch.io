@@ -5,6 +5,8 @@ const http = createServer()
 const io = new Server(http, { cors: { origin: "*" } })
 const users = {}
 let canvasData = []
+let canvasTimeline = []
+let prevCanvasData = []
 
 io.on('connection', (socket) => {
     socket.emit('canvasData', canvasData)
@@ -26,6 +28,18 @@ io.on('connection', (socket) => {
     socket.on('clearCanvas', () => {
         canvasData = []
         socket.broadcast.emit('clearCanvas')
+        canvasTimeline.push([...canvasData])
+    })
+
+    socket.on('mouseReleased', () => {
+        if(prevCanvasData) canvasTimeline.push(prevCanvasData)
+        prevCanvasData = [...canvasData]
+    })
+
+    socket.on('undo', () => {
+        canvasData = canvasTimeline.pop() || []
+        socket.broadcast.emit('canvasData', canvasData)
+        socket.emit('canvasData', canvasData)
     })
 })
 
