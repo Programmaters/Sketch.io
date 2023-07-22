@@ -4,7 +4,7 @@ import { Server } from 'socket.io'
 const http = createServer()
 const io = new Server(http, { cors: { origin: "*" } })
 const users = {}
-const canvasData = []
+let canvasData = []
 
 io.on('connection', (socket) => {
     socket.emit('canvasData', canvasData)
@@ -21,6 +21,11 @@ io.on('connection', (socket) => {
     socket.on('drawingAction', (data) => {
         canvasData.push(data)
         socket.broadcast.emit('drawingAction', data)
+    })
+
+    socket.on('clearCanvas', () => {
+        canvasData = []
+        socket.broadcast.emit('clearCanvas')
     })
 })
 
