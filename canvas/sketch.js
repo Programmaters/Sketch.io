@@ -2,7 +2,7 @@ let x, y, px, py = 0
 let mouseInCanvas = false
 let drawColor = 'black'
 const eraseColor = 'white'
-const drawWeight = 5
+let drawWeight = 5
 const eraseWeight = 10
 const easing = 0.3
 const canvasWidth = 800
@@ -81,4 +81,8 @@ async function drawAction(data) {
 
 function clearCanvas() {
     background(255)
+}
+
+function setBrushSize(brushSize) {
+    drawWeight = brushSize
 }

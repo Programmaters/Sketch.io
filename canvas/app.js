@@ -33,3 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
     drawCursor.style.backgroundColor = 'black'
 })
 
+document.querySelector('#bucket-button').onclick = () => {
+    socket.emit('bucket')
+}
+
+document.querySelector('#brush-size').addEventListener('change', (e) => setBrushSize(e.target.value))
