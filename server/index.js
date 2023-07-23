@@ -4,10 +4,10 @@ import { Server } from 'socket.io'
 const http = createServer()
 const io = new Server(http, { cors: { origin: "*" } })
 const users = {}
-const maxUndos = 10
 let canvasData = []
 let canvasTimeline = []
 let prevCanvasData = []
+let settings = {}
 
 io.on('connection', (socket) => {
     socket.emit('canvasData', canvasData)
@@ -15,6 +15,10 @@ io.on('connection', (socket) => {
     socket.on('message', (message) => {
         if (!users[socket.id]) {
             users[socket.id] = message
+            
+            if (users.length > settings.maxPlayers) {
+                socket.disconnect()
+            }
             return
         }
         io.emit('message', `${users[socket.id]}: ${message}`)
@@ -34,15 +38,24 @@ io.on('connection', (socket) => {
     socket.on('mouseReleased', () => {
         if(prevCanvasData) canvasTimeline.push(prevCanvasData)
         prevCanvasData = [...canvasData]
-        if(canvasTimeline.length > maxUndos) canvasTimeline.shift()
     })
 
     socket.on('undo', () => {
-        canvasData = canvasTimeline.length != 0 ? [...canvasTimeline.pop()] : canvasData
+        canvasData = canvasTimeline.length != 0 ? [...canvasTimeline.pop()] : []
         prevCanvasData = [...canvasData]
         socket.broadcast.emit('canvasData', canvasData)
         socket.emit('canvasData', canvasData)
     })
-})
 
+    socket.on('onUpdateSettings', (newSettings) => {
+        settings = newSettings
+        console.log(settings)
+    })
+
+    socket.on('start', () => {
+        console.log("RICARDO É GAY")
+        // call game logic function with settings
+    })
+
+})
 io.listen(8080, () => console.log('listening on http://localhost:8080') )
