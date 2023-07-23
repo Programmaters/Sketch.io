@@ -4,6 +4,7 @@ import { Server } from 'socket.io'
 const http = createServer()
 const io = new Server(http, { cors: { origin: "*" } })
 const users = {}
+const maxUndos = 10
 let canvasData = []
 let canvasTimeline = []
 let prevCanvasData = []
@@ -33,10 +34,11 @@ io.on('connection', (socket) => {
     socket.on('mouseReleased', () => {
         if(prevCanvasData) canvasTimeline.push(prevCanvasData)
         prevCanvasData = [...canvasData]
+        if(canvasTimeline.length > maxUndos) canvasTimeline.shift()
     })
 
     socket.on('undo', () => {
-        canvasData = canvasTimeline.length != 0 ? [...canvasTimeline.pop()] : []
+        canvasData = canvasTimeline.length != 0 ? [...canvasTimeline.pop()] : canvasData
         prevCanvasData = [...canvasData]
         socket.broadcast.emit('canvasData', canvasData)
         socket.emit('canvasData', canvasData)

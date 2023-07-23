@@ -28,6 +28,6 @@ body {
     position: absolute;
     width: 10px;
     height: 10px;
-    border: 2px solid #fff;
+    border: 2px solid gray;
     border-radius: 50%;
 }

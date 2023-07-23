@@ -7,14 +7,22 @@ let mouseInCanvas = false
 let brushSize = 5
 let brushColor = 'black'
 
+/**
+ * Function called when the page is loaded
+ * Setup the canvas
+ */
 function setup() {
     const canvas = createCanvas(canvasWidth, canvasHeight)
     clearCanvas()
-    socket.on('drawingAction', drawAction) // listen for drawing actions from the server
+    socket.on('drawingAction', drawLine) // listen for drawing actions from the server
     document.addEventListener('contextmenu', (e) => e.preventDefault())
     handleMouseMove(canvas)
 }
 
+/**
+ * Function to handle the mouse move event
+ * @param {Canvas} canvas 
+ */
 function handleMouseMove(canvas) {
     const drawCursor = document.querySelector('#draw-cursor')
 
@@ -42,44 +50,80 @@ function handleMouseMove(canvas) {
     })
 }
 
+/**
+ * Function called when the mouse is dragged
+ * Draw and emit the drawing action to the server
+ */
 function mouseDragged() {
     x += (mouseX- x) * easing
     y += (mouseY - y) * easing
-    const data = { x, y, px, py, color: brushColor, size: brushSize }
-    socket.emit('drawingAction', data) // send drawing action to the server
-    drawAction(data) // draw the action immediately on the client-side
+    drawAction()
     px = x
     py = y
 }
 
+/**
+ * Function called when the mouse is pressed
+ * Update coordinate positions
+ * Draw and emit the drawing action to the server
+ */
 function mousePressed() {
     x = mouseX
     px = mouseX
     y = mouseY
     py = mouseY
+    drawAction()
 }
 
+/**
+ * Function called when the mouse is released
+ * Emit the mouseReleased event to the server
+ */
 function mouseReleased() {
     if (mouseInCanvas) {
         socket.emit('mouseReleased')
     }
 }
 
-async function drawAction(data) {
+/**
+ * Draw a line in the canvas and emit the drawing action to the server
+ */
+function drawAction() {
+    const data = { x, y, px, py, color: brushColor, size: brushSize }
+    socket.emit('drawingAction', data)
+    drawLine(data)
+}
+
+/**
+ * Draw a line in the canvas
+ * @param {Object} data - line data
+ */
+function drawLine(data) {
     stroke(data.color)
     strokeWeight(data.size)
     line(data.x, data.y, data.px, data.py)
 }
 
+/**
+ * Clear the canvas
+ */
 function clearCanvas() {
     background(255)
 }
 
+/**
+ * Set the brush color
+ * @param {String} targetColor 
+ */
 function setBrushColor(targetColor) {
     brushColor = targetColor
     document.querySelector('#draw-cursor').style.backgroundColor = targetColor
 }
 
+/**
+ * Set the brush size
+ * @param {int} targetSize 
+ */
 function setBrushSize(targetSize) {
     brushSize = targetSize
 }

@@ -1,11 +1,14 @@
 const socket = io('ws://localhost:8080')
 
+// listens for canvas data from server
 socket.on('canvasData', (data) => {
     clearCanvas()
-    data.forEach(drawAction)
+    data.forEach(drawLine)
 })
 
+// listens for clear canvas event from server
 socket.on('clearCanvas', clearCanvas)
+
 
 document.querySelector('#clear-button').onclick = () => {
     socket.emit('clearCanvas')
