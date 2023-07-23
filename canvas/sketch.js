@@ -6,6 +6,7 @@ let x, y, px, py = 0
 let mouseInCanvas = false
 let brushSize = 5
 let brushColor = 'black'
+let drawMode = 'draw' // draw, erase, picker, fill
 
 /**
  * Function called when the page is loaded
@@ -72,7 +73,24 @@ function mousePressed() {
     px = mouseX
     y = mouseY
     py = mouseY
-    drawAction()
+
+    switch (drawMode) {
+        case 'draw':
+            drawAction()
+            break;
+        case 'erase':
+            setBrushColor('white')
+            drawAction()
+            break;
+        case 'picker':
+            const color = `rgba(${get(x, y)})`
+            setBrushColor(color)
+            setDrawMode('draw')
+            break;
+        case 'fill':
+            // TODO
+            break;
+    }
 }
 
 /**
@@ -129,8 +147,16 @@ function setBrushSize(targetSize) {
 }
 
 /**
+ * Set the draw mode
+ */
+function setDrawMode(targetMode) {
+    drawMode = targetMode
+}
+
+/**
  * Saves the canvas as a png file 
  */
 function saveDraw() {
     saveCanvas('myCanvas', 'png')
 }
+

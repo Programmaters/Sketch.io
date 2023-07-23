@@ -14,11 +14,13 @@ document.querySelector('#clear-button').onclick = () => {
 
 document.querySelector('#undo-button').onclick = () => { socket.emit('undo') }
 
-document.querySelector('#erase-button').onclick = () => { setBrushColor('white') }
+document.querySelector('#erase-button').onclick = () => { setDrawMode('erase') }
 
 document.querySelector('#brush-size').addEventListener('change', (e) => setBrushSize(e.target.value))
 
 document.querySelector('#save-button').onclick = saveDraw
+
+document.querySelector('#color-picker-button').onclick = () => { setDrawMode('picker') }
     
 document.addEventListener('DOMContentLoaded', () => {
     const colorPalette = document.querySelector('#color-palette')
@@ -27,7 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const option = document.createElement('div')
         option.classList.add('color-option')
         option.style.backgroundColor = color
-        option.onclick = () => { setBrushColor(color) }
+        option.onclick = () => { 
+            setDrawMode('draw')
+            setBrushColor(color)
+        }
         colorPalette.appendChild(option)
     })
     const drawCursor = document.querySelector('#draw-cursor')
