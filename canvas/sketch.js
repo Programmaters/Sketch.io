@@ -127,3 +127,10 @@ function setBrushColor(targetColor) {
 function setBrushSize(targetSize) {
     brushSize = targetSize
 }
+
+/**
+ * Saves the canvas as a png file 
+ */
+function saveDraw() {
+    saveCanvas('myCanvas', 'png')
+}
