@@ -46,27 +46,26 @@ function arrayEquals(a, b) {
     let queue = [];
     queue.push(seed);
   
-    while (queue.length) {
-      let current = queue.shift();
-      index = 4 * (width * current.y + current.x);
+    for (let i = 0; i < queue.length; i += 4) {
+      let current = queue[i];
+
       let color = [
-        pixels[index],
-        pixels[index + 1],
-        pixels[index + 2],
-        pixels[index + 3],
+        pixels[i],
+        pixels[i + 1],
+        pixels[i + 2],
+        pixels[i + 3],
       ];
   
       if (!arrayEquals(color, seedColor)) {
         continue;
       }
   
-      for (let i = 0; i < 4; i++) {
-        pixels[index+i] = fillColor[0 + i];
+      for (let j = 0; j < 4; j++) {
+        pixels[i+j] = fillColor[j];
       }
       
-      queue = expandToNeighbours(queue, current)  
+      queue = expandToNeighbours(queue, current)  // cheira me que seja aqui o erro ass: Diogo
     }
     
     updatePixels()
-    
   }

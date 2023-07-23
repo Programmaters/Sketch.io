@@ -2,7 +2,7 @@ const socket = io('ws://localhost:8080')
 
 socket.on('canvasData', (data) => {
     clearCanvas()
-    data.forEach(drawAction)
+    data.forEach(drawLine)
 })
 
 socket.on('clearCanvas', clearCanvas)
