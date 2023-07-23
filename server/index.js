@@ -37,7 +37,8 @@ io.on('connection', (socket) => {
     })
 
     socket.on('undo', () => {
-        canvasData = canvasTimeline.pop() || []
+        canvasData = canvasTimeline.length != 0 ? [...canvasTimeline.pop()] : []
+        prevCanvasData = [...canvasData]
         socket.broadcast.emit('canvasData', canvasData)
         socket.emit('canvasData', canvasData)
     })
