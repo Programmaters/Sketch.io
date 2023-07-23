@@ -16,6 +16,8 @@ document.querySelector('#undo-button').onclick = () => { socket.emit('undo') }
 
 document.querySelector('#erase-button').onclick = () => { setDrawMode('erase') }
 
+document.querySelector('#fill-button').onclick = () => { setDrawMode('fill') }
+
 document.querySelector('#brush-size').addEventListener('change', (e) => setBrushSize(e.target.value))
 
 document.querySelector('#save-button').onclick = saveDraw
