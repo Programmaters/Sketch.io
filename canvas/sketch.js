@@ -18,6 +18,7 @@ function setup() {
     document.addEventListener('mousemove', (e) => {
         // check if the mouse is within the canvas boundaries
         const canvasRect = canvas.elt.getBoundingClientRect()
+        const drawCursor = document.querySelector('#draw-cursor')
         if (
             e.clientX >= canvasRect.left &&
             e.clientX <= canvasRect.right &&
@@ -25,20 +26,26 @@ function setup() {
             e.clientY <= canvasRect.bottom
         ) {
             mouseInCanvas = true
+            drawCursor.style.display = 'block'
+            document.body.style.cursor = 'none'
+            drawCursor.style.top = `${e.clientY-5}px`
+            drawCursor.style.left = `${e.clientX-5}px`
+            
         } else {
             mouseInCanvas = false
-        }
+            drawCursor.style.display = 'none'
+            document.body.style.cursor = 'default'
+        } 
     })
 }
 
 
 function mouseDragged() {
     
-    const selectElement = document.getElementById("color-select")
-    const selectedColor = selectElement.options[selectElement.selectedIndex].value
     
     // determine if it's a left-click (draw) or right-click (erase) action
-    const color = mouseButton === LEFT ? selectedColor : eraseColor
+    const drawColor = document.querySelector('#draw-cursor').style.backgroundColor
+    const color = mouseButton === LEFT ? drawColor : eraseColor
     const weight = mouseButton === LEFT ? drawWeight : eraseWeight
 
     x += (mouseX- x) * easing
@@ -63,7 +70,7 @@ function mousePressed() {
 function mouseReleased() {
     if (mouseInCanvas) {
         socket.emit('mouseReleased')
-    } 
+    }
 }
 
 async function drawAction(data) {
