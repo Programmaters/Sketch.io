@@ -1,63 +1,55 @@
-let x, y, px, py = 0
-let mouseInCanvas = false
-let drawColor = 'black'
-const eraseColor = 'white'
-let drawWeight = 5
-const eraseWeight = 10
 const easing = 0.3
 const canvasWidth = 800
 const canvasHeight = 600
 
+let x, y, px, py = 0
+let mouseInCanvas = false
+let brushSize = 5
+let brushColor = 'black'
 
 function setup() {
     const canvas = createCanvas(canvasWidth, canvasHeight)
     clearCanvas()
     socket.on('drawingAction', drawAction) // listen for drawing actions from the server
-    canvas.elt.addEventListener('contextmenu', (e) => e.preventDefault()) // disable right-click context menu on canvas
+    document.addEventListener('contextmenu', (e) => e.preventDefault())
+    handleMouseMove(canvas)
+}
+
+function handleMouseMove(canvas) {
+    const drawCursor = document.querySelector('#draw-cursor')
+
+    const handleMouseIn = (e) => {
+        mouseInCanvas = true
+        drawCursor.style.display = 'block'
+        document.body.style.cursor = 'none'
+        drawCursor.style.top = `${e.clientY - 5}px`
+        drawCursor.style.left = `${e.clientX - 5}px`
+    }
+
+    const handleMouseOut = () => {
+        mouseInCanvas = false
+        drawCursor.style.display = 'none'
+        document.body.style.cursor = 'default'
+    }
 
     document.addEventListener('mousemove', (e) => {
-        // check if the mouse is within the canvas boundaries
-        const canvasRect = canvas.elt.getBoundingClientRect()
-        const drawCursor = document.querySelector('#draw-cursor')
-        if (
-            e.clientX >= canvasRect.left &&
-            e.clientX <= canvasRect.right &&
-            e.clientY >= canvasRect.top &&
-            e.clientY <= canvasRect.bottom
-        ) {
-            mouseInCanvas = true
-            drawCursor.style.display = 'block'
-            document.body.style.cursor = 'none'
-            drawCursor.style.top = `${e.clientY-5}px`
-            drawCursor.style.left = `${e.clientX-5}px`
-            
+        const { left, right, top, bottom } = canvas.elt.getBoundingClientRect()
+        if (e.clientX >= left && e.clientX <= right && e.clientY >= top && e.clientY <= bottom) {
+            handleMouseIn(e)
         } else {
-            mouseInCanvas = false
-            drawCursor.style.display = 'none'
-            document.body.style.cursor = 'default'
-        } 
+            handleMouseOut()
+        }
     })
 }
 
-
 function mouseDragged() {
-    
-    
-    // determine if it's a left-click (draw) or right-click (erase) action
-    const drawColor = document.querySelector('#draw-cursor').style.backgroundColor
-    const color = mouseButton === LEFT ? drawColor : eraseColor
-    const weight = mouseButton === LEFT ? drawWeight : eraseWeight
-
     x += (mouseX- x) * easing
     y += (mouseY - y) * easing
-
-    const data = { x, y, px, py, color, weight }
+    const data = { x, y, px, py, color: brushColor, size: brushSize }
     socket.emit('drawingAction', data) // send drawing action to the server
     drawAction(data) // draw the action immediately on the client-side
-
     px = x
     py = y
-
 }
 
 function mousePressed() {
@@ -75,7 +67,7 @@ function mouseReleased() {
 
 async function drawAction(data) {
     stroke(data.color)
-    strokeWeight(data.weight)
+    strokeWeight(data.size)
     line(data.x, data.y, data.px, data.py)
 }
 
@@ -83,6 +75,11 @@ function clearCanvas() {
     background(255)
 }
 
-function setBrushSize(brushSize) {
-    drawWeight = brushSize
+function setBrushColor(targetColor) {
+    brushColor = targetColor
+    document.querySelector('#draw-cursor').style.backgroundColor = targetColor
+}
+
+function setBrushSize(targetSize) {
+    brushSize = targetSize
 }

@@ -16,6 +16,9 @@ document.querySelector('#undo-button').onclick = () => {
     socket.emit('undo')
 }
 
+document.querySelector('#erase-button').onclick = () => { setBrushColor('white') }
+
+document.querySelector('#brush-size').addEventListener('change', (e) => setBrushSize(e.target.value))
 
 document.addEventListener('DOMContentLoaded', () => {
     const colorPalette = document.querySelector('#color-palette')
@@ -24,17 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const option = document.createElement('div')
         option.classList.add('color-option')
         option.style.backgroundColor = color
-        option.onclick = () => {
-            document.querySelector('#draw-cursor').style.backgroundColor = color
-        }
+        option.onclick = () => { setBrushColor(color) }
         colorPalette.appendChild(option)
     })
     const drawCursor = document.querySelector('#draw-cursor')
     drawCursor.style.backgroundColor = 'black'
 })
-
-document.querySelector('#bucket-button').onclick = () => {
-    socket.emit('bucket')
-}
-
-document.querySelector('#brush-size').addEventListener('change', (e) => setBrushSize(e.target.value))

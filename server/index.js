@@ -12,11 +12,10 @@ io.on('connection', (socket) => {
     socket.emit('canvasData', canvasData)
 
     socket.on('message', (message) => {
-        if (!users[socket.id]) { // first message is the name of the user
+        if (!users[socket.id]) {
             users[socket.id] = message
             return
         }
-        // send message if user already known
         io.emit('message', `${users[socket.id]}: ${message}`)
     })
 
