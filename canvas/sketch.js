@@ -53,6 +53,7 @@ function handleMouseMove(canvas) {
  * Draw and emit the drawing action to the server
  */
 function mouseDragged() {
+    if (!mouseInCanvas || (!['draw', 'erase'].includes(drawMode))) return
     x += (mouseX- x) * easing
     y += (mouseY - y) * easing
     drawAction()

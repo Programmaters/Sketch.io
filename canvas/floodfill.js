@@ -2,6 +2,7 @@ function floodFill(fx, fy, fillColor){
   loadPixels()
   const stack = []
   const initColor = get(fx, fy)
+  if (initColor.toString() === fillColor.toString()) return
   stack.push([fx, fy])
   
   while(stack.length > 0){
