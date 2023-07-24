@@ -15,7 +15,17 @@ function setup() {
     const canvas = createCanvas(width, height)
     pixelDensity(1)
     clearCanvas()
-    socket.on('drawingAction', drawLine) // listen for drawing actions from the server
+    socket.on('drawingAction', (data) => {
+        console.log(data.mode)
+        switch (data.mode) {
+            case 'brush':
+                drawLine(data)
+                break
+            case 'fill':
+                floodFill(data)
+                break
+        }
+    }) // listen for drawing actions from the server
     document.addEventListener('contextmenu', (e) => e.preventDefault())
     handleMouseMove(canvas)
 }
@@ -78,21 +88,23 @@ function mousePressed() {
     switch (drawMode) {
         case 'draw':
             drawAction()
-            break;
+            break
         case 'erase':
             setBrushColor('white')
             drawAction()
-            break;
+            break
         case 'picker':
             const pickerColor = `rgba(${get(x, y)})`
             setBrushColor(pickerColor)
             setDrawMode('draw')
-            break;
+            break
         case 'fill':
             const fillColor = color(brushColor).levels
             const targetColor = [fillColor[0], fillColor[1], fillColor[2], 255]
-            floodFill(parseInt(mouseX), parseInt(mouseY), targetColor)
-            break;
+            const data = { mode: 'fill', x: parseInt(mouseX), y: parseInt(mouseY), color: targetColor }
+            socket.emit('drawingAction', data)
+            floodFill(data)
+            break
     }
 }
 
@@ -110,7 +122,7 @@ function mouseReleased() {
  * Draw a line in the canvas and emit the drawing action to the server
  */
 function drawAction() {
-    const data = { x, y, px, py, color: brushColor, size: brushSize }
+    const data = { mode: 'brush', x, y, px, py, color: brushColor, size: brushSize }
     socket.emit('drawingAction', data)
     drawLine(data)
 }
@@ -163,3 +175,19 @@ function saveDraw() {
     saveCanvas('myCanvas', 'png')
 }
 
+const data = [
+    {
+        mode: "brush",
+        x: 0,
+        y: 0,
+        px: 0,
+        color: "black",
+        size: 5
+    },
+    {
+        mode: "fill",
+        x: 0,
+        y: 0,
+        color: "red"
+    }
+]

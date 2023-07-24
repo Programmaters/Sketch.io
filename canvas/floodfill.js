@@ -1,16 +1,17 @@
-function floodFill(fx, fy, fillColor){
+function floodFill(data) {
+    const { x, y, color } = data
     loadPixels()
-    const initColor = get(fx, fy)
-    if (initColor.toString() === fillColor.toString()) return
+    const initColor = get(x, y)
+    if (initColor.toString() === color.toString()) return
 
     const stack = []
-    stack.push([fx, fy])
+    stack.push([x, y])
     while(stack.length > 0){
         const [fx, fy] = stack.shift()
         if (!isValid(fx, fy)) continue
         if (!isPixel(fx, fy, initColor)) continue
 
-        setPixel(fx, fy, fillColor)
+        setPixel(fx, fy, color)
 
         stack.push([fx, fy + 1])
         stack.push([fx, fy - 1])

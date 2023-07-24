@@ -34,7 +34,7 @@ io.on('connection', (socket) => {
     socket.on('mouseReleased', () => {
         if(prevCanvasData) canvasTimeline.push(prevCanvasData)
         prevCanvasData = [...canvasData]
-        // if(canvasTimeline.length > maxUndos) canvasTimeline.shift()
+        if(canvasTimeline.length > maxUndos) canvasTimeline.shift()
     })
 
     socket.on('undo', () => {
@@ -43,6 +43,8 @@ io.on('connection', (socket) => {
         socket.broadcast.emit('canvasData', canvasData)
         socket.emit('canvasData', canvasData)
     })
+
+
 })
 
 io.listen(8080, () => console.log('listening on http://localhost:8080') )
