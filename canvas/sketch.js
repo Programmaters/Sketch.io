@@ -4,13 +4,16 @@ let brushSize = 5
 let brushColor = 'black'
 let drawMode = 'draw' // draw, erase, picker, fill
 const easing = 0.3
+const width = 800
+const height = 600
 
 /**
  * Function called when the page is loaded
  * Setup the canvas
  */
 function setup() {
-    const canvas = createCanvas(800, 600)
+    const canvas = createCanvas(width, height)
+    pixelDensity(1)
     clearCanvas()
     socket.on('drawingAction', drawLine) // listen for drawing actions from the server
     document.addEventListener('contextmenu', (e) => e.preventDefault())
@@ -88,8 +91,7 @@ function mousePressed() {
         case 'fill':
             const fillColor = color(brushColor).levels
             const targetColor = [fillColor[0], fillColor[1], fillColor[2], 255]
-            floodFill(mouseX, mouseY, targetColor)
-            setDrawMode('draw')
+            floodFill(parseInt(mouseX), parseInt(mouseY), targetColor)
             break;
     }
 }
