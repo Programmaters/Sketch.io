@@ -12,7 +12,6 @@ const easing = 0.3
 function setup() {
     const canvas = createCanvas(800, 600)
     clearCanvas()
-    pixelDensity(1);
     socket.on('drawingAction', drawLine) // listen for drawing actions from the server
     document.addEventListener('contextmenu', (e) => e.preventDefault())
     handleMouseMove(canvas)
@@ -54,7 +53,6 @@ function handleMouseMove(canvas) {
  * Draw and emit the drawing action to the server
  */
 function mouseDragged() {
-    if(!mouseInCanvas || (!['draw', 'erase'].includes(drawMode))) return
     x += (mouseX- x) * easing
     y += (mouseY - y) * easing
     drawAction()
@@ -87,8 +85,8 @@ function mousePressed() {
             setDrawMode('draw')
             break;
         case 'fill':
-            const fillColor = color(brushColor).toString()
-            const targetColor = fillColor.slice(5, fillColor.length - 1).split(',')
+            const fillColor = color(brushColor).levels
+            const targetColor = [fillColor[0], fillColor[1], fillColor[2], 255]
             floodFill(mouseX, mouseY, targetColor)
             setDrawMode('draw')
             break;
