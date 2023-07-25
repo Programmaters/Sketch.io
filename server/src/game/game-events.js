@@ -1,6 +1,6 @@
 
 export function onNewLobby(socket) {
-    lobby = new Lobby(socket.id)
+    lobby = new Lobby(socket)
 }
 
 export function onStartGame(socket) {

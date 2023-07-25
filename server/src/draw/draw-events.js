@@ -1,26 +1,24 @@
 
+
 export function onDrawingAction(socket, data) {
-    canvasData.push(data)
+    Lobby.find(socket.id).game.draw(socket.id, data)
     socket.broadcast.emit('drawingAction', data)
 }
 
 export function onClearCanvas(socket) {
-    canvasData = []
+    canvas.clear()
     socket.broadcast.emit('clearCanvas')
-    canvasTimeline.push([...canvasData])
 }
 
-export function onMouseReleased(socket) {
-    if(prevCanvasData) canvasTimeline.push(prevCanvasData)
-    prevCanvasData = [...canvasData]
-    if(canvasTimeline.length > maxUndos) canvasTimeline.shift()
+export function onMouseReleased() {
+    save()
 }
 
 export function onUndo(socket) {
-    canvasData = canvasTimeline.length != 0 ? [...canvasTimeline.pop()] : canvasData
-    prevCanvasData = [...canvasData]
-    socket.broadcast.emit('canvasData', canvasData)
-    socket.emit('canvasData', canvasData)
+    canvas.undo()
+    const data = getCanvasData()
+    socket.broadcast.emit('canvasData', data)
+    socket.emit('canvasData', data)
 }
 
 

@@ -29,9 +29,9 @@ function setPixel(fx, fy, fillColor){
     pixels[i + 3] = 255 // a
 }
 
-function isPixel(fx, fy, initColor) {
+function isPixel(fx, fy, srcColor) {
     const i = getIndex(fx, fy)
-    return pixels[i] === initColor[0] && pixels[i + 1] === initColor[1] && pixels[i + 2] === initColor[2]
+    return pixels[i] === srcColor[0] && pixels[i + 1] === srcColor[1] && pixels[i + 2] === srcColor[2]
 }
 
 function isValid(fx, fy){
