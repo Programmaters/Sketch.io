@@ -1,6 +1,6 @@
 import { createServer } from 'http'
 import { Server } from 'socket.io'
-import handlers from './handlers.js'
+import events from './events.js'
 
 const http = createServer()
 const io = new Server(http, { cors: { origin: "*" } })
@@ -8,7 +8,7 @@ const io = new Server(http, { cors: { origin: "*" } })
 const withSocket = (handler) => (socket, ...args) => handler(socket, ...args)
 
 io.on('connection', (socket) => {
-    Object.entries(handlers).forEach(([name, handler]) => {
+    Object.entries(events).forEach(([name, handler]) => {
         socket.on(name, (data) => withSocket(handler)(socket, data))
     })
 })

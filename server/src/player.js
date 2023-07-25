@@ -9,5 +9,7 @@ class Player {
         this.name = name
         this.socket = socket
         this.id = socket.id
+        this.drawer = false
+        this.guessed = false
     }
 }

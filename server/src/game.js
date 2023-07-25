@@ -4,7 +4,7 @@ import { broadcast } from '../utils.js'
 /**
  * @class Game
  * @description Represents a single game in a single lobby
- * @param {Array[Socket]} players
+ * @param {Array[Player]} players
  */
 class Game {
     
