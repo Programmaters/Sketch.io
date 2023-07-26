@@ -1,4 +1,9 @@
 import { broadcast } from '../utils.js'
+import { games } from './main.js'
+import { timeout, getRandomWords, getCloseness } from './utils.js'
+
+
+const closeThreshold = 0.75
 
 
 /**
@@ -6,53 +11,115 @@ import { broadcast } from '../utils.js'
  * @description Represents a single game in a single lobby
  * @param {Array[Player]} players
  */
-class Game {
-    
-    constructor(players, settings) {
-        this.resetScores()
-        this.players = players // Player[]
-        this.settings = settings // object
-        this.round = null // Round
-        this.roundNumber = 1 // number
-        this.scores = {} // object
+export class Game {
+
+    constructor(io, socket, players, settings, roomId) {
+        this.io = io
+        this.socket = socket
+        this.host = socket.id
+        this.players = players
+        this.settings = settings
+        this.roomId = roomId
+        this.roundNumber = 1
+        this.canvas = new Canvas()
+        this.currentWord = null
+        this.drawer = null
     }
 
     /**
      * Starts the game
      */
-    startGame() {
-        clearScores()
-        newRound()
-        broadcast(this.players, 'start', this.word)       
+    async startGame() {
+        this.resetScores()
+        this.roundNumber = 1
+    
+        socket.to(this.roomId).emit('startGame')
+        for (let round = 0; round < this.settings.rounds; round++) {
+            for (let player = 0; player < this.players.length; player++) {
+                await nextTurn(player)
+            }
+        }
+        this.io.to(this.roomId).emit('endGame')
     }
 
+
     /**
-     * Resets the scores of all players
+     * Starts a new turn
+     * @param {int} playerIndex 
      */
-    resetScores() {
-        players.forEach(player => {
-            this.scores[player.id] = 0
+    async nextTurn(playerIndex) {
+
+        this.canvas.clear()
+
+        this.players.forEach(player => player.guessed = false)
+
+        const prevDrawer = this.players[(playerIndex - 1 + this.players.length) % this.players.length]
+        const drawer = this.players[playerIndex]
+        this.drawer = drawer
+        drawer.guessed = true
+        drawer.drawer = true
+        prevDrawer.drawer = false
+
+        const guessers = this.players.filter(player => player.id !== drawer.id)
+
+        drawer.socket.emit('drawTurn', word)
+        guessers.forEach(player => player.socket.emit('guessTurn'))
+        
+        this.currentWord = getRandomWords(1)[0]
+
+        await timeout(this.settings.drawTime, async () => { // wait for drawTime seconds
+            endTurn()
+        })
+
+        await timeout(5, () => { // wait for 5 seconds
+            newTurn()
         })
     }
 
-    /**
-     * Starts a new round
-     */
-    newRound() {
-        if (rounds++ >= this.settings.rounds) throw new Error('Game has already ended')
-        round = new Round(this.players)
+
+    onMessage(playerId, message) {
+        const guessWord = message.toLowerCase().trim()
+        if (guessWord === '') return
+        const currentWord = games[socket.id].currentWord.toLowerCase()
+        const closeness = getCloseness(guessWord, currentWord)
+        const player = this.players[playerId]
+
+        if (closeness === 1) {
+            if (!player.guessed) {
+                this.socket.emit('correctGuess', { message: 'You guessed it right!', id: socket.id })
+                this.socket.broadcast.emit('correctGuess', { message: `${socket.player.name} has guessed the word!`, id: socket.id })
+                
+                // update and emit scores to players
+                this.players[playerId].score += 10
+                this.players[playerId].guessed = true
+                this.drawer.score += 5
+                const scores = this.players.map(player => ({ id: player.id, score: player.score }))
+                this.io.in(roomId).emit('updateScore', scores)
+                
+                // if everyone guessed, end turn
+                if(this.players.every(player => player.guessed)) {
+                    endTurn()
+                }
+            }
+          
+        } else if (closeness >= closeThreshold) {
+            sendMessage(message)
+            if (!player.guessed) this.socket.emit('closeGuess', { message: `${guessWord} is close!` })
+        } else {
+            sendMessage(message)
+        }
+    }
+
+    sendMessage(message) {
+        this.io.in(roomId).emit('message', message)
     }
 
     /**
-     * Ends the round
+     * Ends the turn
      */
-    endRound() {
-        round = null
-        broadcast(this.players, 'endRound', this.scores)
-        resetTurnIndex()
-
-        if (rounds++ >= this.settings.rounds) {
-            endGame()
+    endTurn() {
+        if(++turnIndex > this.players.length) {
+            this.endRound()
         }
     }
 
@@ -60,6 +127,50 @@ class Game {
      * Ends the game
      */
     endGame() {
-        broadcast(this.players, 'endGame')
+        this.resetScores()
+        this.resetGuessed()
+        this.io.in(roomId).emit('endGame')
+    }
+
+    resetScores() {
+        this.players.forEach(player => { this.scores[player.id] = 0 })
+    }
+
+    resetGuessed() {
+        this.players.forEach(player => {
+            player.guessed = false
+        })
+    }
+    
+    /**
+     * Draws on the canvas
+     * @param {String} playerId 
+     * @param {Object} data 
+     * @returns 
+     */
+    drawCanvas(playerId, data) {
+        if (playerId !== this.drawer.id) return
+        this.canvas.draw(data)
+    }
+    
+    /**
+     * Clears the canvas
+     */
+    clearCanvas() {
+        this.canvas.clear()
+    }
+    
+    /**
+     * Saves a copy of the canvas in the timeline
+     */
+    saveCanvas() {
+        this.canvas.save()
+    }
+    
+    /**
+     * Undos the last action from the canvas
+     */
+    undoCanvas() {
+        this.canvas.undo()
     }
 }

@@ -1,4 +1,8 @@
-async function timeout(time, callback) {
+import { rooms } from './main.js'
+
+const words = readFile('./words.txt', 'utf-8').split('\n')
+
+export async function timeout(time, callback) {
     return new Promise(function(resolve) {
         setTimeout(() => {
             resolve(callback)
@@ -6,13 +10,24 @@ async function timeout(time, callback) {
     })
 }
  
-
-function broadcast(players, event, data) {
-    players.forEach(player => {
-        player.socket.emit(event, data)
-    })
+export function getRandomWords(numberOfWords) {
+    return Array.from({ length: numberOfWords }, () => words[Math.floor(Math.random() * words.length)])
 }
 
-function getRandomFrom(array) {
-    return array[Math.floor(Math.random() * array.length)]
+export function getCloseness(str1, str2) {
+	const maxLength = Math.max(str1.length, str2.length)
+	let hammingDistance = 0
+	for (let i = 0; i < maxLength; i++) {
+        if (str1[i] !== str2[i]) hammingDistance++
+	}
+	return 1 - hammingDistance / maxLength
+}
+
+export function getRoom(socket, id) {
+    const room = rooms[id]
+    if (!room) {
+        socket.emit('error', { error: 'Room does not exist' })
+        throw new Error('Room does not exist')
+    }
+    return room
 }

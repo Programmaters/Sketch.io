@@ -12,7 +12,7 @@ socket.on('message', text => {
 
 document.querySelector('#send-button').onclick = () => {
     const input = document.querySelector('input')
-	const closeRatio = compareTwoWords(input.value, testString)
+	const closeRatio = distance(input.value, testString)
 	
 	if (closeRatio === 1) {
 		socket.emit('message', "You guessed correctly!")

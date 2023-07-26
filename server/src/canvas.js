@@ -5,9 +5,9 @@ const maxUndos = 10
  * @description Stores the canvas data for a round
  */
 class Canvas {
-    #canvasData = []
-    #canvasTimeline = []
-    #prevCanvasData = []
+    canvasData = []
+    canvasTimeline = []
+    prevCanvasData = []
 
     /**
      * Draws on the canvas
@@ -21,8 +21,8 @@ class Canvas {
      * Undos the last action from the canvas
      */
     undo() {
-        canvasData = canvasTimeline.length != 0 ? [...canvasTimeline.pop()] : canvasData
-        prevCanvasData = [...canvasData]
+        this.canvasData = this.canvasTimeline.length != 0 ? [...this.canvasTimeline.pop()] : this.canvasData
+        this.prevCanvasData = [...this.canvasData]
     }
 
     /**
@@ -37,9 +37,9 @@ class Canvas {
      * Saves a copy of the canvas in the timeline
      */
     save() {
-        if (prevCanvasData) canvasTimeline.push(prevCanvasData)
-        prevCanvasData = [...canvasData]
-        if (canvasTimeline.length > maxUndos) canvasTimeline.shift()
+        if (this.prevCanvasData) this.canvasTimeline.push(this.prevCanvasData)
+        this.prevCanvasData = [...this.canvasData]
+        if (this.canvasTimeline.length > maxUndos) this.canvasTimeline.shift()
     }
 
     /**
