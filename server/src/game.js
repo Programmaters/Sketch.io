@@ -1,4 +1,3 @@
-import { games } from './main.js'
 import { timeout, getRandomWords, getCloseness } from './utils.js'
 
 
@@ -73,8 +72,7 @@ export class Game {
     onMessage(playerId, message) {
         const guessWord = message.toLowerCase().trim()
         if (guessWord === '') return
-        const currentWord = games[socket.id].currentWord.toLowerCase()
-        const closeness = getCloseness(guessWord, currentWord)
+        const closeness = getCloseness(guessWord, this.currentWord)
         const player = this.players[playerId]
 
         if (closeness === 1) {

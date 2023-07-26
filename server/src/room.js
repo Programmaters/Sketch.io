@@ -33,7 +33,7 @@ export class Room {
         const player = new Player(socket, name)
         this.players.push(player)
         this.socket.join(id)
-        this.io.in(id).emit('joinRoom', data.player)
+        this.io.to(id).emit('joinRoom', data.player)
 
         // const players = Array.from(await io.in(id).allSockets())
     }
@@ -45,7 +45,7 @@ export class Room {
     leave(playerId) {
         this.players = this.players.filter(player => player.id != playerId)
         this.socket.leave(roomId)
-        this.io.in(roomId).emit('leaveRoom', data.player)
+        this.io.to(roomId).emit('leaveRoom', data.player)
     }
 
 
@@ -67,7 +67,6 @@ export class Room {
      * @param {Object} data
      */
     updateSettings(settings) {
-
         this.settings = settings
         this.players.forEach(player => {
             player.socket.emit('onUpdateSettings', settings)
