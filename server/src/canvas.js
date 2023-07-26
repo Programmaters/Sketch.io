@@ -2,7 +2,7 @@ const maxUndos = 10
 
 /**
  * @class Canvas
- * @description Stores the canvas data for a round
+ * @description Stores the canvas data
  */
 class Canvas {
     canvasData = []

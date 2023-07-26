@@ -1,13 +1,13 @@
 import { randomUUID } from 'crypto'
 import { Room } from './room.js'
-import { getRoom } from './utils.js'
+import { getRoom, addRoom } from './utils.js'
 
-// game events
+/* Game Events */
 function onCreateRoom(data) {
     const roomId = randomUUID()
     const room = new Room(roomId, data.io, data.socket)
     room.join(data.socket, data.name)
-    rooms[roomId] = room
+    addRoom(room)
 }
 
 function onJoinRoom(data) {
@@ -32,14 +32,14 @@ function onStartGame(data) {
 }
 
 
-// chat events
+/* Chat Events */
 function onMessage(data) {
     const room = getRoom(data.socket, data.roomId)
     room.message(data.playerId, data.message)
 }
 
 
-// draw events
+/* Draw Events */
 function onDrawingAction(data) {
     Room.find(socket.id).game.draw(socket.id, data)
     data.socket.broadcast.emit('drawingAction', data)

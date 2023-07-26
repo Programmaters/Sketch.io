@@ -1,10 +1,8 @@
-import { broadcast } from '../utils.js'
 import { games } from './main.js'
 import { timeout, getRandomWords, getCloseness } from './utils.js'
 
 
 const closeThreshold = 0.75
-
 
 /**
  * @class Game
@@ -33,33 +31,29 @@ export class Game {
         this.resetScores()
         this.roundNumber = 1
     
-        socket.to(this.roomId).emit('startGame')
+        this.io.in(this.roomId).emit('startGame')
         for (let round = 0; round < this.settings.rounds; round++) {
             for (let player = 0; player < this.players.length; player++) {
                 await nextTurn(player)
             }
         }
-        this.io.to(this.roomId).emit('endGame')
+        this.io.in(this.roomId).emit('endGame')
     }
 
 
     /**
      * Starts a new turn
-     * @param {int} playerIndex 
+     * @param {Integer} playerIndex 
      */
     async nextTurn(playerIndex) {
 
         this.canvas.clear()
-
-        this.players.forEach(player => player.guessed = false)
-
-        const prevDrawer = this.players[(playerIndex - 1 + this.players.length) % this.players.length]
+        this.resetPlayers()
         const drawer = this.players[playerIndex]
-        this.drawer = drawer
         drawer.guessed = true
         drawer.drawer = true
-        prevDrawer.drawer = false
-
+        this.drawer = drawer
+  
         const guessers = this.players.filter(player => player.id !== drawer.id)
 
         drawer.socket.emit('drawTurn', word)
@@ -75,7 +69,6 @@ export class Game {
             newTurn()
         })
     }
-
 
     onMessage(playerId, message) {
         const guessWord = message.toLowerCase().trim()
@@ -95,7 +88,7 @@ export class Game {
                 this.drawer.score += 5
                 const scores = this.players.map(player => ({ id: player.id, score: player.score }))
                 this.io.in(roomId).emit('updateScore', scores)
-                
+    
                 // if everyone guessed, end turn
                 if(this.players.every(player => player.guessed)) {
                     endTurn()
@@ -110,6 +103,10 @@ export class Game {
         }
     }
 
+    /**
+     * Sends a message to all players in the room
+     * @param {String} message 
+     */
     sendMessage(message) {
         this.io.in(roomId).emit('message', message)
     }
@@ -132,13 +129,20 @@ export class Game {
         this.io.in(roomId).emit('endGame')
     }
 
+    /**
+     * Resets all player scores
+     */
     resetScores() {
         this.players.forEach(player => { this.scores[player.id] = 0 })
     }
 
+    /**
+     * Resets all player guessed states
+     */
     resetGuessed() {
         this.players.forEach(player => {
             player.guessed = false
+            player.drawer = false
         })
     }
     

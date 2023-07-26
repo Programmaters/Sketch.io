@@ -22,20 +22,3 @@ io.on('connection', (socket) => {
 })
 
 io.listen(8080, () => console.log('listening on http://localhost:8080'))
-
-// q: whats the difference between socket and io ?
-// a: socket is a single connection, io is the server
-
-/*
-
-const rooms = {
-    id: {
-        host: socket.id,
-        players: [],
-        settings: defaultSettings,
-        game: new Game(),
-    }
-}
-
-
-*/

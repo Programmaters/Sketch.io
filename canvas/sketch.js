@@ -155,7 +155,7 @@ function setBrushColor(targetColor) {
 
 /**
  * Set the brush size
- * @param {int} targetSize 
+ * @param {Integer} targetSize 
  */
 function setBrushSize(targetSize) {
     brushSize = targetSize
