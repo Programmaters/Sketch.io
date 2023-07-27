@@ -16,7 +16,6 @@ function setup() {
     pixelDensity(1)
     clearCanvas()
     socket.on('drawingAction', (data) => {
-        console.log(data.mode)
         switch (data.mode) {
             case 'brush':
                 drawLine(data)
@@ -25,7 +24,7 @@ function setup() {
                 floodFill(data)
                 break
         }
-    }) // listen for drawing actions from the server
+    }) 
     document.addEventListener('contextmenu', (e) => e.preventDefault())
     handleMouseMove(canvas)
 }

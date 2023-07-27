@@ -1,6 +1,8 @@
 import { rooms } from './main.js'
+import { readFile } from 'fs/promises'
+import { randomUUID } from 'crypto'
 
-const words = readFile('./words.txt', 'utf-8').split('\n')
+const words = readFile('./words.txt', 'utf-8').then(x => x.split('\n'))
 
 /**
  * Waits for a given amount of time and then calls the callback function
@@ -41,6 +43,15 @@ export function getCloseness(str1, str2) {
 }
 
 /**
+ * Get a random id of length 8
+ * @returns random id
+ */
+export function getRandomId() {
+    return randomUUID().slice(0, 8)
+}
+
+
+/**
  * Gets a room by id and throws an error if it doesn't exist
  * @param {Socket} socket 
  * @param {String} id 
@@ -49,7 +60,7 @@ export function getCloseness(str1, str2) {
 export function getRoom(socket, id) {
     const room = rooms[id]
     if (!room) {
-        socket.emit('error', { error: 'Room does not exist' })
+        socket.emit('error', { message: 'Room does not exist' })
         throw new Error('Room does not exist')
     }
     return room
@@ -60,5 +71,5 @@ export function getRoom(socket, id) {
  * @param {Room} room 
  */
 export function addRoom(room) {
-    rooms[room.id] = room
+    rooms[room.roomId] = room
 }

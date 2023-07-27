@@ -1,4 +1,5 @@
 import { Game } from './game.js'
+import { Player } from './player.js'
 
 const defaultSettings = {
     maxPlayers: 8,
@@ -29,13 +30,10 @@ export class Room {
      * Joins a room with the given id and username
      * @param {Object} data 
      */
-    async join(socket, name) {
-        const player = new Player(socket, name)
+    join(socket, username) {
+        const player = new Player(socket, username)
         this.players.push(player)
-        this.socket.join(id)
-        this.io.to(id).emit('joinRoom', data.player)
-
-        // const players = Array.from(await io.in(id).allSockets())
+        socket.join(this.roomId)
     }
 
     /**
@@ -45,20 +43,21 @@ export class Room {
     leave(playerId) {
         this.players = this.players.filter(player => player.id != playerId)
         this.socket.leave(roomId)
-        this.io.to(roomId).emit('leaveRoom', data.player)
+        // this.io.to(this.roomId).emit('leaveRoom', data.player)
+        // this.io.in(this.roomId).emit('playerLeft', { roomId: data.roomId, username: data.username })
     }
-
 
     newGame() {
         this.game = new Game(this.io, this.socket, this.players, this.settings, this.roomId)
     }
 
-    onMessage(playerId, message) {
-        if(this.game == null) {
-            this.game.sendMessage(message)
+    onMessage(socketId, message) {
+        const player = this.players.find(player => player.id == socketId)
+        if(this.game == null) { // game hasnt started yet
+            this.io.in(this.roomId).emit('message', `${player.name}: ${message}`)
             return
         }
-        this.game.onMessage(playerId, message)
+        this.game.onMessage(socketId, message)
     }
 
 

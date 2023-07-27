@@ -1,18 +1,21 @@
-import { randomUUID } from 'crypto'
 import { Room } from './room.js'
-import { getRoom, addRoom } from './utils.js'
+import { getRandomId, getRoom, addRoom } from './utils.js'
+
 
 /* Game Events */
 function onCreateRoom(data) {
-    const roomId = randomUUID()
+    const roomId = getRandomId()
     const room = new Room(roomId, data.io, data.socket)
-    room.join(data.socket, data.name)
     addRoom(room)
+    room.join(data.socket, data.username)
+    data.socket.emit('joinedRoom', { roomId, username: data.username })
 }
 
 function onJoinRoom(data) {
     const room = getRoom(data.socket, data.roomId)
-    room.join(data.socket, data.name)
+    room.join(data.socket, data.username)
+    data.socket.emit('joinedRoom', { roomId: data.roomId, username: data.username })
+    data.socket.broadcast.to(data.roomId).emit('playerJoinedRoom', { roomId: data.roomId, username: data.username })
 }
 
 function onLeaveRoom(data) {
@@ -31,11 +34,10 @@ function onStartGame(data) {
     data.socket.broadcast.emit('startGame', { word: room.game.word })
 }
 
-
 /* Chat Events */
 function onMessage(data) {
     const room = getRoom(data.socket, data.roomId)
-    room.message(data.playerId, data.message)
+    room.onMessage(data.socket.id, data.message)
 }
 
 

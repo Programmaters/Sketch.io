@@ -4,7 +4,7 @@
  * @param {Socket} socket
  * @param {String} name
  */
-class Player {    
+export class Player {    
     constructor(socket, name) {
         this.socket = socket
         this.name = name

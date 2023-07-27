@@ -4,12 +4,12 @@ import events from './events.js'
 
 const http = createServer()
 const io = new Server(http, { cors: { origin: "*" } })
-
 export const rooms = {}
 
 io.on('connection', (socket) => {
     Object.entries(events).forEach(([name, handler]) => {
         socket.on(name, (data) => {
+            data = data || {}
             data.io = io
             data.socket = socket
             try {

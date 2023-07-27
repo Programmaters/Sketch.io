@@ -64,9 +64,7 @@ export class Game {
             endTurn()
         })
 
-        await timeout(5, () => { // wait for 5 seconds
-            newTurn()
-        })
+        await timeout(5) // wait for 5 seconds before starting new turn
     }
 
     onMessage(playerId, message) {
@@ -106,7 +104,7 @@ export class Game {
      * @param {String} message 
      */
     sendMessage(message) {
-        this.io.in(roomId).emit('message', message)
+        this.io.in(this.roomId).emit('message', message)
     }
 
     /**
