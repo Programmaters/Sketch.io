@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import CenterFrame from '../components/center-frame/CenterFrame.tsx'
 import BackgroundButton from '../components/background-button/BackgroundButton.tsx'
-import CharDresser from '../components/char-dresser/CharDresser.tsx'
+import CharDresser from '../components/player-dresser/CharDresser.tsx'
 import './index.scss'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
