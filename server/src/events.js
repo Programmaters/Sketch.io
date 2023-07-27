@@ -20,7 +20,8 @@ function onJoinRoom(data) {
 
 function onLeaveRoom(data) {
     const room = getRoom(data.socket, data.roomId)
-    room.leave(data.playerId)
+    room.leave(data.socket, data.username)
+    data.socket.broadcast.to(data.roomId).emit('playerLeftRoom', { roomId: data.roomId, username: data.username })
 }
 
 function onUpdateSettings(data) {
@@ -37,7 +38,7 @@ function onStartGame(data) {
 /* Chat Events */
 function onMessage(data) {
     const room = getRoom(data.socket, data.roomId)
-    room.onMessage(data.socket.id, data.message)
+    room.onMessage(data.username, data.message)
 }
 
 

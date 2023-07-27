@@ -60,7 +60,7 @@ export function getRandomId() {
 export function getRoom(socket, id) {
     const room = rooms[id]
     if (!room) {
-        socket.emit('error', { message: 'Room does not exist' })
+        socket.emit('error', { message: `Room with id ${id} does not exist` })
         throw new Error('Room does not exist')
     }
     return room

@@ -40,21 +40,18 @@ export class Room {
      * Leaves the room the user is in
      * @param {Object} data
      */
-    leave(playerId) {
-        this.players = this.players.filter(player => player.id != playerId)
-        this.socket.leave(roomId)
-        // this.io.to(this.roomId).emit('leaveRoom', data.player)
-        // this.io.in(this.roomId).emit('playerLeft', { roomId: data.roomId, username: data.username })
+    leave(socket, username) {
+        this.players = this.players.filter(player => player.username != username)
+        socket.leave(this.roomId)
     }
 
     newGame() {
         this.game = new Game(this.io, this.socket, this.players, this.settings, this.roomId)
     }
 
-    onMessage(socketId, message) {
-        const player = this.players.find(player => player.id == socketId)
+    onMessage(username, message) {
         if(this.game == null) { // game hasnt started yet
-            this.io.in(this.roomId).emit('message', `${player.name}: ${message}`)
+            this.io.in(this.roomId).emit('message', `${username}: ${message}`)
             return
         }
         this.game.onMessage(socketId, message)
