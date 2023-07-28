@@ -1,4 +1,4 @@
-import './Frame.scss';
+import './CenterFrame.scss';
 
 
 function Frame(props: { children: React.ReactNode }) {
