@@ -1,8 +1,7 @@
 body {
     background-color: darkgray;
+    overflow: hidden;
 }
-
-
 
 #main-content {
     display: flex;
@@ -13,6 +12,7 @@ body {
 
 button {
     margin: 1vh;
+    user-select: none;
 }
 
 body {
@@ -21,7 +21,6 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    /* user-select: none; */
 }
 
 #color-palette {

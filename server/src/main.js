@@ -9,12 +9,10 @@ export const rooms = {}
 io.on('connection', (socket) => {
     Object.entries(events).forEach(([name, handler]) => {
         socket.on(name, (data) => {
-            data = data || {}
-            data.io = io
-            data.socket = socket
-            data.roomId = data.roomId || Array.from(socket.rooms).find(roomId => roomId !== socket.id)
+            const roomId = Array.from(socket.rooms).find(roomId => roomId !== socket.id)
+            const session = { io, socket, roomId }
             try {
-                handler(data)
+                handler(session, data)
             } catch (error) {
                 console.error(error)
             }
