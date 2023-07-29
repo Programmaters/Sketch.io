@@ -2,9 +2,7 @@ body {
     background-color: darkgray;
 }
 
-* {
-    overflow-x: hidden;
-}
+
 
 #main-content {
     display: flex;
@@ -15,4 +13,34 @@ body {
 
 button {
     margin: 1vh;
+}
+
+body {
+    background-color: darkgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* user-select: none; */
+}
+
+#color-palette {
+    display: flex;
+    flex-direction: row;
+}
+
+#color-palette div {
+    border-radius: 50%;
+    width: 2em;
+    height: 2em;
+    margin: 0.5em;
+    cursor: pointer;
+}
+
+#draw-cursor {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 2px solid gray;
+    border-radius: 50%;
 }

@@ -31,9 +31,10 @@ function onUpdateSettings(data) {
 
 function onStartGame(data) {
     const room = getRoom(data.socket, data.roomId)
-    room.game.startGame()
-    data.socket.broadcast.emit('startGame', { word: room.game.word })
+    room.newGame()
+    room.game.startGame
 }
+
 
 /* Chat Events */
 function onMessage(data) {
@@ -44,22 +45,26 @@ function onMessage(data) {
 
 /* Draw Events */
 function onDrawingAction(data) {
-    Room.find(socket.id).game.draw(socket.id, data)
-    data.socket.broadcast.emit('drawingAction', data)
+    const room = getRoom(data.socket, data.roomId)
+    room.game.canvas.draw(data)
+    data.socket.broadcast.emit('drawingAction', data) // maximum call stack size exceeded
 }
 
 function onClearCanvas(data) {
-    canvas.clear()
+    const room = getRoom(data.socket, data.roomId)
+    room.game.canvas.clear()
     data.socket.broadcast.emit('clearCanvas')
 }
 
-function onMouseReleased() {
-    save()
+function onSave() {
+    const room = getRoom(data.socket, data.roomId)
+    room.game.canvas.save()
 }
 
 function onUndo(data) {
-    canvas.undo()
-    const canvasData = getCanvasData()
+    const room = getRoom(data.socket, data.roomId)
+    room.game.canvas.undo()
+    const canvasData = room.game.canvas.getData()
     data.socket.broadcast.emit('canvasData', canvasData)
     data.socket.emit('canvasData', canvasData)
 }
@@ -74,6 +79,6 @@ export default {
     'message': onMessage,
     'drawingAction': onDrawingAction,
     'clearCanvas': onClearCanvas,
-    'mouseReleased': onMouseReleased,
+    'mouseReleased': onSave,
     'undo': onUndo,
 }

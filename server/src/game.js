@@ -1,5 +1,5 @@
 import { timeout, getRandomWords, getCloseness } from './utils.js'
-
+import { Canvas } from './canvas.js'
 
 const closeThreshold = 0.75
 
@@ -141,6 +141,7 @@ export class Game {
             player.drawer = false
         })
     }
+
     
     /**
      * Draws on the canvas

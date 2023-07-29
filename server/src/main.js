@@ -12,6 +12,7 @@ io.on('connection', (socket) => {
             data = data || {}
             data.io = io
             data.socket = socket
+            data.roomId = data.roomId || Array.from(socket.rooms).find(roomId => roomId !== socket.id)
             try {
                 handler(data)
             } catch (error) {

@@ -4,7 +4,7 @@ const maxUndos = 10
  * @class Canvas
  * @description Stores the canvas data
  */
-class Canvas {
+export class Canvas {
     canvasData = []
     canvasTimeline = []
     prevCanvasData = []
@@ -45,7 +45,7 @@ class Canvas {
     /**
      * Get the canvas data
      */
-    getCanvasData() {
+    getData() {
         return this.canvasData
     }
 }

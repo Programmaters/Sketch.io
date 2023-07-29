@@ -7,10 +7,6 @@ body {
     user-select: none;
 }
 
-* {
-    overflow-x: hidden;
-}
-
 div {
     display: flex;
     justify-content: space-between;
