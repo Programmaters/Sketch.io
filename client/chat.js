@@ -6,4 +6,3 @@ function message(text) {
     el.innerHTML = text
     document.querySelector('ul').appendChild(el)
 }
-

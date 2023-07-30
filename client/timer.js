@@ -1,11 +1,9 @@
-let timeleft = 10
+let timeleft = 0
 let startTime = 0
 let currentTime = 0
 
-
-function setup() {
-
-    noCanvas()
+function setTimer(duration) {
+    timeleft = duration
     startTime = millis()
     var timer = select('#timer')
     timer.html(timeleft - currentTime)
@@ -18,5 +16,4 @@ function setup() {
             clearInterval(interval)
         }
     }
-
 }

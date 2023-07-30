@@ -10,9 +10,9 @@ io.on('connection', (socket) => {
     Object.entries(events).forEach(([name, handler]) => {
         socket.on(name, (data) => {
             const roomId = Array.from(socket.rooms).find(roomId => roomId !== socket.id)
-            const session = { io, socket, roomId }
+            const conn = { io, socket, roomId }
             try {
-                handler(session, data)
+                handler(conn, data)
             } catch (error) {
                 console.error(error)
             }

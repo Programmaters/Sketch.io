@@ -1,18 +1,106 @@
+const easing = 0.3
+const width = 800
+const height = 600
 let x, y, px, py = 0
 let mouseInCanvas = false
 let brushSize = 5
 let brushColor = 'black'
-let drawMode = 'draw' // draw, erase, picker, fill
-const easing = 0.3
-const width = 800
-const height = 600
+let drawMode = null // draw, erase, picker, fill
+
+function setup() {
+    noCanvas()
+}
+
+function renderCanvas() {
+    const mainContent = document.querySelector('#main-content')
+    const drawCursor = document.createElement('div')
+    drawCursor.id = 'draw-cursor'
+
+    const toolsDiv = document.createElement('div')
+    toolsDiv.id = 'tools'
+    const eraseButton = document.createElement('button')
+    eraseButton.id = 'erase-button'
+    eraseButton.textContent = 'Erase'
+    eraseButton.onclick = () => { setDrawMode('erase') }
+
+    const clearButton = document.createElement('button')
+    clearButton.id = 'clear-button'
+    clearButton.textContent = 'Clear'
+    clearButton.onclick = () => {
+        socket.emit('clearCanvas')
+        clearCanvas()
+    }
+
+    const undoButton = document.createElement('button')
+    undoButton.id = 'undo-button'
+    undoButton.textContent = 'Undo'
+    undoButton.onclick = () => { socket.emit('undo') }
+
+    const colorPickerButton = document.createElement('button')
+    colorPickerButton.id = 'color-picker-button'
+    colorPickerButton.textContent = 'Color Picker'
+    colorPickerButton.onclick = () => { setDrawMode('picker') }
+
+    const fillButton = document.createElement('button')
+    fillButton.id = 'fill-button'
+    fillButton.textContent = 'Fill'
+    fillButton.onclick = () => { setDrawMode('fill') }
+
+    const saveButton = document.createElement('button')
+    saveButton.id = 'save-button'
+    saveButton.textContent = 'Save'
+    saveButton.onclick = saveDraw
+
+    
+    const brushSizeInput = document.createElement('input')
+    brushSizeInput.id = 'brush-size'
+    brushSizeInput.type = 'range'
+    brushSizeInput.min = 1
+    brushSizeInput.max = 100
+    
+    
+    const colorPalette = document.createElement('div')
+    colorPalette.id = 'color-palette'
+    
+    const colors = ['black', 'red', 'green', 'blue', 'yellow', 'orange', 'purple', 'brown', 'pink', 'white']
+    colors.forEach(color => {
+        const option = document.createElement('div')
+        option.classList.add('color-option')
+        option.style.backgroundColor = color
+        option.onclick = () => { 
+            setDrawMode('draw')
+            setBrushColor(color)
+        }
+        colorPalette.appendChild(option)
+    })
+    drawCursor.style.backgroundColor = 'black'
+
+    const canvasContainer = document.createElement('div')
+    canvasContainer.id = 'canvas-container'
+
+    toolsDiv.appendChild(eraseButton)
+    toolsDiv.appendChild(clearButton)
+    toolsDiv.appendChild(undoButton)
+    toolsDiv.appendChild(colorPickerButton)
+    toolsDiv.appendChild(fillButton)
+    toolsDiv.appendChild(saveButton)
+    toolsDiv.appendChild(brushSizeInput)
+    toolsDiv.appendChild(colorPalette)
+    mainContent.replaceChildren(drawCursor, toolsDiv, canvasContainer)
+    
+    addCanvas()
+    setDrawMode('draw')
+}
 
 /**
  * Function called when the page is loaded
  * Setup the canvas
  */
-function setup() {
+function addCanvas() {
     const canvas = createCanvas(width, height)
+    canvas.style('visibility', 'visible')
+    canvas.parent('canvas-container');
+    
     pixelDensity(1)
     clearCanvas()
     socket.on('drawingAction', (data) => {
@@ -24,7 +112,15 @@ function setup() {
                 floodFill(data)
                 break
         }
-    }) 
+    })
+
+    socket.on('canvasData', (data) => {
+        clearCanvas()
+        data.forEach(drawLine)
+    })
+    
+    socket.on('clearCanvas', clearCanvas)
+
     document.addEventListener('contextmenu', (e) => e.preventDefault())
     handleMouseMove(canvas)
 }
@@ -65,6 +161,7 @@ function handleMouseMove(canvas) {
  * Draw and emit the drawing action to the server
  */
 function mouseDragged() {
+    if(!drawMode) return
     if (!mouseInCanvas || (!['draw', 'erase'].includes(drawMode))) return
     x += (mouseX- x) * easing
     y += (mouseY - y) * easing
@@ -79,6 +176,8 @@ function mouseDragged() {
  * Draw and emit the drawing action to the server
  */
 function mousePressed() {
+    if (!drawMode) return
+    
     x = mouseX
     px = mouseX
     y = mouseY
@@ -112,6 +211,7 @@ function mousePressed() {
  * Emit the mouseReleased event to the server
  */
 function mouseReleased() {
+    if(!drawMode) return
     if (mouseInCanvas) {
         socket.emit('mouseReleased')
     }
@@ -173,20 +273,3 @@ function setDrawMode(targetMode) {
 function saveDraw() {
     saveCanvas('myCanvas', 'png')
 }
-
-const data = [
-    {
-        mode: "brush",
-        x: 0,
-        y: 0,
-        px: 0,
-        color: "black",
-        size: 5
-    },
-    {
-        mode: "fill",
-        x: 0,
-        y: 0,
-        color: "red"
-    }
-]

@@ -37,7 +37,6 @@ function joinRoom(data) {
     startGameButton.onclick = () => {
         const settings = readSettings()
         socket.emit('startGame', settings)
-        drawing = true
         renderCanvas()
     }
 
