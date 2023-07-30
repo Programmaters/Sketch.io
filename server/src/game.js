@@ -33,7 +33,7 @@ export class Game {
         this.io.in(this.roomId).emit('startGame')
         for (let round = 0; round < this.settings.rounds; round++) {
             for (let player = 0; player < this.players.length; player++) {
-                await nextTurn(player)
+                await this.nextTurn(player)
             }
         }
         this.io.in(this.roomId).emit('endGame')
@@ -47,7 +47,7 @@ export class Game {
     async nextTurn(playerIndex) {
 
         this.canvas.clear()
-        this.resetPlayers()
+        this.resetGuessed()
         const drawer = this.players[playerIndex]
         drawer.guessed = true
         drawer.drawer = true
@@ -55,11 +55,11 @@ export class Game {
   
         const guessers = this.players.filter(player => player.id !== drawer.id)
 
-        drawer.socket.emit('drawTurn', word)
-        guessers.forEach(player => player.socket.emit('guessTurn'))
-        
         this.currentWord = getRandomWords(1)[0]
 
+        drawer.socket.emit('drawTurn', { word: this.currentWord })
+        guessers.forEach(player => player.socket.emit('guessTurn', { wordLength: this.currentWord.length }))
+        
         await timeout(this.settings.drawTime, async () => { // wait for drawTime seconds
             endTurn()
         })
@@ -129,7 +129,7 @@ export class Game {
      * Resets all player scores
      */
     resetScores() {
-        this.players.forEach(player => { this.scores[player.id] = 0 })
+        this.players.forEach(player => player.score = 0)
     }
 
     /**

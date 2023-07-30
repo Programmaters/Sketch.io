@@ -17,28 +17,17 @@ function joinRoom(data) {
 	const sendButton = document.createElement('button')
 	sendButton.id = 'send-button'
 	sendButton.innerText = 'Send'
-	sendButton.onclick = () => {
-		const input = document.querySelector('#message')
-		socket.emit('message', { message: input.value, roomId: data.roomId, username })
-		input.value = ""
-	}
+	sendButton.onclick = sendMessage
 
 	const leaveRoomButton = document.createElement('button')
 	leaveRoomButton.id = 'leave-room'
 	leaveRoomButton.textContent = 'Leave Room'
-	leaveRoomButton.onclick = () => {
-		socket.emit('leaveRoom', { roomId: data.roomId, username })
-		renderHomepage()
-    }
+	leaveRoomButton.onclick = leaveRoom
     
     const startGameButton = document.createElement('button')
     startGameButton.id = 'start'
     startGameButton.textContent = 'Start Game'
-    startGameButton.onclick = () => {
-        const settings = readSettings()
-        socket.emit('startGame', settings)
-        renderCanvas()
-    }
+    startGameButton.onclick = startGame
 
     const ul = document.createElement('ul')
     const messageDiv = document.createElement('div')
@@ -46,9 +35,23 @@ function joinRoom(data) {
 	messageDiv.appendChild(sendButton)
     div.appendChild(leaveRoomButton)
     div.appendChild(startGameButton)
-	document.querySelector('#main-content').replaceChildren(h2, renderLobbySettings(), div, messageDiv, ul)
+
+    const leftDiv = document.createElement('div')
+    leftDiv.id = 'left-div'
+    leftDiv.replaceChildren(h2, renderLobbySettings(), div)
+
+    const rightDiv = document.createElement('div')
+    rightDiv.id = 'right-div'
+    rightDiv.replaceChildren(ul, messageDiv)
+
+	document.querySelector('#main-content').replaceChildren(leftDiv, rightDiv)
 	
 	playerJoinedRoom(data)
+}
+
+function leaveRoom() {
+    socket.emit('leaveRoom', { username })
+    renderHomepage()
 }
 
 function playerJoinedRoom(data) {

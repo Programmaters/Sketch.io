@@ -21,7 +21,7 @@ export class Canvas {
      * Undos the last action from the canvas
      */
     undo() {
-        this.canvasData = this.canvasTimeline.length != 0 ? [...this.canvasTimeline.pop()] : this.canvasData
+        this.canvasData = this.canvasTimeline.length !== 0 ? [...this.canvasTimeline.pop()] : this.canvasData
         this.prevCanvasData = [...this.canvasData]
     }
 

@@ -1,6 +1,6 @@
 const easing = 0.3
-const width = 800
-const height = 600
+const width = 500
+const height = 350
 let x, y, px, py = 0
 let mouseInCanvas = false
 let brushSize = 5
@@ -12,7 +12,7 @@ function setup() {
 }
 
 function renderCanvas() {
-    const mainContent = document.querySelector('#main-content')
+    const canvasDiv = document.createElement('div')
     const drawCursor = document.createElement('div')
     drawCursor.id = 'draw-cursor'
 
@@ -86,8 +86,10 @@ function renderCanvas() {
     toolsDiv.appendChild(saveButton)
     toolsDiv.appendChild(brushSizeInput)
     toolsDiv.appendChild(colorPalette)
-    mainContent.replaceChildren(drawCursor, toolsDiv, canvasContainer)
-    
+    canvasDiv.replaceChildren(drawCursor, toolsDiv, canvasContainer)
+    const leftDiv = document.querySelector('#left-div')
+    leftDiv.replaceChildren(canvasDiv)
+
     addCanvas()
     setDrawMode('draw')
 }
@@ -99,7 +101,7 @@ function renderCanvas() {
 function addCanvas() {
     const canvas = createCanvas(width, height)
     canvas.style('visibility', 'visible')
-    canvas.parent('canvas-container');
+    canvas.parent('canvas-container')
     
     pixelDensity(1)
     clearCanvas()

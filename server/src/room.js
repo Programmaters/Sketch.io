@@ -50,12 +50,13 @@ export class Room {
       
     }
 
-    onMessage(username, message) {
+    onMessage(playerId, message) {
+        const player = this.players.find(player => player.id == playerId)
         if(this.game == null) { // game hasnt started yet
-            this.io.in(this.roomId).emit('message', `${username}: ${message}`)
+            this.io.in(this.roomId).emit('message', `${player.name}: ${message}`)
             return
         }
-        this.game.onMessage(socketId, message)
+        this.game.onMessage(player, message)
     }
 
 

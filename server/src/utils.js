@@ -2,7 +2,7 @@ import { rooms } from './main.js'
 import { readFile } from 'fs/promises'
 import { randomUUID } from 'crypto'
 
-const words = readFile('./words.txt', 'utf-8').then(x => x.split('\n'))
+const words = await readFile('./words.txt', 'utf-8').then(x => x.split('\n'))
 
 /**
  * Waits for a given amount of time and then calls the callback function
@@ -57,11 +57,10 @@ export function getRandomId() {
  * @param {String} id 
  * @returns room
  */
-export function getRoom(socket, id) {
+export function getRoom(id) {
     const room = rooms[id]
     if (!room) {
-        socket.emit('error', { message: `Room with id ${id} does not exist` })
-        throw new Error('Room does not exist')
+        throw new Error(`Room with id ${id} does not exist`)
     }
     return room
 }

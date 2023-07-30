@@ -1,7 +1,5 @@
 
 function renderHomepage() {
-	const h1 = document.createElement('h1')
-	h1.textContent = 'Sketch.io'
 
 	const usernameInput = document.createElement('input')
 	usernameInput.id = 'username'
@@ -22,7 +20,7 @@ function renderHomepage() {
 	joinRoomDiv.appendChild(roomIdInput)
 	joinRoomDiv.appendChild(joinRoomButton)
 
-	document.getElementById('main-content').replaceChildren(h1, usernameInput, createRoomButton, joinRoomDiv)
+	document.getElementById('main-content').replaceChildren(usernameInput, createRoomButton, joinRoomDiv)
 
 	document.querySelector('#create-room').onclick = () => {
 		username = document.querySelector('#username').value
