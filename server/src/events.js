@@ -67,6 +67,7 @@ export default {
     'createRoom': onCreateRoom,
     'joinRoom': onJoinRoom,
     'leaveRoom': onLeaveRoom,
+    // 'disconnect': onLeaveRoom,
     'updateSettings': onUpdateSettings,
     'startGame': onStartGame,
     'message': onMessage,

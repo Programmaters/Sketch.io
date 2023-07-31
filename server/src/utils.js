@@ -2,22 +2,9 @@ import { rooms } from './main.js'
 import { readFile } from 'fs/promises'
 import { randomUUID } from 'crypto'
 
-const words = await readFile('./words.txt', 'utf-8').then(x => x.split('\n'))
+const words = await readFile('./words.txt', 'utf-8').then(x => x.split('\r\n'))
 
-/**
- * Waits for a given amount of time and then calls the callback function
- * @param {Integer} time 
- * @param {Function} callback 
- * @returns 
- */
-export async function timeout(time, callback) {
-    return new Promise(function(resolve) {
-        setTimeout(() => {
-            resolve(callback)
-        }, time * 1000)
-    })
-}
- 
+
 /**
  * Gets n number of random words
  * @param {Integer} numberOfNWords 

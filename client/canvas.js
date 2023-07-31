@@ -11,13 +11,11 @@ function setup() {
     noCanvas()
 }
 
-function renderCanvas() {
-    const canvasDiv = document.createElement('div')
+function renderDrawTools() {
+
     const drawCursor = document.createElement('div')
     drawCursor.id = 'draw-cursor'
 
-    const toolsDiv = document.createElement('div')
-    toolsDiv.id = 'tools'
     const eraseButton = document.createElement('button')
     eraseButton.id = 'erase-button'
     eraseButton.textContent = 'Erase'
@@ -75,56 +73,60 @@ function renderCanvas() {
     })
     drawCursor.style.backgroundColor = 'black'
 
-    const canvasContainer = document.createElement('div')
-    canvasContainer.id = 'canvas-container'
+    const toolsDiv = document.querySelector('#draw-tools')
 
-    toolsDiv.appendChild(eraseButton)
-    toolsDiv.appendChild(clearButton)
-    toolsDiv.appendChild(undoButton)
-    toolsDiv.appendChild(colorPickerButton)
-    toolsDiv.appendChild(fillButton)
-    toolsDiv.appendChild(saveButton)
-    toolsDiv.appendChild(brushSizeInput)
-    toolsDiv.appendChild(colorPalette)
-    canvasDiv.replaceChildren(drawCursor, toolsDiv, canvasContainer)
-    const leftDiv = document.querySelector('#left-div')
-    leftDiv.replaceChildren(canvasDiv)
+    toolsDiv.replaceChildren(drawCursor, eraseButton, clearButton, undoButton, colorPickerButton, fillButton, saveButton, brushSizeInput, colorPalette)
+}
 
-    addCanvas()
-    setDrawMode('draw')
+function removeDrawTools() {
+    const toolsDiv = document.querySelector('#draw-tools')
+    toolsDiv.replaceChildren()
 }
 
 /**
  * Function called when the page is loaded
  * Setup the canvas
  */
-function addCanvas() {
+function renderCanvas() {
+    const leftDiv = document.querySelector('#left-div')
+    const canvasContainer = document.createElement('div')
+    canvasContainer.id = 'canvas-container'
+
+    const drawTools = document.createElement('div')
+    drawTools.id = 'draw-tools'
+
+    const timer = document.createElement('div')
+    timer.id = 'timer'
+
+    canvasContainer.appendChild(drawTools)
+    canvasContainer.appendChild(timer)
+    leftDiv.replaceChildren(canvasContainer)
+
     const canvas = createCanvas(width, height)
     canvas.style('visibility', 'visible')
     canvas.parent('canvas-container')
     
     pixelDensity(1)
     clearCanvas()
-    socket.on('drawingAction', (data) => {
-        switch (data.mode) {
-            case 'brush':
-                drawLine(data)
-                break
-            case 'fill':
-                floodFill(data)
-                break
-        }
-    })
-
-    socket.on('canvasData', (data) => {
-        clearCanvas()
-        data.forEach(drawLine)
-    })
-    
-    socket.on('clearCanvas', clearCanvas)
 
     document.addEventListener('contextmenu', (e) => e.preventDefault())
     handleMouseMove(canvas)
+}
+
+function onDrawingAction(data) {
+    switch (data.mode) {
+        case 'brush':
+            drawLine(data)
+            break
+        case 'fill':
+            floodFill(data)
+            break
+    }
+}
+
+function onCanvasData(data) {
+    clearCanvas()
+    data.forEach(drawLine)
 }
 
 /**
@@ -132,20 +134,23 @@ function addCanvas() {
  * @param {Canvas} canvas 
  */
 function handleMouseMove(canvas) {
-    const drawCursor = document.querySelector('#draw-cursor')
-
+   
     const handleMouseIn = (e) => {
         mouseInCanvas = true
-        drawCursor.style.display = 'block'
+        if (!drawMode) return
+        const drawCursor = document.querySelector('#draw-cursor')
         document.body.style.cursor = 'none'
+        drawCursor.style.display = 'block'
         drawCursor.style.top = `${e.clientY - 5}px`
         drawCursor.style.left = `${e.clientX - 5}px`
     }
 
     const handleMouseOut = () => {
         mouseInCanvas = false
-        drawCursor.style.display = 'none'
+        if (!drawMode) return
+        const drawCursor = document.querySelector('#draw-cursor')
         document.body.style.cursor = 'default'
+        drawCursor.style.display = 'none'
     }
 
     document.addEventListener('mousemove', (e) => {
@@ -179,7 +184,6 @@ function mouseDragged() {
  */
 function mousePressed() {
     if (!drawMode) return
-    
     x = mouseX
     px = mouseX
     y = mouseY
