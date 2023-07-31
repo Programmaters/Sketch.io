@@ -59,3 +59,9 @@ export function getRoom(id) {
 export function addRoom(room) {
     rooms[room.roomId] = room
 }
+
+
+export function wordHint(word) {
+    return word.split(' ').map(subWord => '_ '.repeat(subWord.length)).join('&nbsp;&nbsp;')
+      
+}

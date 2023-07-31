@@ -14,13 +14,14 @@ function onCreateRoom(conn, data) {
 function onJoinRoom(conn, data) {
     const room = getRoom(data.roomId)
     room.join(conn.socket, data.username)
-    conn.socket.emit('joinedRoom', { roomId: data.roomId, username: data.username })
-    conn.socket.broadcast.to(data.roomId).emit('playerJoinedRoom', { roomId: data.roomId, username: data.username })
+    conn.socket.emit('joinedRoom', { roomId: data.roomId, players: room.players.map(player => player.name) })
+    conn.socket.broadcast.to(data.roomId).emit('playerJoinedRoom', data.username)
 }
 
-function onLeaveRoom(conn, data) {
-    conn.room.leave(conn.socket, data.username)
-    conn.socket.broadcast.to(conn.roomId).emit('playerLeftRoom', { roomId: conn.roomId, username: data.username })
+function onLeaveRoom(conn) {
+    const player = conn.room.players.find(player => player.id == conn.socket.id)
+    conn.room.leave(conn.socket, player.name)
+    conn.socket.broadcast.to(conn.roomId).emit('playerLeftRoom', player.name)
 }
 
 function onUpdateSettings(conn, data) {
@@ -30,7 +31,6 @@ function onUpdateSettings(conn, data) {
 function onStartGame(conn, data) {
     conn.room.newGame()
     conn.room.game.startGame(data)
-    conn.socket.broadcast.to(conn.roomId).emit('startGame', data)
 }
 
 

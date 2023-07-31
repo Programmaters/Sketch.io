@@ -9,7 +9,7 @@ export const rooms = {}
 io.on('connection', (socket) => {
     Object.entries(events).forEach(([name, handler]) => {
         socket.on(name, (data) => {
-            const roomId = Array.from(socket.rooms).find(roomId => roomId !== socket.id)
+            const roomId = Array.from(socket.rooms).find(roomId => roomId !== socket.id) // check later
             const room = rooms[roomId]
             const conn = { io, socket, roomId, room }
             try {

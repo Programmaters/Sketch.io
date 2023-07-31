@@ -27,9 +27,19 @@ function joinRoom(data) {
     const startGameButton = document.createElement('button')
     startGameButton.id = 'start'
     startGameButton.textContent = 'Start Game'
-    startGameButton.onclick = startGame
+    startGameButton.onclick = () => {
+        if (!host) return
+        const settings = readSettings()
+        socket.emit('startGame', settings)
+        startGame()
+    }
+
+    const scoreboard = document.createElement('ul')
+    scoreboard.id = 'scoreboard'
 
     const ul = document.createElement('ul')
+    ul.id = 'chat'
+
     const messageDiv = document.createElement('div')
 	messageDiv.appendChild(input)
 	messageDiv.appendChild(sendButton)
@@ -42,11 +52,16 @@ function joinRoom(data) {
 
     const rightDiv = document.createElement('div')
     rightDiv.id = 'right-div'
-    rightDiv.replaceChildren(ul, messageDiv)
+    rightDiv.replaceChildren(scoreboard, ul, messageDiv)
 
 	document.querySelector('#main-content').replaceChildren(leftDiv, rightDiv)
 	
-	playerJoinedRoom(data)
+    
+    if (data.players) {
+        data.players.forEach(playerJoinedRoom)
+    } else {
+        playerJoinedRoom(data.username)
+    }
 }
 
 function leaveRoom() {
@@ -54,18 +69,42 @@ function leaveRoom() {
     renderHomepage()
 }
 
-function playerJoinedRoom(data) {
+function playerJoinedRoom(username) {
     const el = document.createElement('li')
-    el.innerText = `${data.username} joined the room`
-    document.querySelector('ul').appendChild(el)
+    el.innerText = `${username} joined the room`
+    document.querySelector('#chat').appendChild(el)
+    addPlayerToScoreboard(username)
 }
 
-function playerLeftRoom(data) {
+function addPlayerToScoreboard(playerName) {
+    const player = document.createElement('li')
+    player.id = playerName
+
+    const name = document.createElement('span')
+    name.className = 'name'
+    name.innerText = playerName
+
+    const score = document.createElement('span')
+    score.className = 'score'
+    score.innerText = 0
+
+    player.appendChild(name)
+    player.appendChild(document.createTextNode(' - '))
+    player.appendChild(score)
+
+    document.querySelector('#scoreboard').appendChild(player)
+}
+
+function playerLeftRoom(username) {
 	const el = document.createElement('li')
-	el.innerText = `${data.username} left the room`
-	document.querySelector('ul').appendChild(el)
+	el.innerText = `${username} left the room`
+	document.querySelector('#chat').appendChild(el)
+    removePlayerFromScoreboard(username)
 }
 
+function removePlayerFromScoreboard(playerName) {
+    // TODO()
+}
 
 function renderLobbySettings() {
     const parent = document.createElement('div')

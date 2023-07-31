@@ -4,23 +4,23 @@ socket.on('message', receiveMessage)
 socket.on('joinedRoom', joinRoom)
 socket.on('playerJoinedRoom', playerJoinedRoom)
 socket.on('playerLeftRoom', playerLeftRoom)
-socket.on('startGame', startGame)
+
 socket.on('drawingAction', onDrawingAction)
 socket.on('canvasData', onCanvasData )
 socket.on('clearCanvas', clearCanvas)
 
+socket.on('gameStarted', startGame)
 socket.on('drawTurn', onDrawTurn)
 socket.on('guessTurn', onGuessTurn)
 
-
-socket.on('turnEnd', onTurnEnd)
+socket.on('endTurn', onEndTurn)
 socket.on('roundEnd', onRoundEnd)
 socket.on('endGame', onGameEnd)
 
-socket.on('correctGuess', () => alert('You guessed it right!'))
-socket.on('playerGuessed', message => alert(message))
+socket.on('correctGuess', correctGuess)
+socket.on('playerGuessed', receiveMessage)
 
-socket.on('closeGuess', data => alert(data.message))
+socket.on('closeGuess', message => receiveMessage(message, 'yellow'))
 
 socket.on('error', error => alert(error.message))
 

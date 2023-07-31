@@ -11,8 +11,8 @@ const defaultSettings = {
 }
 
 /**
- * @class Lobby
- * @description Represents a single lobby
+ * @class Room
+ * @description Represents a single room
  * @param {Socket} socket
  */
 export class Room {
