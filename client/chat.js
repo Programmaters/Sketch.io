@@ -1,6 +1,3 @@
-let username = null
-let host = false
-let drawer = false
 
 function receiveMessage(text, color) {
     const el = document.createElement('li')

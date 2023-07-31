@@ -1,10 +1,17 @@
 
 function startGame() {
     renderCanvas()
+    const canvas = createCanvas(width, height)
+    canvas.style('visibility', 'visible')
+    canvas.parent('canvas-container')
+    pixelDensity(1)
+    clearCanvas()
+    document.addEventListener('contextmenu', (e) => e.preventDefault())
+    handleMouseMove(canvas)
 }
 
 function onDrawTurn(data) {
-    document.querySelector('h1').innerText = 'Draw the word: ' + data.word
+    updateTitle(`Draw the word: ${data.word}`)
     renderDrawTools()
     setDrawMode('draw')
     setTimer(data.time)
@@ -12,7 +19,7 @@ function onDrawTurn(data) {
 }
 
 function onGuessTurn(data) {
-    document.querySelector('h1').innerHTML = `Guess the word: ${data.hint}` 
+    updateTitle(`Guess the word: ${data.hint}`)
     removeDrawTools()
     setDrawMode(null)
     setTimer(data.time)
@@ -21,28 +28,32 @@ function onGuessTurn(data) {
 
 function correctGuess(word) {
     receiveMessage('You guessed it right!', 'green')
-    document.querySelector('h1').innerText = `Guess the word: ${word}` 
+    updateTitle(`Guess the word: ${word}`)
+}
+
+function closeGuess(message) {
+    receiveMessage(message, 'yellow')
 }
 
 function onEndTurn(data) {
-    document.querySelector('h1').innerText = `The word was: ${data.word}` 
-
+    updateTitle(`The word was: ${data.word}`)
     data.scores.forEach(obj => {
         updatePlayerScore(obj.username, obj.score)
     })
 }
 
-function onRoundEnd(data) {
-    document.querySelector('h1').innerText = 'Round ended'
-
-    
+function onRoundEnd() {
+    updateTitle('Round ended')
 }
 
-
-function onGameEnd(data) {
-    document.querySelector('h1').innerText = 'Game ended'
+function onGameEnd() {
+    updateTitle('Game ended')
 }
 
 function updatePlayerScore(username, score) {
     document.querySelector('#scoreboard').querySelector(`#${username}`).querySelector('.score').innerText = score
+}
+
+function updateTitle(title) {
+    document.querySelector('h1').innerText = title
 }
