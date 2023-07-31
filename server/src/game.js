@@ -83,7 +83,7 @@ export class Game {
                 // update player scores 
                 const timeLeft = parseInt(this.settings.drawTime - (new Date() - this.timeRef) / 1000)
                 this.drawer.score += timeLeft
-                player.score += timeLeft * 4
+                player.score += timeLeft * (this.players.length - 1)
                 player.guessed = true
     
                 // if everyone guessed, end turn
@@ -115,8 +115,6 @@ export class Game {
     endTurn() {
         this.io.in(this.roomId).emit('endTurn', { word: this.currentWord, scores: this.getPlayerScores() })
         this.resetGuessed()
-
-        // show updated scores
     }
 
     /**
@@ -124,7 +122,6 @@ export class Game {
      */
     endGame() {
         this.resetScores()
-        this.resetGuessed()
         this.io.in(roomId).emit('endGame')
     }
 

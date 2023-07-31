@@ -11,108 +11,6 @@ function setup() {
     noCanvas()
 }
 
-function renderDrawTools() {
-
-    const drawCursor = document.createElement('div')
-    drawCursor.id = 'draw-cursor'
-
-    const eraseButton = document.createElement('button')
-    eraseButton.id = 'erase-button'
-    eraseButton.textContent = 'Erase'
-    eraseButton.onclick = () => { setDrawMode('erase') }
-
-    const clearButton = document.createElement('button')
-    clearButton.id = 'clear-button'
-    clearButton.textContent = 'Clear'
-    clearButton.onclick = () => {
-        socket.emit('clearCanvas')
-        clearCanvas()
-    }
-
-    const undoButton = document.createElement('button')
-    undoButton.id = 'undo-button'
-    undoButton.textContent = 'Undo'
-    undoButton.onclick = () => { socket.emit('undo') }
-
-    const colorPickerButton = document.createElement('button')
-    colorPickerButton.id = 'color-picker-button'
-    colorPickerButton.textContent = 'Color Picker'
-    colorPickerButton.onclick = () => { setDrawMode('picker') }
-
-    const fillButton = document.createElement('button')
-    fillButton.id = 'fill-button'
-    fillButton.textContent = 'Fill'
-    fillButton.onclick = () => { setDrawMode('fill') }
-
-    const saveButton = document.createElement('button')
-    saveButton.id = 'save-button'
-    saveButton.textContent = 'Save'
-    saveButton.onclick = saveDraw
-
-    
-    const brushSizeInput = document.createElement('input')
-    brushSizeInput.id = 'brush-size'
-    brushSizeInput.type = 'range'
-    brushSizeInput.min = 1
-    brushSizeInput.max = 100
-    
-    
-    const colorPalette = document.createElement('div')
-    colorPalette.id = 'color-palette'
-    
-    const colors = ['black', 'red', 'green', 'blue', 'yellow', 'orange', 'purple', 'brown', 'pink', 'white']
-    colors.forEach(color => {
-        const option = document.createElement('div')
-        option.classList.add('color-option')
-        option.style.backgroundColor = color
-        option.onclick = () => { 
-            setDrawMode('draw')
-            setBrushColor(color)
-        }
-        colorPalette.appendChild(option)
-    })
-    drawCursor.style.backgroundColor = 'black'
-
-    const toolsDiv = document.querySelector('#draw-tools')
-
-    toolsDiv.replaceChildren(drawCursor, eraseButton, clearButton, undoButton, colorPickerButton, fillButton, saveButton, brushSizeInput, colorPalette)
-}
-
-function removeDrawTools() {
-    const toolsDiv = document.querySelector('#draw-tools')
-    toolsDiv.replaceChildren()
-}
-
-/**
- * Function called when the page is loaded
- * Setup the canvas
- */
-function renderCanvas() {
-    const leftDiv = document.querySelector('#left-div')
-    const canvasContainer = document.createElement('div')
-    canvasContainer.id = 'canvas-container'
-
-    const drawTools = document.createElement('div')
-    drawTools.id = 'draw-tools'
-
-    const timer = document.createElement('div')
-    timer.id = 'timer'
-
-    canvasContainer.appendChild(drawTools)
-    canvasContainer.appendChild(timer)
-    leftDiv.replaceChildren(canvasContainer)
-
-    const canvas = createCanvas(width, height)
-    canvas.style('visibility', 'visible')
-    canvas.parent('canvas-container')
-    
-    pixelDensity(1)
-    clearCanvas()
-
-    document.addEventListener('contextmenu', (e) => e.preventDefault())
-    handleMouseMove(canvas)
-}
-
 function onDrawingAction(data) {
     switch (data.mode) {
         case 'brush':
@@ -277,5 +175,5 @@ function setDrawMode(targetMode) {
  * Saves the canvas as a png file 
  */
 function saveDraw() {
-    saveCanvas('myCanvas', 'png')
+    saveCanvas('canvas', 'png')
 }
