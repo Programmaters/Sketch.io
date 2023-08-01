@@ -4,7 +4,7 @@ function joinRoom(data) {
     if (data.players) {
         data.players.forEach(playerJoinedRoom)
     } else {
-        playerJoinedRoom(data.username)
+        playerJoinedRoom(data.player)
     }
 }
 
@@ -13,27 +13,29 @@ function leaveRoom() {
     renderHomepage()
 }
 
-function playerJoinedRoom(username) {
+function playerJoinedRoom(player) {
     const el = document.createElement('li')
-    el.innerText = `${username} joined the room`
+    el.innerText = `${player.username} joined the room`
     document.querySelector('#chat').appendChild(el)
-    addPlayerToScoreboard(username)
+    addPlayerToScoreboard(player.username, player.id)
 }
 
-function playerLeftRoom(username) {
+function playerLeftRoom(player) {
+    console.log(player)
 	const el = document.createElement('li')
-	el.innerText = `${username} left the room`
+	el.innerText = `${player.username} left the room`
 	document.querySelector('#chat').appendChild(el)
-    removePlayerFromScoreboard(username)
+    removePlayerFromScoreboard(player.id)
 }
 
 
-function addPlayerToScoreboard(playerName) {
-    renderPlayer(playerName)
+function addPlayerToScoreboard(playerName, playerId) {
+    renderPlayer(playerName, playerId)
 }
 
-function removePlayerFromScoreboard(playerName) {
-    document.querySelector(`#${playerName}`).parentNode.remove()
+function removePlayerFromScoreboard(playerId) {
+    console.log(playerId)
+    document.querySelector(`#\\${playerId}`).remove()
 }
 
 

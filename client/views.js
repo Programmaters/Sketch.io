@@ -202,9 +202,9 @@ function removeDrawTools() {
     toolsDiv.replaceChildren()
 }
 
-function renderPlayer(playerName) {
+function renderPlayer(playerName, playerId) {
     const player = document.createElement('li')
-    player.id = playerName
+    player.id = playerId
 
     const name = document.createElement('span')
     name.className = 'name'

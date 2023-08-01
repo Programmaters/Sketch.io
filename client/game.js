@@ -38,7 +38,7 @@ function closeGuess(message) {
 function onEndTurn(data) {
     updateTitle(`The word was: ${data.word}`)
     data.scores.forEach(obj => {
-        updatePlayerScore(obj.username, obj.score)
+        updatePlayerScore(obj.playerId, obj.score)
     })
 }
 
@@ -50,8 +50,8 @@ function onGameEnd() {
     updateTitle('Game ended')
 }
 
-function updatePlayerScore(username, score) {
-    document.querySelector('#scoreboard').querySelector(`#${username}`).querySelector('.score').innerText = score
+function updatePlayerScore(playerId, score) {
+    document.querySelector('#scoreboard').querySelector(`#${playerId}`).querySelector('.score').innerText = score
 }
 
 function updateTitle(title) {

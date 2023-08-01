@@ -8,20 +8,20 @@ function onCreateRoom(conn, data) {
     const room = new Room(roomId, conn.io, conn.socket)
     addRoom(room)
     room.join(conn.socket, data.username)
-    conn.socket.emit('joinedRoom', { roomId, username: data.username })
+    conn.socket.emit('joinedRoom', { roomId, player: {username: data.username, id: conn.socket.id} })
 }
 
 function onJoinRoom(conn, data) {
     const room = getRoom(data.roomId)
     room.join(conn.socket, data.username)
-    conn.socket.emit('joinedRoom', { roomId: data.roomId, players: room.players.map(player => player.name) })
-    conn.socket.broadcast.to(data.roomId).emit('playerJoinedRoom', data.username)
+    conn.socket.emit('joinedRoom', { roomId: data.roomId, players: room.players.map(player => ({username: player.name, id: player.id})) })
+    conn.socket.broadcast.to(data.roomId).emit('playerJoinedRoom', {username: data.username, id: conn.socket.id} )
 }
 
 function onLeaveRoom(conn) {
     const player = conn.room.players.find(player => player.id == conn.socket.id)
     conn.room.leave(conn.socket, player.name)
-    conn.socket.broadcast.to(conn.roomId).emit('playerLeftRoom', player.name)
+    conn.socket.broadcast.to(conn.roomId).emit('playerLeftRoom', {username: player.name, id: player.id})
 }
 
 function onUpdateSettings(conn, data) {

@@ -143,7 +143,7 @@ export class Game {
     }
 
     getPlayerScores() {
-        return this.players.map(player => ({ username: player.name, score: player.score }))
+        return this.players.map(player => ({ playerId: player.id, score: player.score }))
     }
 
 
