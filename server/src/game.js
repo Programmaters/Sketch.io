@@ -34,7 +34,7 @@ export class Game {
         for (let round = 0; round < this.settings.rounds; round++) {
             for (let player = 0; player < this.players.length; player++) {
                 console.log(`Round ${round + 1} | Player ${player + 1}`)
-                await this.nextTurn(player, round)
+                await this.play(player, round + 1)
             }
         }
         this.socket.broadcast.to(this.roomId).emit('gameEnded')
@@ -45,7 +45,7 @@ export class Game {
      * Starts a new turn
      * @param {Integer} playerIndex 
      */
-    async nextTurn(playerIndex, roundNumber) {
+    async play(playerIndex, roundNumber) {
 
         this.canvas.clear()
         this.io.to(this.roomId).emit('clearCanvas')
@@ -83,12 +83,11 @@ export class Game {
                 // update player scores 
                 const timeLeft = parseInt(this.settings.drawTime - (new Date() - this.timeRef) / 1000)
                 this.drawer.score += timeLeft
-                player.score += timeLeft * (this.players.length - 1)
+                player.score += timeLeft * this.players.length
                 player.guessed = true
     
                 // if everyone guessed, end turn
                 if (this.players.every(player => player.guessed)) {
-                    this.controller.abort() // cancels the timeout
                     this.endTurn()
                 }
             }
@@ -115,6 +114,7 @@ export class Game {
     endTurn() {
         this.io.in(this.roomId).emit('endTurn', { word: this.currentWord, scores: this.getPlayerScores() })
         this.resetGuessed()
+        this.controller.abort()
     }
 
     /**

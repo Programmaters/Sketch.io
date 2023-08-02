@@ -15,7 +15,6 @@ function onDrawTurn(data) {
     renderDrawTools()
     setDrawMode('draw')
     setTimer(data.time)
-    drawer = true
 }
 
 function onGuessTurn(data) {
@@ -23,7 +22,6 @@ function onGuessTurn(data) {
     removeDrawTools()
     setDrawMode(null)
     setTimer(data.time)
-    drawer = false
 }
 
 function correctGuess(word) {
@@ -51,9 +49,9 @@ function onGameEnd() {
 }
 
 function updatePlayerScore(playerId, score) {
-    document.querySelector('#scoreboard').querySelector(`#${playerId}`).querySelector('.score').innerText = score
+    document.getElementById(`${playerId}`).querySelector('.score').innerText = score
 }
 
 function updateTitle(title) {
-    document.querySelector('h1').innerText = title
+    document.querySelector('h1').innerHTML = title
 }

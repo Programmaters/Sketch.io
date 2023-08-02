@@ -193,8 +193,19 @@ function renderDrawTools() {
         colorPalette.appendChild(option)
     })
     drawCursor.style.backgroundColor = 'black'
+
+    const hintButton = document.createElement('button')
+    hintButton.id = 'hint-button'
+    hintButton.textContent = 'Hint'
+    hintButton.onclick = () => socket.emit('hint')
+    
+    const skipButton = document.createElement('button')
+    skipButton.id = 'skip-button'
+    skipButton.textContent = 'Skip Turn'
+    skipButton.onclick = () => socket.emit('skipTurn')
+
     const toolsDiv = document.querySelector('#draw-tools')
-    toolsDiv.replaceChildren(drawCursor, eraseButton, clearButton, undoButton, colorPickerButton, fillButton, saveButton, brushSizeInput, colorPalette)
+    toolsDiv.replaceChildren(drawCursor, eraseButton, clearButton, undoButton, colorPickerButton, fillButton, saveButton, brushSizeInput, colorPalette, hintButton, skipButton)
 }
 
 function removeDrawTools() {

@@ -33,6 +33,9 @@ function onStartGame(conn, data) {
     conn.room.game.startGame(data)
 }
 
+function onSkipTurn(conn) {
+    conn.room.game.endTurn()
+}
 
 /* Chat Events */
 function onMessage(conn, data) {
@@ -71,6 +74,7 @@ export default {
     'updateSettings': onUpdateSettings,
     'startGame': onStartGame,
     'message': onMessage,
+    'skipTurn': onSkipTurn,
     'drawingAction': onDrawingAction,
     'clearCanvas': onClearCanvas,
     'mouseReleased': onSave,

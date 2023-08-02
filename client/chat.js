@@ -7,7 +7,7 @@ function receiveMessage(text, color) {
 }
 
 function sendMessage() {
-    if (drawer) return
+    if (drawMode != null) return
     const input = document.querySelector('#message')
     socket.emit('message', { message: input.value, username })
     input.value = ""
