@@ -1,7 +1,6 @@
 import { Room } from './room.js'
 import { getRandomId, getRoom, addRoom } from './utils.js'
 
-
 /* Game Events */
 function onCreateRoom(conn, data) {
     const roomId = getRandomId()
@@ -35,6 +34,12 @@ function onStartGame(conn, data) {
 
 function onSkipTurn(conn) {
     conn.room.game.endTurn()
+}
+
+function onHint(conn) {
+    if (conn.room.game.hintCounter >= conn.room.game.settings.hints) return
+    conn.room.game.hintCounter++
+    conn.room.game.sendHint()
 }
 
 /* Chat Events */
@@ -75,6 +80,7 @@ export default {
     'startGame': onStartGame,
     'message': onMessage,
     'skipTurn': onSkipTurn,
+    'hint': onHint,
     'drawingAction': onDrawingAction,
     'clearCanvas': onClearCanvas,
     'mouseReleased': onSave,

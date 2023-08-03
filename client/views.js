@@ -1,4 +1,3 @@
-
 function renderHomepage() {
 
 	const usernameInput = document.createElement('input')

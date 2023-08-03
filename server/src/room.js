@@ -47,7 +47,6 @@ export class Room {
 
     newGame() {
         this.game = new Game(this.io, this.socket, this.players, this.settings, this.roomId)
-      
     }
 
     onMessage(playerId, message) {

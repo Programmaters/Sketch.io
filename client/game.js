@@ -1,4 +1,3 @@
-
 function startGame() {
     renderCanvas()
     const canvas = createCanvas(width, height)
@@ -38,6 +37,10 @@ function onEndTurn(data) {
     data.scores.forEach(obj => {
         updatePlayerScore(obj.playerId, obj.score)
     })
+}
+
+function onHint(hint) {
+    updateTitle(hint)
 }
 
 function onRoundEnd() {
