@@ -12,8 +12,10 @@ function onCreateRoom(conn, data) {
 
 function onJoinRoom(conn, data) {
     const room = getRoom(data.roomId)
+    if (room.players.length == room.settings.maxPlayers) return
     room.join(conn.socket, data.username)
     conn.socket.emit('joinedRoom', { roomId: data.roomId, players: room.players.map(player => ({username: player.name, id: player.id})) })
+    conn.socket.emit('updateSettings', room.settings )
     conn.socket.broadcast.to(data.roomId).emit('playerJoinedRoom', {username: data.username, id: conn.socket.id} )
 }
 
@@ -24,7 +26,7 @@ function onLeaveRoom(conn) {
 }
 
 function onUpdateSettings(conn, data) {
-    conn.room.updateSettings(data.settings)
+    conn.room.updateSettings(data)
 }
 
 function onStartGame(conn, data) {

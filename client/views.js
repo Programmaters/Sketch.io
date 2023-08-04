@@ -89,8 +89,8 @@ function renderRoomSettings() {
     const parent = document.createElement('div')
     Object.entries(options).forEach(([key, value]) => {
         const div = document.createElement('div')
-        div.onclick = () => { 
-            socket.emit('onUpdateSettings', readSettings())
+        div.onchange = () => { 
+            socket.emit('updateSettings', readSettings())
         }
 
         const label = document.createElement('label')

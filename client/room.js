@@ -59,6 +59,19 @@ function readSettings() {
     }, {})
 }
 
+/**
+ * Update the game settings
+ */
+function updateSettings(settings) {
+    if (!host) {
+        Object.entries(settings).forEach(([key, value]) => {
+             const setting = document.getElementById(key)
+             setting.value = value
+         })
+    }
+    else return
+}
+
 const options = {
     maxPlayers: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     language: ['English', 'Portuguese'],

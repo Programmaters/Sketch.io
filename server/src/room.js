@@ -2,12 +2,12 @@ import { Game } from './game.js'
 import { Player } from './player.js'
 
 const defaultSettings = {
-    maxPlayers: 8,
+    maxPlayers: 2,
     language: 'English',
-    drawTime: 60,
+    drawTime: 30,
     rounds: 3,
-    wordCount: 2,
-    hints: 2
+    wordCount: 1,
+    hints: 0
 }
 
 /**
@@ -66,7 +66,7 @@ export class Room {
     updateSettings(settings) {
         this.settings = settings
         this.players.forEach(player => {
-            player.socket.emit('onUpdateSettings', settings)
+            player.socket.emit('updateSettings', settings)
         })
     }
 }
