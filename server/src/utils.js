@@ -2,7 +2,8 @@ import { rooms } from './main.js'
 import { readFile } from 'fs/promises'
 import { randomUUID } from 'crypto'
 
-const words = await readFile('./words.txt', 'utf-8').then(x => x.split('\r\n'))
+const englishWords = await readFile('./englishWords.txt', 'utf-8').then(x => x.split('\r\n'))
+const portgueseWords = await readFile('./portugueseWords.txt', 'utf-8').then(x => x.split('\r\n'))
 
 
 /**
@@ -10,8 +11,13 @@ const words = await readFile('./words.txt', 'utf-8').then(x => x.split('\r\n'))
  * @param {Integer} numberOfNWords 
  * @returns array of n random words
  */
-export function getRandomWords(n) {
-    return Array.from({ length: n }, () => words[Math.floor(Math.random() * words.length)])
+export function getRandomWords(n, language) {
+    if (language === 'English') {
+        return Array.from({ length: n }, () => englishWords[Math.floor(Math.random() * englishWords.length)])
+    }
+    else {
+        return Array.from({ length: n }, () => portgueseWords[Math.floor(Math.random() * portgueseWords.length)])
+    }
 }
 
 /**
