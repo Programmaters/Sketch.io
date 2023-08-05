@@ -212,7 +212,7 @@ function removeDrawTools() {
     toolsDiv.replaceChildren()
 }
 
-function renderPlayer(playerName, playerId) {
+function renderPlayer(playerName, playerId, playerScore = 0) {
     const player = document.createElement('li')
     player.id = playerId
 
@@ -222,7 +222,7 @@ function renderPlayer(playerName, playerId) {
 
     const score = document.createElement('span')
     score.className = 'score'
-    score.innerText = 0
+    score.innerText = playerScore
 
     player.appendChild(name)
     player.appendChild(document.createTextNode(' - '))

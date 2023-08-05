@@ -1,4 +1,3 @@
-
 /**
  * @class Player
  * @param {Socket} socket

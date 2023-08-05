@@ -5,7 +5,6 @@ import { randomUUID } from 'crypto'
 const englishWords = await readFile('./englishWords.txt', 'utf-8').then(x => x.split('\r\n'))
 const portgueseWords = await readFile('./portugueseWords.txt', 'utf-8').then(x => x.split('\r\n'))
 
-
 /**
  * Gets n number of random words
  * @param {Integer} numberOfNWords 
@@ -42,7 +41,6 @@ export function getCloseness(str1, str2) {
 export function getRandomId() {
     return randomUUID().slice(0, 8)
 }
-
 
 /**
  * Gets a room by id and throws an error if it doesn't exist

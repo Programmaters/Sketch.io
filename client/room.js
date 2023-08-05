@@ -1,4 +1,3 @@
-
 function joinRoom(data) {
     renderRoom(data)
     if (data.players) {
@@ -34,10 +33,8 @@ function addPlayerToScoreboard(playerName, playerId) {
 }
 
 function removePlayerFromScoreboard(playerId) {
-    console.log(playerId)
     document.querySelector(`#\\${playerId}`).remove()
 }
-
 
 /**
  * Get the selected option of a select element by id

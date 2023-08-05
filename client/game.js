@@ -34,8 +34,9 @@ function closeGuess(message) {
 
 function onEndTurn(data) {
     updateTitle(`The word was: ${data.word}`)
+    data.scores.sort((player1, player2) => player1.score - player2.score)
     data.scores.forEach(obj => {
-        updatePlayerScore(obj.playerId, obj.score)
+        updatePlayerScore(obj.playerName, obj.playerId, obj.score)
     })
 }
 
@@ -51,10 +52,15 @@ function onGameEnd() {
     updateTitle('Game ended')
 }
 
-function updatePlayerScore(playerId, score) {
-    document.getElementById(`${playerId}`).querySelector('.score').innerText = score
+function updatePlayerScore(playerName, playerId, score) {
+    deletePlayerScore(playerId)
+    renderPlayer(playerName, playerId, score)
 }
 
 function updateTitle(title) {
     document.querySelector('h1').innerHTML = title
+}
+
+function deletePlayerScore(playerId) {
+    document.getElementById(`${playerId}`).remove()
 }

@@ -1,4 +1,3 @@
-
 function receiveMessage(text, color) {
     const el = document.createElement('li')
     el.innerHTML = text

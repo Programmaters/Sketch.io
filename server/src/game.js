@@ -32,7 +32,7 @@ export class Game {
      */
     async startGame() {
         this.resetScores()
- 
+
         this.socket.broadcast.to(this.roomId).emit('gameStarted')
         for (let round = 0; round < this.settings.rounds; round++) {
             for (let player = 0; player < this.players.length; player++) {
@@ -42,7 +42,6 @@ export class Game {
         }
         this.socket.broadcast.to(this.roomId).emit('gameEnded')
     }
-
 
     /**
      * Starts a new turn
@@ -58,7 +57,7 @@ export class Game {
         drawer.drawer = true
         this.drawer = drawer
 
-        this.currentWord = getRandomWords(1)[0]
+        this.currentWord = getRandomWords(1, this.settings.language)[0]
         this.hints = getRandomChars(this.currentWord, this.settings.hints)
         this.hintsToShow = null
         this.timeRef = new Date()
@@ -163,9 +162,8 @@ export class Game {
     }
 
     getPlayerScores() {
-        return this.players.map(player => ({ playerId: player.id, score: player.score }))
+        return this.players.map(player => ({ playerName: player.name, playerId: player.id, score: player.score }))
     }
-
 
     /**
      * Cancellable timeout
@@ -186,5 +184,4 @@ export class Game {
             setTimeout(resolve, time * 1000)
         })
     }
-
 }

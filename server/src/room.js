@@ -58,7 +58,6 @@ export class Room {
         this.game.onMessage(player, message)
     }
 
-
     /**
      * Updates the settings of the game
      * @param {Object} data

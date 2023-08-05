@@ -49,7 +49,6 @@ function onMessage(conn, data) {
     conn.room.onMessage(conn.socket.id, data.message)
 }
 
-
 /* Draw Events */
 function onDrawingAction(conn, data) {
     conn.room.game.canvas.draw(data)
@@ -71,7 +70,6 @@ function onUndo(conn) {
     conn.socket.emit('canvasData', canvasData)
     conn.socket.broadcast.to(conn.roomId).emit('canvasData', canvasData)
 }
-
 
 export default {
     'createRoom': onCreateRoom,
