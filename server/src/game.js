@@ -86,14 +86,11 @@ export class Game {
                 
                 // update player scores 
                 const timeLeft = parseInt(this.settings.drawTime - (new Date() - this.timeRef) / 1000)
+                const answerTime = this.settings.drawTime - timeLeft
 
-                if (this.hintCounter > 0) {
-                    let penaltyScore = timeLeft / this.settings.hints
-                    this.drawer.score += parseInt(timeLeft - (penaltyScore * (this.hintCounter * 0.1)))
-                } else {
-                    this.drawer.score += timeLeft
-                }
-                player.score += timeLeft * this.players.length
+                this.drawer.score += parseInt(answerTime / (this.hintCounter + 1))
+
+                player.score += answerTime * this.players.length
                 player.guessed = true
     
                 // if everyone guessed, end turn

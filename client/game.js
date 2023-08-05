@@ -42,7 +42,7 @@ function onEndTurn(data) {
 }
 
 function onHint(hint) {
-    updateTitle(hint)
+    updateTitle(`Guess the word: ${hint}`)
 }
 
 function onRoundEnd() {
