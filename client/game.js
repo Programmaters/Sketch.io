@@ -34,7 +34,8 @@ function closeGuess(message) {
 
 function onEndTurn(data) {
     updateTitle(`The word was: ${data.word}`)
-    data.scores.sort((player1, player2) => player1.score - player2.score)
+    stopTimer()
+    data.scores.sort((p1, p2) => p2.score - p1.score)
     data.scores.forEach(obj => {
         updatePlayerScore(obj.playerName, obj.playerId, obj.score)
     })
