@@ -20,6 +20,6 @@ socket.on('endGame', onGameEnd)
 socket.on('correctGuess', correctGuess)
 socket.on('closeGuess', closeGuess)
 socket.on('playerGuessed', receiveMessage)
-socket.on('error', error => alert(error.message))
+socket.on('error', error => alert(error))
 
 document.addEventListener('DOMContentLoaded', renderHomepage)

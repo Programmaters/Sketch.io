@@ -14,19 +14,17 @@ function leaveRoom() {
 
 function playerJoinedRoom(player) {
     const el = document.createElement('li')
-    el.innerText = `${player.username} joined the room`
+    el.innerText = `${player.name} joined the room`
     document.querySelector('#chat').appendChild(el)
-    addPlayerToScoreboard(player.username, player.id)
+    addPlayerToScoreboard(player.name, player.id)
 }
 
 function playerLeftRoom(player) {
-    console.log(player)
 	const el = document.createElement('li')
-	el.innerText = `${player.username} left the room`
+	el.innerText = `${player.name} left the room`
 	document.querySelector('#chat').appendChild(el)
     removePlayerFromScoreboard(player.id)
 }
-
 
 function addPlayerToScoreboard(playerName, playerId) {
     renderPlayer(playerName, playerId)
