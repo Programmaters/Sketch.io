@@ -1,6 +1,6 @@
-const socket = io('ws://localhost:8080')
 let username = null
 let host = false
+const socket = io('ws://localhost:8080')
 
 socket.on('message', receiveMessage)
 socket.on('joinedRoom', joinRoom)
@@ -21,5 +21,6 @@ socket.on('correctGuess', correctGuess)
 socket.on('closeGuess', closeGuess)
 socket.on('playerGuessed', receiveMessage)
 socket.on('error', error => alert(error))
+socket.on('disconnect', onDisconnect)
 
 document.addEventListener('DOMContentLoaded', renderHomepage)

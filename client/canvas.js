@@ -9,6 +9,9 @@ let drawMode = null // draw, erase, picker, fill
 
 function setup() {
     noCanvas()
+    document.addEventListener("dragstart", (e) => {
+        e.preventDefault()
+    })
 }
 
 function onDrawingAction(data) {

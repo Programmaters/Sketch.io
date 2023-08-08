@@ -32,7 +32,7 @@ export class Game {
         this.players = []
         this.settings = defaultSettings
         this.roomId = roomId
-        this.canvas = canvas   
+        this.canvas = canvas
     }
 
     /**
@@ -70,8 +70,8 @@ export class Game {
         this.hintsToShow = null
         this.timeRef = new Date()
 
-        drawer.socket.emit('drawTurn', { word: this.currentWord, time: this.settings.drawTime })
-        drawer.socket.broadcast.to(this.roomId).emit('guessTurn', { hint: wordHint(this.currentWord), time: this.settings.drawTime })
+        drawer.socket.emit('drawTurn', { word: this.currentWord, time: this.settings.drawTime, round: roundNumber })
+        drawer.socket.broadcast.to(this.roomId).emit('guessTurn', { hint: wordHint(this.currentWord), time: this.settings.drawTime, round: roundNumber })
     
         try {
             await this.setCancellableTimeout(this.settings.drawTime)

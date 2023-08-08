@@ -22,7 +22,8 @@ function renderHomepage() {
 	document.getElementById('main-content').replaceChildren(usernameInput, createRoomButton, joinRoomDiv)
 
 	document.querySelector('#create-room').onclick = () => {
-		username = document.querySelector('#username').value
+        username = document.querySelector('#username').value
+        checkUsername()
 		socket.emit('createRoom', { username })
 		host = true
 	}
@@ -30,6 +31,7 @@ function renderHomepage() {
 	document.querySelector('#join-room').onclick = () => {
 		const roomId = document.querySelector('#join-room-id').value
 		username = document.querySelector('#username').value
+        checkUsername()
 		socket.emit('joinRoom', { roomId, username })
 		host = false
 	}
@@ -123,10 +125,14 @@ function renderCanvas() {
     const drawTools = document.createElement('div')
     drawTools.id = 'draw-tools'
 
+    const roundNumber = document.createElement('h6')
+    roundNumber.id = 'round-number'
+
     const timer = document.createElement('div')
     timer.id = 'timer'
 
     canvasContainer.appendChild(drawTools)
+    canvasContainer.appendChild(roundNumber)
     canvasContainer.appendChild(timer)
     leftDiv.replaceChildren(canvasContainer)
 }
@@ -229,4 +235,11 @@ function renderPlayer(playerName, playerId, playerScore = 0) {
     player.appendChild(score)
 
     document.querySelector('#scoreboard').appendChild(player)
+}
+
+function checkUsername() {
+    if (!username) {
+        alert('Username is required')
+        throw new Error('Username is required')
+    }
 }

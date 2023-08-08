@@ -24,7 +24,7 @@ function onJoinRoom(conn, data) {
 
 function onLeaveRoom(conn) {
     const player = conn.room.players.find(player => player.id == conn.socket.id)
-    conn.room.leave(conn.socket, player.name)
+    conn.room.leave(conn.socket, player.id)
     conn.socket.broadcast.to(conn.roomId).emit('playerLeftRoom', { name: player.name, id: player.id })
 }
 
@@ -32,7 +32,7 @@ function onUpdateSettings(conn, data) {
     conn.room.updateSettings(data)
 }
 
-function onStartGame(conn, data) {
+function onStartGame(conn) {
     conn.room.newGame()
 }
 
@@ -41,7 +41,7 @@ function onSkipTurn(conn) {
 }
 
 function onHint(conn) {
-    if (conn.room.game.hintCounter >= conn.room.game.settings.hints) return
+    if (conn.room.game.hintCounter >= conn.room.settings.hints) return
     conn.room.game.hintCounter++
     conn.room.game.sendHint()
 }
@@ -86,5 +86,5 @@ export default {
     'mouseReleased': onSave,
     'undo': onUndo,
     'leaveRoom': onLeaveRoom,
-    // 'disconnect': onLeaveRoom,
+    // 'disconnect': onLeaveRoom
 }

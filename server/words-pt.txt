@@ -1,4654 +1,2231 @@
-ás
 nó
+pá
 lã
-pá
-pó
-pá
 ás
-nó
-lã
-pá
 pó
-pá
-bar
-BMW
-BMX
-dia
-DNA
-ovo
-ema
-fim
-gás
-gru
-KFC
-MTV
-noz
-pró
-bar
-mar
-céu
-sol
-chá
-USB
-gru
-eco
-bom
-mão
-rei
-pão
-lua
-dor
-ler
-sal
-bem
-asa
-dor
-pão
-giz
-mel
-paz
-rio
-som
-sul
-tio
-pai
-rim
 mãe
-rua
 noz
-noz
-avó
-bar
-BMW
-BMX
-dia
-DNA
-ovo
-ema
-fim
-gás
-gru
-KFC
-MTV
-noz
-pró
-bar
-mar
-céu
-sol
-chá
-USB
-gru
-eco
-bom
-mão
-rei
-pão
-lua
-dor
-ler
-sal
-bem
-asa
-dor
-pão
-giz
-mel
-paz
-rio
 som
-sul
-tio
-pai
-rim
-mãe
+gás
+dia
+céu
+fim
+sol
+ler
+mel
+rei
+bem
+ovo
+bom
+gru
+BMX
+ema
 rua
-noz
-noz
 avó
-ruim
-cama
-arco
-pode
-boné
-gato
-vaca
-olho
-voar
-gema
-Deus
-gelo
-hera
-colo
-mapa
-lama
-remo
-óleo
-pata
-rato
-dica
-OVNI
-cera
-rede
-hera
-ABBA
-acne
-afro
-arco
-Ásia
+KFC
+pró
+asa
+mão
+paz
+pai
+pão
+rim
+bar
+giz
+rio
+BMW
+tio
+eco
+dor
+USB
+DNA
+MTV
+sul
+mar
+lua
+sal
+chá
 Audi
-bebê
-isca
-bola
-base
-bico
-urso
-Sino
-azul
-bolo
-capa
-Cola
-frio
-cone
-Cuba
-cubo
-derp
-mesa
-divã
-doca
-Dora
-pato
-Elmo
-Elsa
-face
-cair
-sapo
-cola
-meta
-ouro
-duro
-Hulk
-Ikea
-iPad
-JayZ
-jazz
-jipe
-pipa
-kiwi
-lago
-lava
-Lego
-Lima
-link
-leão
-amor
-meme
-mofo
-unha
-Nasa
-nemo
-nerd
-Nike
-Olaf
-orca
-Oreo
-oval
-pera
-rosa
-cano
-pólo
-lago
-cocô
-papa
-Puma
-punk
-Rick
-anel
-Roma
-teto
-sala
-raiz
-rosa
-rubi
-runa
-selo
-silo
-pele
-neve
-solo
-sopa
-Swag
-taco
-fita
-Táxi
-Thor
-pneu
-sapo
-tuba
-atum
-cocô
-tipo
-veia
+vaca
 voto
-lobo
-xbox
-yeti
-Yoda
-gema
-Zeus
-Zuma
-ABBA
-cana
-zuma
-ator
-beco
-anjo
-Maçã
-seta
-cego
-capa
-pano
-sujo
-ralo
-anão
-erro
-fada
-luva
-cova
-casa
-juiz
-suco
-faca
-laço
-alce
-rato
-boca
-fila
-pena
-robô
-real
-lodo
+bata
+unha
+tuba
+silo
+dica
+Thor
+solo
 lula
+suco
+rosa
+lago
+ilha
+nabo
+pólo
+oval
+sapo
+derp
+beco
+frio
+cuco
+arma
+Cuba
+Zeus
+lupa
+robô
+laca
+real
+país
+peru
+jazz
+Sapo
+raiz
+pata
+boné
+divã
+boca
+lodo
+vale
+Elmo
 suor
+taco
+atum
+fora
+pneu
+bolo
+ator
+link
+Cola
+Elsa
+amor
+bebê
+neve
+bule
+voar
+nerd
+alce
+orca
+fita
+doca
+anjo
+mago
+rena
+poça
+luva
+duro
+nada
+dedo
+mala
+selo
+rede
+ioiô
+meta
+mapa
+Vila
+seta
+óleo
+cone
+jipe
+papa
+raio
+Nike
+bico
+remo
+anão
+OVNI
+sede
+café
+runa
+sopa
+pera
+gato
+zuma
+maca
+lama
+uvas
+raso
 mesa
 trem
-água
-roda
-bata
-iate
-ioiô
-lula
-Ação
-balé
-bala
-vela
-café
-cuco
-dedo
-flor
-alho
-uvas
-fome
-gelo
-ilha
-Sapo
-remo
-poça
-fita
-tela
-alvo
-bule
-sede
-peru
-nabo
-vale
-arma
-mago
-teto
-coco
-show
-país
-seca
-pena
-lixo
-maca
-rede
-nada
-fora
-pais
-juiz
-galo
-raso
-Vila
-ruga
-nada
-rena
-mala
-mesa
-tatu
-laca
-raio
-lupa
-moto
-ruim
-cama
-arco
-pode
-boné
-gato
-vaca
-olho
-voar
-gema
-Deus
-gelo
-hera
-colo
-mapa
-lama
-remo
-óleo
-pata
-rato
-dica
-OVNI
-cera
-rede
-hera
-ABBA
-acne
-afro
-arco
-Ásia
-Audi
-bebê
-isca
-bola
-base
-bico
-urso
-Sino
-azul
-bolo
-capa
-Cola
-frio
-cone
-Cuba
-cubo
-derp
-mesa
-divã
-doca
-Dora
-pato
-Elmo
-Elsa
-face
-cair
-sapo
-cola
-meta
-ouro
-duro
-Hulk
-Ikea
-iPad
-JayZ
-jazz
-jipe
-pipa
-kiwi
-lago
-lava
-Lego
-Lima
-link
-leão
-amor
-meme
-mofo
-unha
-Nasa
-nemo
-nerd
-Nike
 Olaf
-orca
-Oreo
-oval
-pera
-rosa
-cano
-pólo
-lago
-cocô
-papa
-Puma
-punk
-Rick
-anel
-Roma
-teto
-sala
-raiz
-rosa
-rubi
-runa
-selo
-silo
+Lima
+Hulk
 pele
-neve
-solo
-sopa
-Swag
-taco
-fita
-Táxi
-Thor
-pneu
-sapo
-tuba
-atum
-cocô
-tipo
-veia
-voto
-lobo
-xbox
-yeti
-Yoda
-gema
-Zeus
-Zuma
-ABBA
-cana
-zuma
-ator
-beco
-anjo
-Maçã
-seta
-cego
-capa
-pano
-sujo
-ralo
-anão
-erro
-fada
-luva
-cova
-casa
-juiz
-suco
-faca
-laço
-alce
-rato
-boca
-fila
-pena
-robô
-real
-lodo
-lula
-suor
-mesa
-trem
-água
-roda
-bata
-iate
-ioiô
-lula
-Ação
-balé
 bala
-vela
-café
-cuco
-dedo
-flor
-alho
-uvas
-fome
-gelo
-ilha
-Sapo
-remo
-poça
-fita
-tela
-alvo
-bule
-sede
-peru
-nabo
-vale
-arma
-mago
-teto
-coco
-show
-país
-seca
-pena
-lixo
-maca
-rede
-nada
-fora
+fada
+Sino
 pais
-juiz
-galo
-raso
-Vila
-ruga
-nada
-rena
-mala
-mesa
 tatu
-laca
-raio
-lupa
+sala
+ruga
+punk
+fome
+pato
+vela
+Puma
+isca
+lixo
+sujo
+juiz
+seca
+ouro
+iPad
+yeti
+xbox
+cano
+nemo
+mofo
+rato
+pano
+veia
+acne
+cair
+gelo
 moto
-braço
-bolsa
-caixa
-corte
-comer
-gripe
-névoa
-chave
-tampa
-baixo
-velho
-torta
-porco
-bater
-esqui
-filho
-puxão
-ácido
-átomo
-banco
-cinto
-conta
-barco
-livro
-touro
-jaula
-garra
-moeda
-milho
-corvo
-morto
-surdo
-cervo
-dente
-dados
-dieta
-porta
-duelo
-leste
-exame
-peixe
-pulga
-garfo
-forte
-germe
-cabra
-golfe
-grade
-harpa
-salto
-herói
-casco
-ferir
-ideia
-ferro
-beijo
-faixa
-folha
-vazar
-lente
-lírio
+lobo
+arco
+rubi
+Dora
+base
+galo
+tipo
+ABBA
+JayZ
+ruim
+faca
+Nasa
+Ásia
+afro
+Zuma
+bola
+Deus
+balé
+cola
+iate
+urso
+azul
+água
+Swag
+meme
+Ikea
+pipa
+fila
+casa
+laço
+colo
+cera
+Táxi
+gema
+Rick
+pena
+roda
+lava
+teto
+erro
+olho
+cama
+coco
+ralo
+anel
+alvo
+cova
+cana
+hera
+Yoda
+Roma
+leão
+pode
+cego
+flor
+show
+alho
+kiwi
+Maçã
+capa
+tela
+Ação
+Oreo
+cubo
+Lego
+cocô
+face
+bolha
+ganso
 linha
-saque
-sorte
-lince
-Marte
-carne
-leite
-monge
-musgo
-ninho
-nariz
-abrir
-Palma
-pique
+Grilo
+avião
+ombro
 pinho
-arado
-pónei
+emoji
+tênis
+ópera
+zíper
+cobra
+Zelda
+arame
+gorro
+caixa
+lança
+CA/CC
+vespa
+areia
+Vênus
+avelã
+padre
+leite
+pique
+burro
+bambu
+fruta
+lhama
+norte
+forma
+órgão
+creme
+Paris
+falha
+canto
+viola
+bambi
+ideia
+botas
+lince
+gênio
+bolsa
+lápis
+Índia
+vinho
+cervo
+dieta
+taser
+banco
+laser
+kazoo
+ponte
+rubor
+duelo
+cobre
+golfe
+manga
+Egito
+bater
+cauda
+filha
+arroz
+líder
+sorte
+briga
+costa
+queda
+circo
+abrir
+jaula
+besta
+esqui
+Japão
+Curry
+dedão
+molho
+curto
+aceno
+Sushi
+preto
+placa
+drama
+tábua
+Shrek
+Pombo
+tampa
+ninho
+Intel
+pizza
+porão
+banho
+sauna
+Amora
+balde
+skate
+saque
+aroma
+axila
+vácuo
+jeans
+pavão
+manhã
+morto
+tocar
+tumor
+geada
+vidro
+xampu
+luigi
+chuva
+risco
+Dumbo
+pedal
+praia
+W-LAN
+Boate
+trevo
+torre
+roubo
+sabão
+vento
+bruxa
+pátio
+Marte
+calça
+batom
+tripé
+pudim
+pausa
+sótão
+rampa
+nariz
+germe
+museu
+átomo
+arpão
+panda
+oeste
+Havaí
+Vapor
+lírio
+cesta
+gnomo
+bolso
+torno
+vírus
+faixa
+pulga
+noiva
+puxão
+forno
+poção
+mundo
 pobre
 rezar
-chuva
-rampa
-arroz
-risco
 pedra
-rolar
-areia
-bater
-lento
-sabão
-rodar
-etapa
-cisne
-cauda
-texto
-galho
-torno
-andar
-vespa
-aceno
-fraco
-oeste
-vento
-vinho
-arame
-ácido
-touro
-nariz
-arroz
-CA/CC
-sótão
-bacon
-bagel
-bambi
-banjo
-praia
-banco
-Bingo
-preto
-corar
-botas
-marca
-noiva
-peito
-China
-nuvem
-costa
-cobra
-coral
-creme
-Curry
-dança
-tonto
-massa
-drama
-babar
-Dumbo
-águia
-Terra
-Egito
-emoji
-fanta
-cerca
-campo
-rubor
-fruta
-gênio
-vidro
-globo
-gnomo
-ganso
-grama
-grade
-noivo
-feliz
-roubo
-hotel
-hiena
-Índia
-Intel
-Japão
-jeans
-Jenga
-kazoo
-Kirby
-coala
-laser
-limão
-limbo
-lhama
-luigi
-macho
-máfia
-Magia
-magma
-Mário
-Melão
-metal
-morty
-filme
-Mamãe
-noite
-ninja
-norte
-ópera
-órgão
-panda
-calça
-papel
-Paris
-festa
-massa
-pátio
-pausa
-pedal
-Pepsi
-piano
-pizza
-placa
-libra
-Pumba
-bolsa
-radar
-rádio
-molho
-sauna
-lenço
-aroma
-forma
-curto
-Shrek
-Skunk
-skype
-queda
-lesma
-cobra
-meias
-lança
-ficar
-Vapor
-pedra
-forno
-Sushi
-taser
-dedão
-tigre
-dente
-tocha
-totem
-tocar
-torre
-t-rex
-tumor
-úbere
-cofre
-Vênus
-vídeo
-viola
-vírus
-vodka
-bruxa
-W-LAN
-mundo
 pulso
-xerox
-Yoshi
-jovem
-zebra
-Zelda
-zorro
-libra
-axila
-bambu
-cesta
-gorro
-trair
-ponte
-bolha
-balde
-botão
-cacto
-circo
-trevo
-cobre
-canto
 primo
-dólar
-burro
-dobro
-motor
-pasta
-lidar
-Porto
-Havaí
-saúde
-selva
-líder
-loção
-museu
-ostra
-mamão
-lápis
-Pombo
-pilar
-praga
-bolso
-poção
-padre
-selim
-foice
-banho
-prata
-trenó
-manga
-forte
-metrô
-verão
-tábua
-tênis
-trono
-tripé
-túnel
-Urano
-vácuo
-visão
-morsa
-mexer
-zíper
-zumbi
-balão
-Grilo
-noite
-Cílio
-falha
-copos
-arpão
-junta
-couro
-manhã
-polvo
-pavão
-pudim
-xampu
-vilão
-clima
-avião
-porão
-besta
-caspa
-filha
-testa
-fonte
-geada
-avelã
-batom
-senha
-toque
-ombro
-vício
-Natal
-Boate
-Pinha
-Amora
-briga
-farol
-skate
-braço
-bolsa
-caixa
-corte
-comer
-gripe
-névoa
-chave
-tampa
-baixo
-velho
-torta
-porco
-bater
-esqui
-filho
-puxão
-ácido
-átomo
-banco
-cinto
-conta
-barco
-livro
-touro
-jaula
-garra
-moeda
-milho
-corvo
-morto
-surdo
-cervo
-dente
-dados
-dieta
-porta
-duelo
-leste
-exame
-peixe
-pulga
-garfo
-forte
-germe
-cabra
-golfe
-grade
-harpa
-salto
-herói
-casco
-ferir
-ideia
-ferro
-beijo
-faixa
-folha
-vazar
-lente
-lírio
-linha
-saque
-sorte
-lince
-Marte
-carne
-leite
-monge
-musgo
-ninho
-nariz
-abrir
+China
 Palma
-pique
-pinho
-arado
-pónei
-pobre
-rezar
-chuva
-rampa
-arroz
-risco
-pedra
-rolar
-areia
-bater
-lento
-sabão
-rodar
-etapa
-cisne
-cauda
-texto
-galho
-torno
-andar
-vespa
-aceno
-fraco
-oeste
-vento
-vinho
-arame
-ácido
-touro
-nariz
-arroz
-CA/CC
-sótão
-bacon
-bagel
-bambi
-banjo
-praia
-banco
-Bingo
-preto
-corar
-botas
-marca
-noiva
+metrô
+comer
+exame
 peito
-China
-nuvem
-costa
-cobra
-coral
-creme
-Curry
-dança
-tonto
-massa
-drama
-babar
-Dumbo
-águia
-Terra
-Egito
-emoji
-fanta
-cerca
-campo
-rubor
-fruta
-gênio
-vidro
-globo
-gnomo
-ganso
 grama
-grade
-noivo
+testa
+pasta
+fraco
+bagel
+cisne
+botão
+caspa
+Natal
+leste
+farol
+arado
+galho
+dólar
+beijo
 feliz
-roubo
-hotel
-hiena
-Índia
-Intel
-Japão
-jeans
-Jenga
-kazoo
-Kirby
-coala
-laser
-limão
-limbo
-lhama
-luigi
-macho
-máfia
 Magia
-magma
-Mário
-Melão
-metal
-morty
-filme
+porta
+ferro
+verão
+folha
+nuvem
+Jenga
+radar
+totem
+velho
+polvo
+névoa
+herói
+vício
 Mamãe
-noite
+balão
+Pepsi
+hiena
+peixe
+noivo
+selva
+surdo
+baixo
+hotel
+trenó
+salto
+coala
+t-rex
+garra
+loção
+carne
+úbere
+texto
+tocha
+Cílio
+mamão
+barco
+lidar
+ostra
+filho
+praga
+metal
+Yoshi
+xerox
+braço
+couro
+cabra
+corte
+túnel
+lenço
+bacon
+clima
+torta
+harpa
+dobro
+lente
+libra
+pilar
+rolar
+dados
+grade
+Urano
+vazar
+toque
 ninja
-norte
-ópera
-órgão
-panda
-calça
-papel
-Paris
+copos
+skype
+casco
+filme
 festa
 massa
-pátio
-pausa
-pedal
-Pepsi
-piano
-pizza
-placa
-libra
-Pumba
-bolsa
-radar
-rádio
-molho
-sauna
-lenço
-aroma
-forma
-curto
-Shrek
-Skunk
-skype
-queda
-lesma
-cobra
-meias
-lança
-ficar
-Vapor
-pedra
-forno
-Sushi
-taser
-dedão
-tigre
-dente
-tocha
-totem
-tocar
-torre
-t-rex
-tumor
-úbere
-cofre
-Vênus
-vídeo
-viola
-vírus
+águia
+tonto
 vodka
-bruxa
-W-LAN
-mundo
-pulso
-xerox
-Yoshi
+porco
 jovem
 zebra
-Zelda
-zorro
-libra
-axila
-bambu
-cesta
-gorro
-trair
-ponte
-bolha
-balde
-botão
-cacto
-circo
-trevo
-cobre
-canto
-primo
-dólar
-burro
-dobro
-motor
-pasta
-lidar
-Porto
-Havaí
-saúde
-selva
-líder
-loção
-museu
-ostra
-mamão
-lápis
-Pombo
-pilar
-praga
-bolso
-poção
-padre
-selim
-foice
-banho
-prata
-trenó
-manga
-forte
-metrô
-verão
-tábua
-tênis
-trono
-tripé
-túnel
-Urano
-vácuo
-visão
-morsa
-mexer
-zíper
-zumbi
-balão
-Grilo
-noite
-Cílio
-falha
-copos
-arpão
-junta
-couro
-manhã
-polvo
-pavão
-pudim
-xampu
-vilão
-clima
-avião
-porão
-besta
-caspa
-filha
-testa
+dança
 fonte
-geada
-avelã
-batom
+junta
+ficar
+campo
+lento
+babar
+cerca
+dente
+piano
+Kirby
+livro
+vilão
+limão
+coral
+ferir
+motor
+globo
+rodar
+zorro
+pónei
+andar
+corvo
+cacto
+Pumba
+macho
+moeda
+tigre
+vídeo
+cinto
+ácido
+Bingo
+gripe
+trono
+rádio
+milho
+corar
+trair
+Terra
+banjo
+visão
 senha
-toque
-ombro
-vício
-Natal
-Boate
+cofre
+mexer
+noite
+Melão
+musgo
+saúde
+Mário
+máfia
+chave
+conta
+morty
+limbo
+Porto
+garfo
+monge
+fanta
+prata
+forte
+morsa
+lesma
+Skunk
+meias
+marca
+touro
+foice
+magma
+papel
+etapa
+zumbi
+selim
 Pinha
-Amora
-briga
-farol
-skate
-cinzas
-bastão
-abelha
-garoto
-ônibus
-xícara
-morrer
-orelha
-enguia
-raposa
-chapéu
-saltar
-quente
-abraço
-cabana
-barril
-caneca
-freira
-coruja
-Panela
-tapete
-correr
-triste
-tímido
-sentar
-espião
-peruca
-Careca
-latido
-feijão
-morder
-javali
-ferver
-tigela
-elenco
-célula
-queixo
-argila
-carvão
-casaco
-cordão
-boneca
-cúpula
-pontos
-pingar
-tambor
-rápido
-comida
-gangue
-portão
-garota
-brilho
-cabelo
-metade
-aréola
-cabeça
-colina
-gancho
-buzina
-cadeia
-joelho
-pernas
-lábios
-pulmão
-mímica
-novato
-página
-parque
-plugue
-trilho
-seguro
-oferta
-sapato
-doente
-cantar
-saliva
-facada
-tanque
-rasgar
-afinar
-túmulo
-árvore
-parede
-esposa
-abismo
-bolota
-adulto
-alarme
-animes
-abaixo
-Bíblia
-bétula
-sangue
-quadro
-tijolo
-cabine
-camelo
-xadrez
-limpar
-cometa
-crosta
-cupido
-dardos
-sonhar
-vestir
-bebida
-Clarão
-frasco
-fluido
-flauta
-quadro
-fritas
-lustro
-Pateta
-gomoso
-peludo
-cavalo
-Itália
-geléia
-rótulo
-deixar
-lêmure
-modelo
-oceano
-cebola
-órbita
-lontra
-pintar
-pétala
-piloto
 Plutão
-prisma
-rainha
-colcha
-juncos
-salada
-colher
-ovelha
-concha
-camisa
-choque
-gritar
-megera
-crânio
-dormir
-cheiro
-fumaça
-sônica
-espaço
-coluna
-colher
-esporo
-picada
-canudo
-açúcar
-enxame
-espada
-Caudas
-ladrão
-pensar
-brinde
-toalha
-baleia
-branco
-raio X
-espaço
-Adidas
-África
-airbag
-alpaca
-âncora
-Anúbis
-texugo
-banana
-barril
-Castor
-abaixo
-meleca
-quicar
-filial
-Brasil
-bronze
-Câmera
-Canadá
-canhão
-tapete
-caviar
-queijo
-cereja
-igreja
-cinema
-casulo
-caixão
-coiote
-punhal
-darwin
-dexter
-fralda
-jantar
-doutor
-Dragão
-gaveta
-Páscoa
-brasas
-Eminem
-Europa
-tecido
-filtro
-fóssil
-França
-Gandhi
-jardim
-gênero
-gentil
-gêiser
-duende
-Google
-Grécia
-Grinch
-hacker
-cabide
-perigo
-hippie
-hobbit
-hóquei
-inseto
-dentro
-Iphone
-Israel
-jaguar
-karatê
-katana
-kraken
-escada
-saguão
-Medusa
-México
-lacaio
-minuto
-macaco
-Mozart
-muffin
-nachos
-NASCAR
-agulha
-níquel
-pepita
-Obelix
-parada
-Paypal
-pessoa
-pirata
-tóxico
-poodle
-Popeye
-portal
-poster
-batata
-pregar
-prisão
-pureza
-quokka
-passas
-rapper
-Reddit
-repita
-varejo
-ladrão
-Rússia
-safári
-saliva
-salmão
-escola
-gritar
-segway
-sensei
-sombra
-patins
-Slinky
-aranha
-caneta
-Sudoku
-trocar
-tampão
-Tarzan
-tetris
-tecido
-tomate
-língua
-tucano
-troféu
-Tweety
-vítima
-volume
-voodoo
-waffle
-garçom
-Wall-e
-janela
-Addida
-gentil
-Grinch
-repita
-Tarzan
-Aladim
-álcool
-antena
-atleta
-sacada
-bazuca
-frango
-defesa
-doença
-girafa
-gorila
-marido
-alface
-mamute
-bueiro
-mansão
-sereia
-míssil
-narval
-Netuno
-paleta
-Pipoca
-réptil
-suéter
-girino
-trovão
-trator
-vacina
-vulcão
-abutre
-sereia
-Adição
-baiacu
-morena
-prédio
-pepino
-dominó
-sardas
-ouriço
-mágico
-bigode
 picolé
-arraia
-férias
-jacaré
-barman
-lençol
-bilhar
-cartão
-barata
-painel
-sombra
-medusa
-jornal
-lápide
-ombros
-lustre
-duende
-estojo
-umbigo
-cabide
-cinzas
-bastão
-abelha
-garoto
-ônibus
-xícara
-morrer
-orelha
-enguia
-raposa
-chapéu
-saltar
-quente
-abraço
-cabana
-barril
-caneca
-freira
-coruja
-Panela
-tapete
-correr
-triste
-tímido
-sentar
-espião
-peruca
-Careca
-latido
-feijão
-morder
-javali
-ferver
-tigela
-elenco
-célula
-queixo
-argila
-carvão
-casaco
-cordão
-boneca
-cúpula
-pontos
-pingar
-tambor
-rápido
-comida
-gangue
-portão
-garota
-brilho
-cabelo
-metade
-aréola
-cabeça
-colina
-gancho
-buzina
-cadeia
-joelho
-pernas
-lábios
-pulmão
-mímica
-novato
-página
-parque
-plugue
-trilho
 seguro
-oferta
-sapato
-doente
-cantar
-saliva
-facada
-tanque
-rasgar
-afinar
-túmulo
-árvore
 parede
-esposa
-abismo
-bolota
-adulto
-alarme
-animes
-abaixo
-Bíblia
-bétula
-sangue
-quadro
-tijolo
-cabine
-camelo
-xadrez
-limpar
-cometa
-crosta
-cupido
-dardos
-sonhar
-vestir
-bebida
-Clarão
-frasco
-fluido
-flauta
-quadro
-fritas
-lustro
-Pateta
-gomoso
-peludo
-cavalo
-Itália
-geléia
-rótulo
-deixar
-lêmure
-modelo
-oceano
-cebola
-órbita
-lontra
-pintar
-pétala
-piloto
-Plutão
-prisma
-rainha
-colcha
-juncos
-salada
-colher
-ovelha
-concha
-camisa
-choque
-gritar
-megera
-crânio
-dormir
-cheiro
-fumaça
-sônica
-espaço
-coluna
-colher
-esporo
-picada
-canudo
-açúcar
-enxame
-espada
-Caudas
-ladrão
-pensar
-brinde
-toalha
-baleia
-branco
-raio X
-espaço
-Adidas
-África
-airbag
-alpaca
-âncora
-Anúbis
-texugo
-banana
-barril
-Castor
-abaixo
-meleca
-quicar
-filial
-Brasil
-bronze
-Câmera
-Canadá
-canhão
-tapete
-caviar
-queijo
-cereja
-igreja
-cinema
-casulo
-caixão
-coiote
-punhal
-darwin
-dexter
-fralda
-jantar
-doutor
-Dragão
-gaveta
-Páscoa
-brasas
-Eminem
-Europa
-tecido
-filtro
-fóssil
-França
-Gandhi
-jardim
-gênero
-gentil
-gêiser
-duende
-Google
-Grécia
-Grinch
-hacker
-cabide
-perigo
-hippie
-hobbit
-hóquei
-inseto
-dentro
-Iphone
-Israel
-jaguar
-karatê
-katana
-kraken
-escada
-saguão
-Medusa
-México
-lacaio
-minuto
-macaco
-Mozart
-muffin
-nachos
-NASCAR
-agulha
-níquel
-pepita
-Obelix
-parada
-Paypal
-pessoa
-pirata
-tóxico
-poodle
-Popeye
-portal
-poster
-batata
-pregar
-prisão
-pureza
-quokka
 passas
-rapper
-Reddit
-repita
-varejo
-ladrão
-Rússia
-safári
-saliva
-salmão
-escola
-gritar
-segway
-sensei
-sombra
-patins
-Slinky
-aranha
-caneta
-Sudoku
-trocar
-tampão
-Tarzan
-tetris
-tecido
-tomate
-língua
-tucano
-troféu
-Tweety
-vítima
-volume
-voodoo
-waffle
-garçom
+hóquei
+megera
+doente
+espaço
+filial
+pureza
+chapéu
+alarme
+âncora
+México
+comida
+Mozart
+alpaca
+prisma
+Itália
+brilho
 Wall-e
-janela
-Addida
-gentil
-Grinch
-repita
-Tarzan
-Aladim
-álcool
-antena
-atleta
-sacada
-bazuca
-frango
-defesa
-doença
-girafa
-gorila
-marido
-alface
-mamute
-bueiro
-mansão
-sereia
-míssil
-narval
-Netuno
-paleta
-Pipoca
-réptil
-suéter
-girino
-trovão
-trator
-vacina
-vulcão
-abutre
-sereia
 Adição
-baiacu
-morena
-prédio
+modelo
+pirata
+míssil
+geléia
+Obelix
+sentar
+trilho
+janela
+gomoso
+tomate
+Clarão
+cabelo
+tapete
+jardim
+oferta
+pensar
+branco
+volume
+afinar
+NASCAR
 pepino
-dominó
-sardas
-ouriço
-mágico
-bigode
-picolé
-arraia
-férias
-jacaré
-barman
-lençol
-bilhar
-cartão
+saliva
+Iphone
+tetris
+brinde
+Israel
+níquel
+kraken
+Reddit
+lábios
+jantar
+cometa
+Anúbis
+fluido
+escada
+trovão
+cantar
+gancho
 barata
-painel
-sombra
-medusa
-jornal
-lápide
-ombros
+prisão
+voodoo
+pingar
+safári
+elenco
+texugo
+salada
 lustre
+banana
+pintar
+tucano
+férias
+animes
+tanque
+Medusa
+correr
+morrer
+inseto
+morder
+rótulo
+Google
+cabine
+mansão
+atleta
+triste
+suéter
+Dragão
+colcha
+espada
+adulto
+túmulo
+toalha
+aranha
+cabeça
+troféu
+igreja
+dominó
+pulmão
+Careca
+pontos
+saguão
+parada
+buzina
+orelha
+sombra
+célula
+freira
+África
+hobbit
+camisa
+fóssil
+espião
+morena
 duende
-estojo
+lêmure
+tigela
+ouriço
+réptil
+vestir
+cúpula
+pepita
+doença
+árvore
+caixão
+sonhar
+Sudoku
+rainha
+caviar
+darwin
+Addida
+doutor
+Slinky
+gritar
+cordão
+tímido
+abelha
+sangue
+caneta
+parque
+escola
+queixo
+tampão
+karatê
+pregar
+barman
+bigode
+minuto
+baiacu
 umbigo
+filtro
+katana
+tecido
+casulo
+cheiro
+oceano
+quicar
+plugue
+bronze
+cartão
+canhão
+salmão
+estojo
+gênero
+mamute
+cinzas
+repita
+Bíblia
+peludo
+casaco
+Europa
+enguia
+caneca
+Grinch
+vítima
+canudo
+xícara
+latido
+pessoa
+raposa
+lacaio
+novato
+barril
+choque
+Gandhi
+baleia
+sapato
+xadrez
+bueiro
+sardas
+dexter
+portal
+coluna
+agulha
+mágico
+colher
+paleta
+jornal
+frasco
+hacker
+ombros
+cinema
+flauta
+muffin
+França
+Netuno
+lustro
+painel
+Brasil
+medusa
+prédio
+cupido
+dentro
+cavalo
+perigo
+coruja
+abraço
+Panela
+raio X
+patins
+gêiser
+bastão
+garçom
+bebida
+trator
+mímica
+tóxico
+crânio
+quente
+lápide
+língua
+lençol
+Eminem
+peruca
+ladrão
+airbag
+punhal
+macaco
+cadeia
+gentil
+bétula
+Páscoa
+jacaré
+poster
+aréola
+bolota
+meleca
+Aladim
+cereja
+bazuca
+joelho
+varejo
+abutre
+coiote
+Adidas
+metade
+esposa
 cabide
-formiga
-Machado
-orvalho
-pelagem
-galinha
-costela
-gravata
-celeiro
-cerveja
-pássaro
-bombear
-arrotar
-caverna
-pentear
-cortiça
-fazenda
-suspiro
-sorriso
-aquecer
-inferno
-colmeia
-senhora
-lâmpada
-trancar
-hortelã
-verruga
-marinha
-pescoço
-caminho
-cutucar
-corrida
-jangada
-ancinho
-semente
-comprar
-afundar
-estrela
-barraca
-bandido
-pequeno
-videira
-verruga
-minhoca
-bocejar
-fazenda
-minhoca
-nervoso
-bigorna
-barriga
-cérebro
-escovar
-cadeira
-criança
-escalar
-relógio
-palhaço
-caixote
-demônio
-dirigir
-rebanho
-gigante
-gráfico
-ambição
-coração
-palhaço
-coleira
-mineiro
-Entalhe
-romance
-pêssego
-centavo
-prancha
-apontar
-papoula
-varanda
-camarão
-navalha
-sacudir
-Tubarão
-arbusto
-declive
-sorriso
-Espanha
-fagulha
-estágio
-carimbo
-cegonha
-estudar
-pântano
-balanço
-cansado
-vomitar
-cintura
-amêndoa
+boneca
+vacina
+waffle
+garota
+Popeye
+Castor
+garoto
+narval
+Câmera
+tijolo
+marido
+antena
+picada
+piloto
+colina
+órbita
+alface
+frango
+arraia
+crosta
+quadro
+quokka
+sacada
+Canadá
+vulcão
+Rússia
+rasgar
+sônica
+gangue
+carvão
+álcool
+juncos
+brasas
+esporo
+açúcar
+sereia
+ferver
+dormir
+Tarzan
+portão
+abismo
+enxame
+jaguar
+cebola
+cabana
+gorila
+defesa
+Tweety
+saltar
+gaveta
+página
+tambor
+fumaça
+pétala
+hippie
+Pateta
+dardos
+Pipoca
+rapper
+segway
+lontra
+pernas
+camelo
+feijão
+rápido
+concha
+queijo
+Paypal
+ônibus
+nachos
+limpar
+Caudas
+facada
+argila
+fralda
+sensei
+trocar
+fritas
+girino
+girafa
+javali
+ovelha
+bilhar
+poodle
+Grécia
+abaixo
+batata
+deixar
 babuíno
-padaria
-batalha
-besouro
-garrafa
-mordomo
-canário
-cenoura
-cassino
-cimento
-cromada
-cigarra
-círculo
-comédia
-cadáver
-algodão
-crédito
-címbalo
-deserto
-esquimó
-fachada
-família
-galáxia
-garagem
-martelo
-eremita
-caçador
-impacto
-jaqueta
-gatinho
-lagarto
-Londres
-mármore
-mercado
-marmota
-mascote
-espelho
-moicano
-músculo
-Noruega
-omelete
-laranja
-Palácio
-pimenta
-espinha
-pistola
-planeta
-jogador
-foguete
-Saturno
-segundo
-magrelo
-futebol
-soquete
-esfinge
-espiral
-esponja
-estátua
-estéreo
-estúdio
-bilhete
-cócegas
-smoking
-violino
-vórtice
-fortuna
-doninha
-inverno
-amarelo
-iogurte
-alergia
-América
-Android
-damasco
-assalto
-Asterix
-abacate
-baklava
-bandana
-bateria
-beatbox
-Big Ben
-bolacha
-bitcoin
-bobsled
-boliche
-Brownie
-burrito
-capitão
-chaminé
-bússola
-console
-Croácia
-cristal
-Bolinho
-cortina
-diploma
-mostrar
-Doritos
-Drácula
-eclipse
-equador
-fábrica
-esgrima
-Ferrari
-Flórida
-fortuna
-funeral
-Gandalf
-granada
-hamster
-hashtag
-hip hop
-feriado
-iceberg
-Irlanda
-zelador
-jet ski
-jornada
-karaokê
-kendama
-ketchup
-cozinha
-Kung Fu
-lasanha
-lagosta
-loteria
-bagagem
-máquina
-maracás
-minivan
-monstro
-Nutella
-origami
-Pac-Man
-pijamas
-pantera
-patrick
-pinguim
-perfume
-Picasso
-pikachu
-Pokémon
-popular
-pretzel
-abóbora
-Ravioli
-Romênia
-Samsung
-Ciência
-gaivota
-enjoado
-soldado
-spoiler
-estádio
-cartola
-tornado
-torpedo
-turista
-tráfego
-reboque
-acionar
-Twitter
-unibrow
-vampiro
-vitória
-vinagre
-vlogger
-acordar
-YouTube
-aquário
-público
-mochila
-baguete
-Atadura
-nevasca
-beliche
+centavo
+cigarro
+bocejar
 vasilha
-Cérbero
-campeão
-químico
-colapso
-confuso
-cadinho
-armário
-cliente
-entrega
-detonar
-bateria
-eleição
-lareira
-insônia
+amêndoa
+lutador
+vinagre
+YouTube
+estante
+Android
+algodão
+pescoço
+minhoca
+cortina
+barriga
+baklava
+martelo
+Coliseu
 invasão
-canguru
-teclado
-levitar
-alcaçuz
-revista
-colchão
+anuário
+origami
+bilhete
+palhaço
+baguete
+vampiro
+mirtilo
+marmota
+Brownie
+jogador
+iogurte
+bagagem
 vizinho
+Atadura
+senhora
+estádio
+estúdio
+cliente
+camarão
+estudar
+declive
+balanço
+enjoado
+colmeia
+pretzel
+Machado
+cassino
+foguete
+esteira
+insônia
+Flórida
+caminho
+teclado
+coleira
+Kung Fu
+minivan
+mostrar
+arbusto
+bandido
+capitão
+injeção
+coração
+relação
+levitar
+músculo
+loteria
+bandana
+impacto
+mascote
+Hilário
+fagulha
+videira
+criança
+pêndulo
+mobília
+pelagem
+tornado
+boliche
+jaqueta
+equador
+vitória
+fazenda
+Nutella
+cadarço
+chaminé
+cimento
+flâmula
+arrotar
+químico
+dirigir
+gigante
+forcado
+monstro
+deserto
+Romênia
+tráfego
+cadáver
+funeral
+granada
+estéreo
+Twitter
+confuso
+lâmpada
+perfume
+taxista
+demônio
+pijamas
+fortuna
+jornada
+rebanho
+varanda
+trancar
+torpedo
+damasco
+mármore
+diploma
+verruga
+spoiler
+Picasso
+tesoura
+grávida
+cromada
+acionar
+costela
+barraca
+hashtag
+vórtice
+vomitar
+cansado
+hortelã
+América
+aquário
+crédito
+apontar
+punição
+abóbora
+bússola
+escolta
+detonar
+abacaxi
+gravata
+estrela
+sorriso
+Pokémon
+romance
+Cérbero
+bitcoin
+bárbaro
+cintura
+caverna
+omelete
+estátua
+cutucar
+pequeno
+Escócia
+comédia
+padaria
+toranja
+Espanha
+mercado
+Croácia
+Ravioli
+gaivota
+círculo
+vegetal
+beliche
+turista
+nervoso
+esquimó
+inferno
+patrick
+pantera
+chicote
+iceberg
+cartola
+bolacha
+segundo
+retrato
+fábrica
+bombear
+aquecer
+Ciência
+doninha
+alçapão
+mordomo
+escalar
+Holanda
+suspiro
+Londres
+anúncio
+pêssego
+armário
+prancha
+morango
+navalha
+fachada
+nevasca
+compras
+cegonha
+planeta
+acordar
+zepelim
+pentear
 narinas
 caderno
-pêndulo
-retrato
-grávida
-tesoura
-Escócia
-rabisco
-cadarço
-compras
-brilhos
-esquilo
-flâmula
-decolar
-alçapão
-tesouro
-sem fio
-lutador
-anuário
-zepelim
-bárbaro
-mirtilo
-escolta
-estante
-cigarro
-Coliseu
-dálmata
-lareira
-aquário
-mobília
-gerador
-Hilário
-chicote
-Bambolê
-sorvete
-injeção
-abacaxi
-forcado
-esteira
-vegetal
-armazém
-carcaju
-taxista
-celular
-toranja
-punição
-morango
-nádegas
-lagarta
-coveiro
-esmalte
-Holanda
-taxista
-relação
-marreta
-anúncio
-piscina
-formiga
-Machado
-orvalho
-pelagem
-galinha
-costela
-gravata
-celeiro
-cerveja
-pássaro
-bombear
-arrotar
-caverna
-pentear
-cortiça
-fazenda
-suspiro
-sorriso
-aquecer
-inferno
-colmeia
-senhora
-lâmpada
-trancar
-hortelã
-verruga
-marinha
-pescoço
-caminho
-cutucar
-corrida
-jangada
-ancinho
-semente
-comprar
-afundar
-estrela
-barraca
-bandido
-pequeno
-videira
-verruga
-minhoca
-bocejar
-fazenda
-minhoca
-nervoso
-bigorna
-barriga
-cérebro
-escovar
-cadeira
-criança
-escalar
-relógio
-palhaço
-caixote
-demônio
-dirigir
-rebanho
-gigante
-gráfico
-ambição
-coração
-palhaço
-coleira
-mineiro
-Entalhe
-romance
-pêssego
-centavo
-prancha
-apontar
-papoula
-varanda
-camarão
-navalha
-sacudir
-Tubarão
-arbusto
-declive
-sorriso
-Espanha
-fagulha
-estágio
-carimbo
-cegonha
-estudar
-pântano
-balanço
-cansado
-vomitar
-cintura
-amêndoa
-babuíno
-padaria
-batalha
-besouro
-garrafa
-mordomo
-canário
-cenoura
-cassino
-cimento
-cromada
-cigarra
-círculo
-comédia
-cadáver
-algodão
-crédito
-címbalo
-deserto
-esquimó
-fachada
-família
-galáxia
-garagem
-martelo
-eremita
-caçador
-impacto
-jaqueta
-gatinho
-lagarto
-Londres
-mármore
-mercado
-marmota
-mascote
-espelho
-moicano
-músculo
-Noruega
-omelete
-laranja
-Palácio
-pimenta
-espinha
 pistola
-planeta
-jogador
-foguete
-Saturno
-segundo
-magrelo
-futebol
-soquete
-esfinge
-espiral
-esponja
-estátua
-estéreo
-estúdio
-bilhete
-cócegas
-smoking
-violino
-vórtice
-fortuna
-doninha
-inverno
-amarelo
-iogurte
-alergia
-América
-Android
-damasco
-assalto
-Asterix
-abacate
-baklava
-bandana
-bateria
-beatbox
-Big Ben
-bolacha
-bitcoin
-bobsled
-boliche
-Brownie
-burrito
-capitão
-chaminé
-bússola
-console
-Croácia
-cristal
-Bolinho
-cortina
-diploma
-mostrar
-Doritos
-Drácula
-eclipse
-equador
-fábrica
-esgrima
-Ferrari
-Flórida
-fortuna
-funeral
-Gandalf
-granada
-hamster
-hashtag
-hip hop
-feriado
-iceberg
-Irlanda
-zelador
-jet ski
-jornada
-karaokê
-kendama
-ketchup
-cozinha
-Kung Fu
-lasanha
-lagosta
-loteria
-bagagem
-máquina
-maracás
-minivan
-monstro
-Nutella
-origami
-Pac-Man
-pijamas
-pantera
-patrick
-pinguim
-perfume
-Picasso
-pikachu
-Pokémon
-popular
-pretzel
-abóbora
-Ravioli
-Romênia
-Samsung
-Ciência
-gaivota
-enjoado
-soldado
-spoiler
-estádio
-cartola
-tornado
-torpedo
-turista
-tráfego
-reboque
-acionar
-Twitter
-unibrow
-vampiro
-vitória
-vinagre
-vlogger
-acordar
-YouTube
-aquário
-público
-mochila
-baguete
-Atadura
-nevasca
-beliche
-vasilha
-Cérbero
-campeão
-químico
-colapso
-confuso
-cadinho
-armário
-cliente
-entrega
-detonar
-bateria
-eleição
+caixote
+orvalho
 lareira
-insônia
-invasão
-canguru
-teclado
-levitar
+karaokê
+galáxia
+amarelo
+pikachu
+coveiro
 alcaçuz
 revista
-colchão
-vizinho
-narinas
-caderno
-pêndulo
-retrato
-grávida
-tesoura
-Escócia
+lagarto
+Pac-Man
 rabisco
-cadarço
-compras
-brilhos
-esquilo
-flâmula
-decolar
-alçapão
+smoking
+cadinho
+batalha
+zelador
+hamster
+bigorna
+futebol
+papoula
+eremita
+inverno
+Noruega
+cócegas
+lasanha
+espinha
 tesouro
-sem fio
-lutador
-anuário
-zepelim
-bárbaro
-mirtilo
-escolta
-estante
-cigarro
-Coliseu
-dálmata
-lareira
-aquário
-mobília
-gerador
-Hilário
-chicote
+afundar
+Tubarão
+Bolinho
+esponja
+burrito
+cenoura
+beatbox
+cristal
+cérebro
 Bambolê
+máquina
+formiga
+mineiro
+gráfico
+colapso
+carimbo
+estágio
+espelho
+Irlanda
+Big Ben
+soldado
 sorvete
-injeção
-abacaxi
-forcado
-esteira
-vegetal
-armazém
-carcaju
-taxista
-celular
-toranja
-punição
-morango
-nádegas
-lagarta
-coveiro
-esmalte
-Holanda
-taxista
-relação
+decolar
+abacate
+moicano
+canário
+relógio
+soquete
+sacudir
+console
+hip hop
+violino
+feriado
+reboque
+família
+corrida
 marreta
-anúncio
+vlogger
+garagem
+celeiro
+Entalhe
+esmalte
+garrafa
+Palácio
+cozinha
+assalto
+gerador
+ambição
+cigarra
+esfinge
+Drácula
+eclipse
+cerveja
+sem fio
+colchão
+bobsled
+entrega
+cadeira
+Doritos
+mochila
+marinha
+maracás
+armazém
+Ferrari
+ancinho
+besouro
+lagarta
+carcaju
+kendama
+unibrow
+canguru
+campeão
+dálmata
+nádegas
+Saturno
+esquilo
+Asterix
+alergia
+comprar
+eleição
 piscina
-cachorro
-presunto
-registro
-esfregar
-alfinete
-vermelho
-costurar
-dinheiro
-mastigar
-aplaudir
-cópia de
-profundo
-bandeira
-frustrar
-completo
-presente
-cordeiro
-logotipo
-mascarar
-refeição
-mariposa
-ervilhas
-cicatriz
-desfazer
-vassoura
-corrente
-bochecha
-penhasco
-cotovelo
-carranca
-fantasma
-gelatina
-ajoelhar
-perdedor
-prefeito
-dinheiro
-mindinho
-parafuso
-deslizar
-preguiça
-carretel
-caminhão
-assistir
-arqueiro
-barbeiro
-hematoma
-manteiga
-biscoito
-vaqueiro
-desgosto
-cruzeiro
-ciborgue
-apagador
-torneira
-floresta
-cascalho
-guitarra
-capacete
-chaleira
-advogado
-inventar
-mosquete
-natureza
-macarrão
-orquídea
-oxigênio
-papagaio
-amendoim
+ketchup
+pinguim
+popular
+címbalo
+semente
+pimenta
+jangada
+Gandalf
+escovar
+lagosta
+jet ski
+caçador
+pântano
+brilhos
+celular
+cortiça
+público
+gatinho
+magrelo
+pássaro
+bateria
+espiral
+Samsung
+esgrima
+laranja
+galinha
+Gasolina
+maçaneta
+traduzir
+fabuloso
+cogumelo
+Vaticano
+detetive
+ferreiro
+coquetel
 salmoura
-Principe
-fantoche
-rabanete
-registro
+castanha
 borracha
-procurar
-gangorra
-servidor
-espirrar
-Esportes
-quadrado
-estresse
-alfaiate
-tatuagem
-garganta
-banheiro
-soldador
-ganhador
-escritor
-curativo
-banheira
-baioneta
-biologia
-cobertor
-gabinete
-Catálogo
-centauro
-guepardo
-chocalho
-almofada
-dentista
-diagrama
-diamante
-divórcio
-golfinho
-gotícula
-bombeiro
-florista
-Alemanha
-hexágono
-joaninha
-lanterna
-isqueiro
-carteiro
-massagem
-suricato
-Mercúrio
-mensagem
+Pimentão
 leiteiro
-Sr. Bean
+estresse
+cicatriz
+vermelho
+chaleira
+tatuagem
+limusine
+recepção
+lenhador
+mensagem
+penhasco
+backflip
+gotícula
+natureza
+disquete
+paciente
+montanha
+assistir
+massagem
+papagaio
+xilofone
+antílope
+catedral
+trompete
+bombeiro
+procurar
+ratoeira
+joaninha
+profundo
+manteiga
+venenoso
+Principe
+desastre
+Facebook
+silêncio
+Portugal
+soldador
+talheres
+evaporar
+promoção
+Monalisa
+cópia de
+desfazer
+parafuso
+pica-pau
+pulseira
+Internet
+arqueiro
+youtuber
 mostarda
+cascalho
+Macarrão
+pelicano
+alfinete
+cachorro
+holofote
+guepardo
+Tiramisu
+curativo
+protesto
 octógono
 avestruz
-panqueca
-paciente
-patriota
-camponês
-pelicano
-picareta
-presente
-protesto
-provocar
-pirâmide
-guaxinim
-salsicha
-silêncio
-espátula
-estômago
-tímpanos
-Titânico
-trompete
-uniforme
-baunilha
-Vaticano
-Vitamina
-assobiar
-tirolesa
-panqueca
-abstrato
-acidente
-adorável
-aeronave
-anaconda
-tamanduá
-antílope
-aplausos
-backflip
-banheiro
-pulseira
-brócolis
-fogueira
-carnaval
-castanha
-coquetel
-completo
-cilindro
-diagonal
-desastre
-maçaneta
-download
-dinamite
-einstein
-elefante
-elevador
-expresso
-fabuloso
-Facebook
-festival
-flamingo
-gângster
-Garfield
-Gasolina
-pichação
-capacete
-Hércules
-hospital
-infinito
-Internet
-senhorio
-limonada
-pirulito
-Macarrão
-manicure
-maratona
-mecânico
-Mercedes
-mosquito
-montanha
-Sr. Bean
-cogumelo
-Portugal
-Poseidon
-positivo
-princesa
-Pringles
-religião
-revólver
-Skittles
-Skrillex
-sinfonia
-Tiramisu
-viajante
-triciclo
-trombone
-tropical
-universo
-vertical
-vuvuzela
-Whatsapp
-youtuber
-antílope
-maratona
-acordeão
-albatroz
-Amsterdã
-animação
-catedral
-comemoro
-camaleão
-milharal
-detetive
-libélula
-evaporar
-evolução
-explosão
-cineasta
-pescador
-Padrinho
-hibernar
-invenção
-paisagem
-limusine
-Rei Leão
-manequim
-megafone
-Monalisa
-ratoeira
-pesadelo
-Palmeira
-Pinóquio
-pistache
-venenoso
-policial
-poluição
-promoção
-radiação
-recepção
-satélite
-saxofone
-aspersor
-girassol
-Telefone
-traduzir
-xilofone
-critério
-tamboril
-ferreiro
-pedreiro
-Chiclete
-peitoral
-Patolino
-lanterna
-holofote
-lenhador
-maionese
-cofrinho
-reflexão
-talheres
-voleibol
-pica-pau
-Pimentão
-bombinha
-bombeiro
-disquete
-queimada
-X-Burger
-hidrante
-skatista
-trovoada
-semáforo
-cachorro
-presunto
-registro
-esfregar
-alfinete
-vermelho
-costurar
-dinheiro
-mastigar
-aplaudir
-cópia de
-profundo
-bandeira
-frustrar
-completo
-presente
-cordeiro
-logotipo
-mascarar
-refeição
-mariposa
-ervilhas
-cicatriz
-desfazer
-vassoura
-corrente
-bochecha
-penhasco
-cotovelo
-carranca
-fantasma
-gelatina
-ajoelhar
-perdedor
-prefeito
-dinheiro
-mindinho
-parafuso
-deslizar
-preguiça
-carretel
-caminhão
-assistir
-arqueiro
-barbeiro
-hematoma
-manteiga
-biscoito
-vaqueiro
-desgosto
-cruzeiro
-ciborgue
-apagador
-torneira
-floresta
-cascalho
-guitarra
-capacete
-chaleira
-advogado
-inventar
-mosquete
-natureza
-macarrão
-orquídea
-oxigênio
-papagaio
-amendoim
-salmoura
-Principe
-fantoche
-rabanete
-registro
-borracha
-procurar
-gangorra
-servidor
-espirrar
-Esportes
-quadrado
-estresse
-alfaiate
-tatuagem
-garganta
-banheiro
-soldador
-ganhador
-escritor
-curativo
-banheira
-baioneta
-biologia
-cobertor
-gabinete
-Catálogo
-centauro
-guepardo
-chocalho
-almofada
 dentista
-diagrama
-diamante
-divórcio
-golfinho
-gotícula
-bombeiro
-florista
-Alemanha
-hexágono
-joaninha
-lanterna
-isqueiro
-carteiro
-massagem
-suricato
-Mercúrio
-mensagem
-leiteiro
-Sr. Bean
-mostarda
-octógono
-avestruz
-panqueca
-paciente
-patriota
-camponês
-pelicano
-picareta
-presente
-protesto
-provocar
-pirâmide
-guaxinim
-salsicha
-silêncio
-espátula
-estômago
-tímpanos
-Titânico
-trompete
-uniforme
-baunilha
-Vaticano
-Vitamina
-assobiar
-tirolesa
-panqueca
-abstrato
-acidente
-adorável
-aeronave
-anaconda
-tamanduá
-antílope
-aplausos
-backflip
-banheiro
-pulseira
-brócolis
-fogueira
-carnaval
-castanha
-coquetel
-completo
-cilindro
-diagonal
-desastre
-maçaneta
-download
-dinamite
-einstein
-elefante
-elevador
-expresso
-fabuloso
-Facebook
-festival
-flamingo
-gângster
-Garfield
-Gasolina
-pichação
-capacete
-Hércules
-hospital
-infinito
-Internet
-senhorio
-limonada
-pirulito
-Macarrão
-manicure
-maratona
-mecânico
-Mercedes
-mosquito
-montanha
-Sr. Bean
-cogumelo
-Portugal
-Poseidon
-positivo
-princesa
-Pringles
-religião
-revólver
-Skittles
-Skrillex
-sinfonia
-Tiramisu
-viajante
-triciclo
-trombone
-tropical
-universo
-vertical
-vuvuzela
-Whatsapp
-youtuber
-antílope
-maratona
-acordeão
+banheira
 albatroz
-Amsterdã
-animação
-catedral
-comemoro
-camaleão
-milharal
-detetive
-libélula
-evaporar
-evolução
-explosão
-cineasta
-pescador
-Padrinho
-hibernar
-invenção
-paisagem
-limusine
-Rei Leão
-manequim
-megafone
-Monalisa
-ratoeira
-pesadelo
-Palmeira
-Pinóquio
-pistache
-venenoso
-policial
-poluição
-promoção
-radiação
-recepção
-satélite
-saxofone
-aspersor
-girassol
-Telefone
-traduzir
-xilofone
-critério
-tamboril
-ferreiro
-pedreiro
-Chiclete
-peitoral
-Patolino
-lanterna
-holofote
-lenhador
-maionese
-cofrinho
-reflexão
-talheres
-voleibol
-pica-pau
-Pimentão
-bombinha
-bombeiro
-disquete
-queimada
-X-Burger
-hidrante
+mindinho
+presunto
 skatista
+cineasta
+queimada
+dinamite
+isqueiro
+floresta
+provocar
+perdedor
+orquídea
+pedreiro
+tamanduá
+adorável
+anaconda
+bandeira
+guaxinim
+milharal
+desgosto
+vertical
+barbeiro
+aplausos
+Mercedes
+Skrillex
+Palmeira
+critério
+vaqueiro
+patriota
+hexágono
+carteiro
+einstein
+evolução
+princesa
+presente
+torneira
+cofrinho
+flamingo
+panqueca
+advogado
+ajoelhar
+explosão
+trombone
+preguiça
+Patolino
+elevador
+peitoral
+Chiclete
+aplaudir
+limonada
+acidente
+revólver
+aeronave
+bochecha
+quadrado
+Catálogo
+biologia
+frustrar
+mosquete
 trovoada
+garganta
+elefante
+Titânico
+biscoito
+rabanete
+Amsterdã
+uniforme
+Alemanha
+esfregar
+pichação
+X-Burger
+cotovelo
+radiação
+carranca
+mecânico
+golfinho
+diagonal
+viajante
+diamante
+chocalho
+alfaiate
+megafone
+caminhão
+hospital
+suricato
+acordeão
+ervilhas
+inventar
+ganhador
+salsicha
+sinfonia
+abstrato
+apagador
+assobiar
+gelatina
+corrente
+vassoura
 semáforo
-escavação
-mandíbula
-brinquedo
-beterraba
-bonitinho
-samambaia
-finlandês
-mangueira
-Labirinto
-derretido
-descansar
-armadilha
-esquentar
-trabalhar
-ampliação
-armaduras
-dirigível
-coelhinho
-carrilhão
-treinador
-rachadura
-margarida
-engraçado
-bagunçado
-pontuação
-tendência
-ferimento
-tendência
-banqueiro
-fronteira
-bochechas
+reflexão
+escritor
+estômago
+cilindro
+Pringles
+Pinóquio
+cordeiro
+expresso
+mascarar
+guitarra
+manicure
+baunilha
+gabinete
+dinheiro
+Padrinho
+camponês
+brócolis
+lanterna
+Rei Leão
+pesadelo
+amendoim
+registro
+hidrante
+tropical
+pirâmide
+manequim
+saxofone
+Hércules
+carnaval
+Telefone
+centauro
+servidor
+fogueira
+pescador
+libélula
+oxigênio
+fantoche
+carretel
+tímpanos
+refeição
+mastigar
+Vitamina
+tamboril
+pistache
+comemoro
+cruzeiro
+maionese
+senhorio
+aspersor
+vuvuzela
+Mercúrio
+paisagem
+universo
+ciborgue
+hematoma
+cobertor
+hibernar
+Whatsapp
+animação
+baioneta
+maratona
+almofada
+festival
+mosquito
+gângster
+capacete
+completo
+Skittles
+policial
+costurar
+espirrar
+triciclo
+positivo
+invenção
+banheiro
+florista
+mariposa
+deslizar
+infinito
+poluição
+camaleão
+logotipo
+Esportes
+gangorra
+macarrão
+religião
+espátula
+prefeito
+fantasma
+voleibol
+tirolesa
+girassol
+download
+diagrama
+picareta
+bombinha
+Poseidon
+pirulito
+Sr. Bean
+satélite
+Garfield
+divórcio
 colarinho
-motorista
-geladeira
-Obstáculo
-cavaleiro
-magnético
-chiqueiro
-rebobinar
-temporada
-primavera
-tartaruga
-salgueiro
-guirlanda
-aeroporto
-percevejo
-bicicleta
-segurança
-sobremesa
-Discórdia
-esmeralda
-vaga-lume
-purpurina
-gravidade
-cabeçalho
-horizonte
-peixe-boi
-fliperama
-encanador
-trimestre
-arco-íris
-realidade
-Horizonte
-espinafre
-agrafador
-estudante
-cirurgião
-professor
-unicórnio
-atualizar
-casamento
-ocidental
-sussurrar
-assassino
-asteróide
-Atlântida
-churrasco
-lava-jato
-catapulta
-caldeirão
-clarinete
-distância
-beringela
-exercício
-estatueta
-bola fogo
-fortaleza
-indústria
-linguagem
-calêndula
-almôndega
-militares
-Miniclipe
-Minotauro
-naftalina
-assassino
-periquito
-pavimento
-sanduíche
-segurança
-esqueleto
-sombreiro
-tentáculo
-tartaruga
-triângulo
-trigêmeos
-monociclo
-violência
-lobisomem
-invólucro
-antivírus
-arquiteto
-Argentina
-Austrália
-autógrafo
-bailarina
-Beethoven
-Bomberman
-Bruce Lee
-borboleta
-carnívoro
-centopéia
-champanhe
-Chewbacca
-chihuahua
-Chinatown
-chocolate
-clickbait
-crocodilo
-croissant
-Elon Musk
-Excalibur
-lua cheia
-geografia
-gladiador
-cemitério
-Hamburger
-harmônica
-cabeceira
-toca aqui
-hollywood
-ampulheta
-incógnito
-invisível
-John Cena
-junk food
-king kong
-Lady Gaga
-Las Vegas
-Margarina
-marmelada
-meteorito
-Microsoft
-milkshake
-Minecraft
-orquestra
-paintball
-Península
-Peppa Pig
-calabresa
-photoshop
-professor
-framboesa
-retângulo
-cientista
-escultura
-naufrágio
-Cingapura
-snowboard
-espaguete
-Spartacus
-carambola
-submarino
-tangerina
-tarântula
-Teletubby
-cachoeira
-Antártica
-binóculos
-capuccino
-chimpanzé
-chinchila
-pauzinhos
-comercial
-terremoto
-graduação
-microfone
-sobrepeso
-pula-pula
-televisão
-videogame
-parabrisa
-cafeteria
-daltônico
-gafanhoto
-placa mãe
-fotógrafo
-escavação
-mandíbula
-brinquedo
-beterraba
-bonitinho
-samambaia
-finlandês
-mangueira
-Labirinto
-derretido
-descansar
-armadilha
-esquentar
-trabalhar
-ampliação
-armaduras
-dirigível
-coelhinho
-carrilhão
 treinador
-rachadura
-margarida
-engraçado
-bagunçado
-pontuação
-tendência
-ferimento
-tendência
-banqueiro
-fronteira
-bochechas
-colarinho
-motorista
-geladeira
-Obstáculo
-cavaleiro
-magnético
-chiqueiro
-rebobinar
-temporada
-primavera
-tartaruga
-salgueiro
-guirlanda
-aeroporto
-percevejo
-bicicleta
-segurança
-sobremesa
-Discórdia
-esmeralda
-vaga-lume
-purpurina
-gravidade
-cabeçalho
-horizonte
-peixe-boi
-fliperama
-encanador
-trimestre
-arco-íris
-realidade
-Horizonte
-espinafre
-agrafador
-estudante
-cirurgião
-professor
-unicórnio
-atualizar
-casamento
-ocidental
-sussurrar
-assassino
-asteróide
-Atlântida
-churrasco
-lava-jato
-catapulta
-caldeirão
-clarinete
-distância
-beringela
-exercício
-estatueta
-bola fogo
-fortaleza
-indústria
-linguagem
-calêndula
-almôndega
-militares
-Miniclipe
-Minotauro
-naftalina
-assassino
-periquito
-pavimento
-sanduíche
-segurança
-esqueleto
-sombreiro
-tentáculo
-tartaruga
-triângulo
-trigêmeos
-monociclo
-violência
-lobisomem
-invólucro
-antivírus
-arquiteto
-Argentina
-Austrália
-autógrafo
-bailarina
-Beethoven
-Bomberman
-Bruce Lee
-borboleta
-carnívoro
-centopéia
-champanhe
-Chewbacca
-chihuahua
-Chinatown
-chocolate
-clickbait
-crocodilo
-croissant
-Elon Musk
-Excalibur
-lua cheia
-geografia
-gladiador
-cemitério
-Hamburger
-harmônica
-cabeceira
-toca aqui
-hollywood
-ampulheta
-incógnito
-invisível
 John Cena
-junk food
-king kong
-Lady Gaga
-Las Vegas
-Margarina
-marmelada
-meteorito
-Microsoft
-milkshake
-Minecraft
-orquestra
-paintball
-Península
-Peppa Pig
-calabresa
-photoshop
-professor
-framboesa
-retângulo
-cientista
-escultura
-naufrágio
-Cingapura
-snowboard
-espaguete
-Spartacus
-carambola
-submarino
-tangerina
-tarântula
 Teletubby
-cachoeira
-Antártica
-binóculos
-capuccino
-chimpanzé
-chinchila
-pauzinhos
-comercial
-terremoto
-graduação
-microfone
-sobrepeso
+sanduíche
+periquito
+percevejo
+chihuahua
+exercício
+champanhe
+Horizonte
+bagunçado
+ampulheta
+paintball
 pula-pula
-televisão
+vaga-lume
+realidade
+esmeralda
+tendência
+Argentina
+carrilhão
+microfone
+rebobinar
+coelhinho
+cachoeira
+cientista
+unicórnio
+crocodilo
+terremoto
+invisível
+Margarina
+Miniclipe
+capuccino
+king kong
+salgueiro
+bola fogo
+sobrepeso
+horizonte
+geladeira
+guirlanda
+derretido
+Atlântida
+finlandês
+junk food
+peixe-boi
+indústria
+fliperama
 videogame
-parabrisa
-cafeteria
-daltônico
-gafanhoto
-placa mãe
+linguagem
+cavaleiro
+pauzinhos
+chocolate
+trimestre
+casamento
+harmônica
+bochechas
+framboesa
+bicicleta
+retângulo
+chinchila
+bonitinho
+beterraba
+Minotauro
+assassino
+invólucro
+espaguete
+Peppa Pig
+atualizar
+espinafre
+monociclo
+lobisomem
+chimpanzé
+escavação
+fronteira
+trigêmeos
+Chewbacca
+fortaleza
+segurança
+arquiteto
+pontuação
+comercial
+calêndula
+carambola
+descansar
+magnético
+catapulta
+clickbait
+samambaia
+purpurina
 fotógrafo
-frigideira
-dedo do pé
-caranguejo
-efervescer
-comprimido
-violoncelo
-mais velho
-hipopótamo
-enfermeira
-governante
-papai noel
-apavorante
-prateleira
-tempestade
-enfermeira
-respiração
-Parachoque
-agricultor
-cavanhaque
-guardanapo
-escritório
-pastelaria
-piquenique
-apedrejado
-ziguezague
-equilíbrio
-assaltante
-açougueiro
-peixe-gato
-carregador
-Rastejador
-Inglaterra
+estatueta
+submarino
+naftalina
+cabeçalho
+naufrágio
+beringela
+arco-íris
+Península
+armadilha
+dirigível
+placa mãe
+gafanhoto
+rachadura
+pavimento
+calabresa
+agrafador
+Obstáculo
+sombreiro
+croissant
+sobremesa
+Las Vegas
+Spartacus
+trabalhar
+tartaruga
+antivírus
+margarida
+autógrafo
+lava-jato
+escultura
+ferimento
+tangerina
+cirurgião
+Hamburger
+violência
+primavera
+chiqueiro
+banqueiro
+mangueira
+graduação
+esqueleto
+cafeteria
+gravidade
+almôndega
+meteorito
+lua cheia
+esquentar
+Microsoft
+distância
+temporada
+marmelada
+centopéia
+binóculos
+photoshop
+Austrália
+Lady Gaga
+clarinete
+motorista
+encanador
+ampliação
+ocidental
+Excalibur
+Chinatown
+Beethoven
+toca aqui
+geografia
+Cingapura
+hollywood
+incógnito
+militares
+tentáculo
+daltônico
+gladiador
+Minecraft
+triângulo
+televisão
+milkshake
+Elon Musk
+Discórdia
+parabrisa
+engraçado
+estudante
+churrasco
+snowboard
+cemitério
+caldeirão
+tarântula
+mandíbula
+aeroporto
+asteróide
+cabeceira
+armaduras
+carnívoro
+Bruce Lee
+professor
+bailarina
+orquestra
+brinquedo
+Labirinto
+borboleta
+Bomberman
+Antártica
+sussurrar
+Vin Diesel
+diss track
 congelador
+prateleira
+James Bond
 lavanderia
-biblioteca
-carregando
-impressora
-espingarda
-superfície
-torradeira
-unha do pé
-cavaquinho
-testemunha
-calendário
-motosserra
-comediante
-computador
-dinossauro
-empregador
-engenheiro
-jardineiro
-meia-noite
-mini golfe
-cata-vento
-guarda-sol
-ambulância
-astronauta
-assimetria
-bumerangue
-comandante
-comunidade
-condimento
-continente
-depressivo
-escavadora
+peixe-gato
+Steve Jobs
+agricultor
 cavalheiro
-amarelinha
-hipnotizar
-entrevista
-McDonald's
-microondas
-via Láctea
-periscópio
-Presidente
+dedo do pé
+mais velho
+superfície
+pastelaria
+comprimido
+unha do pé
+escritório
 reciclando
+calendário
+couve-flor
+Rastejador
+estilingue
+Scooby Doo
+beija Flor
+continente
+papai noel
+skribbl.io
+depressivo
+carregando
+governante
+engenheiro
+apocalipse
+imaginação
+açougueiro
+guarda-sol
+equilíbrio
+testemunha
+McDonald's
+escavadora
+salto alto
+fotografia
+espingarda
+Pernalonga
+biblioteca
 espantalho
 assinatura
-estilingue
-telescópio
-luta livre
-apocalipse
-Bill Gates
-Pernalonga
-dicionário
-diss track
-guilhotina
-hieróglifo
-salto alto
-Mochileiro
-hovercraft
-britadeira
-James Bond
-jornalista
-Katy Perry
-Madagáscar
-fotografia
-Urso polar
-Robin Hood
-Scooby Doo
-skribbl.io
-Steve Jobs
-urso Teddy
-Usain Bolt
-Vin Diesel
-couve-flor
-ei gatinha
-beija Flor
-imaginação
-Os Beatles
-termômetro
 interseção
-vizinhança
-Yin e Yang
-arqueólogo
-frigideira
-dedo do pé
-caranguejo
-efervescer
-comprimido
-violoncelo
-mais velho
-hipopótamo
-enfermeira
-governante
-papai noel
-apavorante
-prateleira
 tempestade
-enfermeira
-respiração
-Parachoque
-agricultor
-cavanhaque
-guardanapo
-escritório
-pastelaria
-piquenique
-apedrejado
-ziguezague
-equilíbrio
-assaltante
-açougueiro
-peixe-gato
-carregador
-Rastejador
-Inglaterra
-congelador
-lavanderia
-biblioteca
-carregando
-impressora
-espingarda
-superfície
-torradeira
-unha do pé
-cavaquinho
-testemunha
-calendário
-motosserra
-comediante
-computador
-dinossauro
-empregador
-engenheiro
-jardineiro
 meia-noite
-mini golfe
-cata-vento
-guarda-sol
-ambulância
-astronauta
-assimetria
-bumerangue
-comandante
-comunidade
-condimento
-continente
-depressivo
-escavadora
-cavalheiro
-amarelinha
-hipnotizar
-entrevista
-McDonald's
-microondas
-via Láctea
-periscópio
-Presidente
-reciclando
-espantalho
-assinatura
-estilingue
-telescópio
-luta livre
-apocalipse
-Bill Gates
-Pernalonga
-dicionário
-diss track
-guilhotina
-hieróglifo
-salto alto
-Mochileiro
-hovercraft
-britadeira
-James Bond
-jornalista
-Katy Perry
-Madagáscar
-fotografia
+jardineiro
+assaltante
 Urso polar
-Robin Hood
-Scooby Doo
-skribbl.io
-Steve Jobs
-urso Teddy
-Usain Bolt
-Vin Diesel
-couve-flor
-ei gatinha
-beija Flor
-imaginação
-Os Beatles
-termômetro
-interseção
-vizinhança
-Yin e Yang
+enfermeira
+computador
+apedrejado
+cavaquinho
+torradeira
+via Láctea
+hieróglifo
+piquenique
+mini golfe
+condimento
 arqueólogo
-estrangeiro
+caranguejo
+guardanapo
+ambulância
+jornalista
+Bill Gates
+hipnotizar
+astronauta
+cata-vento
+assimetria
+urso Teddy
+amarelinha
+periscópio
+empregador
+Presidente
+guilhotina
+Os Beatles
+comandante
+ziguezague
+microondas
+luta livre
+dicionário
+Parachoque
+dinossauro
+Yin e Yang
+entrevista
+termômetro
+carregador
+cavanhaque
+apavorante
+Mochileiro
+violoncelo
+comediante
+britadeira
+impressora
+comunidade
+bumerangue
+Robin Hood
+Katy Perry
+ei gatinha
+Usain Bolt
+respiração
+motosserra
+hovercraft
+Madagáscar
+frigideira
+telescópio
+Inglaterra
+vizinhança
+hipopótamo
+efervescer
 sanguessuga
-ameixa seca
-GIS de cera
-malabarismo
-noz-moscada
-travesseiro
-desaparecer
-formigueiro
-acampamento
-pé de cabra
-sobrancelha
-autoestrada
-palestrante
-aniversário
-deficiência
-Super homen
-apartamento
-transmissão
-escavadeira
-Capricórnio
-carpinteiro
-Mulher Gato
-celebridade
-O comunismo
-saca rolhas
-Desodorante
-desesperado
-favo de mel
-pular corda
-orangotango
-pára-quedas
-pensionista
 porco porky
-espeleólogo
-Bob Esponja
-aristocrata
-basquetebol
-encouraçado
-controlador
-unha da mão
-ovo dourado
+Desodorante
 helicóptero
-laboratório
-microscópio
-motocicleta
-programador
-restaurante
-rinoceronte
-semicírculo
-arranha-céu
-vegetariano
-Angry Birds
-confortável
-Pato Donald
-eletricista
-mata-moscas
-Jackie Chan
-Kim Jong Un
-marshmallow
-Playstation
-tinta spray
-temperatura
-subterrâneo
-tinta spray
-conversação
-notificação
 veterinário
-finn e jake
+pára-quedas
+laboratório
+rinoceronte
+unha da mão
+formigueiro
+travesseiro
+aristocrata
+vegetariano
+noz-moscada
+Playstation
+favo de mel
+desesperado
+acampamento
+saca rolhas
+O comunismo
+confortável
+Mulher Gato
+pé de cabra
+conversação
+espeleólogo
+transmissão
+tinta spray
+pular corda
+malabarismo
+celebridade
+Kim Jong Un
+subterrâneo
+ovo dourado
+Bob Esponja
+palestrante
+restaurante
+autoestrada
+arranha-céu
+GIS de cera
+aniversário
+desaparecer
+basquetebol
+pensionista
+carpinteiro
+notificação
+semicírculo
+mata-moscas
+Capricórnio
 estrangeiro
-sanguessuga
-ameixa seca
-GIS de cera
-malabarismo
-noz-moscada
-travesseiro
-desaparecer
-formigueiro
-acampamento
-pé de cabra
-sobrancelha
-autoestrada
-palestrante
-aniversário
-deficiência
-Super homen
-apartamento
-transmissão
-escavadeira
-Capricórnio
-carpinteiro
-Mulher Gato
-celebridade
-O comunismo
-saca rolhas
-Desodorante
-desesperado
-favo de mel
-pular corda
-orangotango
-pára-quedas
-pensionista
-porco porky
-espeleólogo
-Bob Esponja
-aristocrata
-basquetebol
-encouraçado
-controlador
-unha da mão
-ovo dourado
-helicóptero
-laboratório
-microscópio
-motocicleta
-programador
-restaurante
-rinoceronte
-semicírculo
-arranha-céu
-vegetariano
-Angry Birds
-confortável
-Pato Donald
-eletricista
-mata-moscas
-Jackie Chan
-Kim Jong Un
-marshmallow
-Playstation
-tinta spray
-temperatura
-subterrâneo
-tinta spray
-conversação
-notificação
-veterinário
 finn e jake
-carne bovina
-refrigerante
-respiradouro
-corresponder
-desfiladeiro
-mal-humorado
-louva a Deus
-desentupidor
-casca de noz
+orangotango
+Jackie Chan
+programador
+encouraçado
+apartamento
+ameixa seca
+escavadeira
+temperatura
+Pato Donald
+motocicleta
+Super homen
+Angry Birds
+eletricista
+marshmallow
+deficiência
+controlador
+microscópio
+sobrancelha
 flauta de pã
-ornitorrinco
-barco a vela
-Leão marinho
-escorregadio
-bola de neve
-sobrevivente
-guarda-chuva
-pé de feijão
-sala de aula
-distribuidor
-fita adesiva
-lixa de unha
-água salgada
-Homem Aranha
-Lula Molusco
-peixe-espada
-arma De Agua
-buraco negro
 porco voador
-verme gomoso
-sabre de luz
-Monte Branco
-Código Morse
-quebra-nozes
-farmacêutico
-monte branco
-eletricidade
 observatório
-navio pirata
-pote de ouro
-estegossauro
-supermercado
-Barack Obama
-Bart Simpson
-Chuck Norris
-algodão doce
-Donald Trump
-Torre Eiffel
-lança-chamas
-Frankenstein
-maçã Dourada
-Harry Potter
-Jesus Cristo
 Johnny Bravo
-Mickey Mouse
-Sr. Meeseeks
-mídia social
-Velociraptor
-demonstração
-Robbie podre
-ursinho Pooh
-carne bovina
-refrigerante
-respiradouro
-corresponder
-desfiladeiro
-mal-humorado
-louva a Deus
+buraco negro
+guarda-chuva
+lixa de unha
 desentupidor
-casca de noz
-flauta de pã
-ornitorrinco
-barco a vela
-Leão marinho
-escorregadio
-bola de neve
-sobrevivente
-guarda-chuva
-pé de feijão
-sala de aula
 distribuidor
-fita adesiva
-lixa de unha
-água salgada
-Homem Aranha
-Lula Molusco
-peixe-espada
-arma De Agua
-buraco negro
-porco voador
-verme gomoso
-sabre de luz
-Monte Branco
-Código Morse
 quebra-nozes
-farmacêutico
-monte branco
-eletricidade
-observatório
-navio pirata
-pote de ouro
-estegossauro
-supermercado
-Barack Obama
-Bart Simpson
+verme gomoso
 Chuck Norris
-algodão doce
-Donald Trump
-Torre Eiffel
-lança-chamas
-Frankenstein
 maçã Dourada
-Harry Potter
-Jesus Cristo
-Johnny Bravo
-Mickey Mouse
-Sr. Meeseeks
 mídia social
-Velociraptor
 demonstração
-Robbie podre
+refrigerante
+barco a vela
+sala de aula
+louva a Deus
+escorregadio
 ursinho Pooh
-bomba nuclear
-protuberância
-Churrasquinho
-homem Morcego
-bobo da corte
-Segunda-feira
-quebra-cabeça
-chave inglesa
-pano de prato
-vitória Régia
-frutos do mar
-nascer do sol
-gaita de fole
-marca páginas
-Piscina morta
-dor de cabeça
-Rolo de carne
-cartão postal
-capa de chuva
-gota de chuva
-Concha do mar
-colher de chá
-torta de maçã
-café da manhã
-Peixe-palhaço
-dente de leão
-comida rápida
-ponta do dedo
-aperto de mão
-molho picante
-bibliotecário
-saco de papel
-porco-espinho
-pára-quedismo
-floco de neve
+Frankenstein
+algodão doce
+respiradouro
+desfiladeiro
+Jesus Cristo
+sobrevivente
+carne bovina
+Robbie podre
+fita adesiva
+Código Morse
+Barack Obama
+pote de ouro
+Donald Trump
+Bart Simpson
+Torre Eiffel
+pé de feijão
+farmacêutico
+água salgada
+Sr. Meeseeks
+Homem Aranha
+Leão marinho
+ornitorrinco
+corresponder
+Mickey Mouse
+eletricidade
+bola de neve
+navio pirata
+monte branco
+peixe-espada
+sabre de luz
+casca de noz
+supermercado
+Harry Potter
+Lula Molusco
+mal-humorado
+Velociraptor
+arma De Agua
+Monte Branco
+estegossauro
+lança-chamas
 nave espacial
-sinal de pare
-cesto de lixo
-dentes falsos
+Piscina morta
+cartão postal
+colher de chá
+Homer Simpson
+dente de leão
+avanço rápido
+torta de maçã
+chave inglesa
+bibliotecário
+Torre de Pisa
 canal de Suez
-oculos de sol
-superpotência
+vitória Régia
+dentes falsos
+pára-quedismo
+porco-espinho
+Rolo de carne
+Churrasquinho
 copo de vinho
-arame farpado
+bobo da corte
+Aurora boreal
+dor de cabeça
+oculos de sol
 Nova Zelândia
 ciclo da água
-avanço rápido
-recepcionista
-Sistema solar
-tênis de mesa
-Homer Simpson
-Jimmy Neutron
-Monte Everest
-Torre de Pisa
-Aurora boreal
-bomba nuclear
 protuberância
-Churrasquinho
-homem Morcego
-bobo da corte
-Segunda-feira
+Sistema solar
 quebra-cabeça
-chave inglesa
-pano de prato
-vitória Régia
-frutos do mar
-nascer do sol
-gaita de fole
 marca páginas
-Piscina morta
-dor de cabeça
-Rolo de carne
-cartão postal
+cesto de lixo
+Peixe-palhaço
+Segunda-feira
 capa de chuva
 gota de chuva
-Concha do mar
-colher de chá
-torta de maçã
-café da manhã
-Peixe-palhaço
-dente de leão
-comida rápida
-ponta do dedo
 aperto de mão
-molho picante
-bibliotecário
-saco de papel
-porco-espinho
-pára-quedismo
-floco de neve
-nave espacial
-sinal de pare
-cesto de lixo
-dentes falsos
-canal de Suez
-oculos de sol
+homem Morcego
+nascer do sol
 superpotência
-copo de vinho
-arame farpado
-Nova Zelândia
-ciclo da água
-avanço rápido
-recepcionista
-Sistema solar
-tênis de mesa
-Homer Simpson
 Jimmy Neutron
+café da manhã
+frutos do mar
 Monte Everest
-Torre de Pisa
-Aurora boreal
-água sanitária
-cera de ouvido
-hora de dormir
-liquidificador
-montanha-russa
-estacionamento
-caixa de areia
-algas marinhas
-boneco de neve
-espinha dorsal
-saco de feijão
-máscara de gás
-pacote de feno
-arco de cabelo
-morador de rua
-Homem de Ferro
-rabo de cavalo
-cavalo marinho
-pacote de seis
-salto de esqui
-estrela do Mar
-roupa de banho
-dor nas costas
-casa de boneca
-pelos do nariz
-areia movediça
-Idade da Pedra
-casa na árvore
-bolo de queijo
-pintura facial
-bastão de cola
-Grande Muralha
-Refeição feliz
-caixa de areia
-varinha mágica
-traje espacial
-toalha de mesa
-truque de tiro
-rolo de cabelo
-porta-retratos
-abaixo do peso
-carro elétrico
-Ponte da Torre
-Lanterna Verde
-Angelina Jolie
-bungee jumping
-fidget spinner
-Morgan Freeman
-Monte Rushmore
-Susan Wojcicki
-procrastinação
+arame farpado
+molho picante
+bomba nuclear
+comida rápida
+Concha do mar
+sinal de pare
+tênis de mesa
+recepcionista
+pano de prato
+gaita de fole
+floco de neve
+ponta do dedo
+saco de papel
 Phineas e Ferb
-água sanitária
 cera de ouvido
-hora de dormir
-liquidificador
-montanha-russa
-estacionamento
-caixa de areia
-algas marinhas
-boneco de neve
-espinha dorsal
-saco de feijão
-máscara de gás
-pacote de feno
-arco de cabelo
-morador de rua
-Homem de Ferro
-rabo de cavalo
-cavalo marinho
-pacote de seis
-salto de esqui
-estrela do Mar
-roupa de banho
-dor nas costas
-casa de boneca
-pelos do nariz
-areia movediça
-Idade da Pedra
-casa na árvore
-bolo de queijo
-pintura facial
-bastão de cola
-Grande Muralha
-Refeição feliz
-caixa de areia
-varinha mágica
-traje espacial
-toalha de mesa
-truque de tiro
 rolo de cabelo
-porta-retratos
-abaixo do peso
-carro elétrico
-Ponte da Torre
-Lanterna Verde
-Angelina Jolie
-bungee jumping
+roupa de banho
 fidget spinner
+estrela do Mar
+casa de boneca
+traje espacial
+morador de rua
+bungee jumping
+cavalo marinho
+Idade da Pedra
+truque de tiro
+pintura facial
+algas marinhas
 Morgan Freeman
+toalha de mesa
+arco de cabelo
+máscara de gás
+estacionamento
+Refeição feliz
+porta-retratos
 Monte Rushmore
-Susan Wojcicki
+pacote de seis
+abaixo do peso
+Ponte da Torre
+dor nas costas
+Grande Muralha
+bastão de cola
+Angelina Jolie
 procrastinação
-Phineas e Ferb
-shopping center
-letra da música
-papagaio-do-mar
-controlo remoto
-Franco atirador
-desenho animado
-fones de ouvido
-corte de cabelo
-cachorro-quente
-ponto de ônibus
-cachorro-quente
-loja de animais
-estrela do rock
-moinho de vento
-a prova de fogo
-vareta luminosa
-Lâmpada de lava
-palito de dente
-garoto do cofre
-papel de parede
-semente de maçã
-abridor de lata
-cabelo no peito
-ursinho de goma
-fones de ouvido
-Sozinho em casa
-Olho de Londres
-Parque infantil
-tapete vermelho
-caixa de tecido
-escova de dente
-pasta de dentes
-flip de garrafa
-guarda Costeira
-Senhor Meeseeks
-Coréia do Norte
-Fada dos Dentes
-carrinho de mão
-coração partido
-Jack-o-lanterna
-Abraham Lincoln
-ar condicionado
-Capitão América
-Charlie Chaplin
-Crash Bandicoot
-Fred Flintstone
-Mark Zuckerberg
-Michael Jackson
-nintendo switch
-Sherlock Holmes
+liquidificador
+rabo de cavalo
+pacote de feno
+pelos do nariz
+caixa de areia
+saco de feijão
+hora de dormir
+montanha-russa
+areia movediça
+Homem de Ferro
+bolo de queijo
+varinha mágica
+carro elétrico
+água sanitária
+Susan Wojcicki
+espinha dorsal
+boneco de neve
+salto de esqui
+Lanterna Verde
+casa na árvore
 William wallace
-shopping center
-letra da música
-papagaio-do-mar
-controlo remoto
-Franco atirador
-desenho animado
-fones de ouvido
-corte de cabelo
-cachorro-quente
-ponto de ônibus
-cachorro-quente
-loja de animais
-estrela do rock
-moinho de vento
-a prova de fogo
-vareta luminosa
-Lâmpada de lava
-palito de dente
-garoto do cofre
-papel de parede
-semente de maçã
-abridor de lata
 cabelo no peito
-ursinho de goma
-fones de ouvido
-Sozinho em casa
-Olho de Londres
-Parque infantil
-tapete vermelho
-caixa de tecido
-escova de dente
-pasta de dentes
-flip de garrafa
-guarda Costeira
-Senhor Meeseeks
-Coréia do Norte
-Fada dos Dentes
-carrinho de mão
-coração partido
-Jack-o-lanterna
-Abraham Lincoln
-ar condicionado
-Capitão América
-Charlie Chaplin
-Crash Bandicoot
-Fred Flintstone
+a prova de fogo
 Mark Zuckerberg
+loja de animais
+escova de dente
+desenho animado
+Crash Bandicoot
+Parque infantil
+Lâmpada de lava
+Franco atirador
+ar condicionado
 Michael Jackson
+Sozinho em casa
+cachorro-quente
+shopping center
 nintendo switch
+Fred Flintstone
+fones de ouvido
+pasta de dentes
+Abraham Lincoln
+tapete vermelho
+Senhor Meeseeks
+ursinho de goma
+coração partido
+papel de parede
+estrela do rock
+abridor de lata
+caixa de tecido
+ponto de ônibus
+Olho de Londres
+garoto do cofre
+letra da música
+Charlie Chaplin
+flip de garrafa
+corte de cabelo
+papagaio-do-mar
+carrinho de mão
 Sherlock Holmes
-William wallace
-jardim zoológico
-chefe de cozinha
+controlo remoto
+semente de maçã
+palito de dente
+moinho de vento
+Jack-o-lanterna
+Capitão América
+vareta luminosa
+guarda Costeira
+Fada dos Dentes
+Coréia do Norte
 código de barras
-Bola de chiclete
-caixa de correio
-carro de corrida
-caixa de sapatos
-peixinho dourado
-Pimenta jalapeno
-banho de Pássaro
-lavagem cerebral
-escova de cabelo
-lâmpada elétrica
-prancha de surfe
 cabo de vassoura
-Recife de corais
-Homem de familia
-corrente de ouro
-pontuação máxima
-gigante de ferro
-líder de torcida
-Truque de mágica
-Castelo de Areia
-show de talentos
-máquina do tempo
-mulher maravilha
+lâmpada elétrica
+carro de corrida
 chocolate quente
-creme de barbear
-raquete de tênis
-Darwin Watterson
-designer de moda
 jardim zoológico
-chefe de cozinha
-código de barras
-Bola de chiclete
-caixa de correio
-carro de corrida
-caixa de sapatos
-peixinho dourado
-Pimenta jalapeno
-banho de Pássaro
-lavagem cerebral
-escova de cabelo
-lâmpada elétrica
-prancha de surfe
-cabo de vassoura
 Recife de corais
-Homem de familia
-corrente de ouro
-pontuação máxima
-gigante de ferro
-líder de torcida
-Truque de mágica
-Castelo de Areia
-show de talentos
-máquina do tempo
-mulher maravilha
-chocolate quente
-creme de barbear
+lavagem cerebral
+Bola de chiclete
+banho de Pássaro
 raquete de tênis
+Homem de familia
+caixa de sapatos
+escova de cabelo
+peixinho dourado
+mulher maravilha
+creme de barbear
+gigante de ferro
+máquina do tempo
+Pimenta jalapeno
+pontuação máxima
+show de talentos
+Castelo de Areia
+Truque de mágica
+corrente de ouro
 Darwin Watterson
+chefe de cozinha
 designer de moda
+líder de torcida
+prancha de surfe
+caixa de correio
 mergulho autônomo
-queimadura de sol
-fogo de artifício
-caixa de fósforos
-vida após a morte
-de olhos vendados
-carrinho de golfe
-piercing de nariz
-sangramento nasal
+Cartão de crédito
 etiqueta de preço
+Sexta-feira preta
+guitarra elétrica
+realidade virtual
+floresta tropical
+sangramento nasal
+luta de almofadas
+piercing de nariz
+de olhos vendados
+fogo de artifício
+lâmina de barbear
 pote de biscoitos
 cortador de grama
-floresta tropical
-lâmina de barbear
-Cartão de crédito
-Sexta-feira preta
-luta de almofadas
-Flor de cerejeira
-guitarra elétrica
-preparador físico
-realidade virtual
-Leonardo da Vinci
-mergulho autônomo
-queimadura de sol
-fogo de artifício
-caixa de fósforos
 vida após a morte
-de olhos vendados
 carrinho de golfe
-piercing de nariz
-sangramento nasal
-etiqueta de preço
-pote de biscoitos
-cortador de grama
-floresta tropical
-lâmina de barbear
-Cartão de crédito
-Sexta-feira preta
-luta de almofadas
+queimadura de sol
 Flor de cerejeira
-guitarra elétrica
-preparador físico
-realidade virtual
 Leonardo da Vinci
-homem das cavernas
+preparador físico
+caixa de fósforos
+Leonardo Di Caprio
 bloco de anotações
-mastro de bandeira
+Sydney Opera House
 cinto de segurança
+apontador de lápis
+homem das cavernas
 alarme de incêndio
-porquinho da índia
 ventilador de teto
 Jardim da infância
-máquina de costura
-apontador de lápis
-Leonardo Di Caprio
-Sydney Opera House
-Leonardo Di Caprio
-Sydney Opera House
-homem das cavernas
-bloco de anotações
 mastro de bandeira
-cinto de segurança
-alarme de incêndio
-porquinho da índia
-ventilador de teto
-Jardim da infância
 máquina de costura
-apontador de lápis
-Leonardo Di Caprio
-Sydney Opera House
-Leonardo Di Caprio
-Sydney Opera House
-empregada doméstica
-computador portátil
+porquinho da índia
 casinha de cachorro
 armadilha para urso
-Queimadura por frio
-bloqueio de estrada
-tempestade de areia
-Guerra das Estrelas
-caminhão de reboque
-motorista de ônibus
-país das maravilhas
-coelhinho da Páscoa
-Pantera Cor de Rosa
-carrinho de compras
-Monstro do Biscoito
-caminhão de sorvete
-comissária de bordo
 William Shakespeare
-empregada doméstica
+motorista de ônibus
 computador portátil
-casinha de cachorro
-armadilha para urso
-Queimadura por frio
-bloqueio de estrada
-tempestade de areia
 Guerra das Estrelas
-caminhão de reboque
-motorista de ônibus
-país das maravilhas
-coelhinho da Páscoa
-Pantera Cor de Rosa
-carrinho de compras
+empregada doméstica
 Monstro do Biscoito
+caminhão de reboque
+país das maravilhas
+Queimadura por frio
+tempestade de areia
 caminhão de sorvete
+coelhinho da Páscoa
 comissária de bordo
-William Shakespeare
+Pantera Cor de Rosa
+bloqueio de estrada
+carrinho de compras
 aparelho ortodôntico
-Caixa de ferramentas
-Quartel de bombeiros
-ambiente de trabalho
 Estátua da Liberdade
-aparelho ortodôntico
 Caixa de ferramentas
-Quartel de bombeiros
 ambiente de trabalho
-Estátua da Liberdade
-caminhão de bombeiros
-motorista de caminhão
+Quartel de bombeiros
 caminhão de bombeiros
 motorista de caminhão
 local na rede Internet
-história em quadrinhos
-Exterminador do Futuro
 espaço de rastreamento
-local na rede Internet
-história em quadrinhos
 Exterminador do Futuro
-espaço de rastreamento
+história em quadrinhos
 pisco de peito vermelho
 guerra de bolas de neve
-pisco de peito vermelho
-guerra de bolas de neve
-comida para animais de estimação
-comida para animais de estimação

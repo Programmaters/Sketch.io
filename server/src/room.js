@@ -7,11 +7,12 @@ import { Player } from './player.js'
  */
 export class Room {
 
-    constructor(roomId, io, socket, game) {
+    constructor(roomId, io, socket, game, canvas) {
         this.roomId = roomId
         this.io = io
         this.socket = socket
         this.game = game
+        this.canvas = canvas 
     }
 
     /**
@@ -29,8 +30,8 @@ export class Room {
      * Leaves the room the user is in
      * @param {Object} data
      */
-    leave(socket, username) {
-        this.game.players = this.players.filter(player => player.name != username)
+    leave(socket, playerId) {
+        this.game.players = this.players.filter(player => player.id != playerId)
         socket.leave(this.roomId)
     }
 

@@ -67,6 +67,11 @@ function updateSettings(settings) {
     else return
 }
 
+function onDisconnect() {
+    renderHomepage()
+    alert("You have been disconnected from the server")    
+}
+
 const options = {
     maxPlayers: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     language: ['English', 'Portuguese'],

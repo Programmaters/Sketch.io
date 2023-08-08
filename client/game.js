@@ -14,6 +14,7 @@ function onDrawTurn(data) {
     renderDrawTools()
     setDrawMode('draw')
     setTimer(data.time)
+    updateRoundNumber(data.round)
 }
 
 function onGuessTurn(data) {
@@ -21,6 +22,7 @@ function onGuessTurn(data) {
     removeDrawTools()
     setDrawMode(null)
     setTimer(data.time)
+    updateRoundNumber(data.round)
 }
 
 function correctGuess(word) {
@@ -60,6 +62,10 @@ function updatePlayerScore(playerName, playerId, score) {
 
 function updateTitle(title) {
     document.querySelector('h1').innerHTML = title
+}
+
+function updateRoundNumber(roundNumber) {
+    document.querySelector('#round-number').innerHTML = `Round ${roundNumber}`
 }
 
 function deletePlayerScore(playerId) {
