@@ -2,15 +2,22 @@ import { rooms } from './main.js'
 import { readFile } from 'fs/promises'
 import { randomUUID } from 'crypto'
 
-const words = await readFile('./words.txt', 'utf-8').then(x => x.split('\r\n'))
+const enWords = await readFile('./words-en.txt', 'utf-8').then(x => x.split('\r\n'))
+const ptWords = await readFile('./words-pt.txt', 'utf-8').then(x => x.split('\r\n'))
 
+const dictionary = {
+  'English': enWords,
+  'Portuguese': ptWords
+}
 
 /**
  * Gets n number of random words
  * @param {Integer} numberOfNWords 
  * @returns array of n random words
  */
-export function getRandomWords(n) {
+export function getRandomWords(n, language) {
+    const words = dictionary[language]
+    if(!words) throw new Error(`Language ${language} is not supported`)
     return Array.from({ length: n }, () => words[Math.floor(Math.random() * words.length)])
 }
 
@@ -37,7 +44,6 @@ export function getRandomId() {
     return randomUUID().slice(0, 8)
 }
 
-
 /**
  * Gets a room by id and throws an error if it doesn't exist
  * @param {Socket} socket 
@@ -60,8 +66,69 @@ export function addRoom(room) {
     rooms[room.roomId] = room
 }
 
-
 export function wordHint(word) {
     return word.split(' ').map(subWord => '_ '.repeat(subWord.length)).join('&nbsp;&nbsp;')
-      
+}
+
+export function getRandomChars(word, nOfChars) {
+    const hintArray = word.split('')
+    const hintIndices = []
+    let hintCount = 0
+    
+    for (let i = 0; i < hintArray.length; i++) {
+        hintIndices.push(i)
+    }
+    
+    for (let i = 0; i <= hintArray.length; i++) {
+        const randomIndex = hintIndices[Math.floor(Math.random() * hintIndices.length)]
+        if (hintArray[randomIndex] === ' ') {
+            hintIndices.splice(hintIndices.indexOf(randomIndex), 1)
+            continue
+        }
+        if (hintCount >= nOfChars) {
+            hintArray[randomIndex] = '_'
+        }
+        hintIndices.splice(hintIndices.indexOf(randomIndex), 1)
+        hintCount++
+    }
+    return hintArray
+}
+
+
+export function getHint(turn) {
+    const hintChar = turn.hints.find(c => c != '_' && c != ' ')
+    const hintArray = []
+    for (let i = 0; i < turn.hints.length; i++) {
+        if (turn.hints[i] != '_' && turn.hints[i] != ' ' && turn.hints[i] != hintChar) {
+            hintArray.push('_')
+        }
+        else {
+            hintArray.push(turn.hints[i])
+        }
+    }
+
+    // remove hintChar from the available hints for the turn
+    const hintCharIndex = turn.hints.indexOf(hintChar)
+    turn.hints[hintCharIndex] = '_'
+
+    if (turn.hintsToShow === null) {
+        turn.hintsToShow = hintArray
+    }
+    else {
+        turn.hintsToShow[hintCharIndex] = hintChar
+    }
+
+    const hintArraySeparated = turn.hintsToShow.join('').split(' ')
+    let hint = ['', '']
+    for (let i = 0; i < hintArraySeparated.length; i++) {
+        for(let j = 0; j < hintArraySeparated[i].length; j++) {
+            if (hintArraySeparated[i][j] != '_') {
+                hint[i] += hintArraySeparated[i][j] + ' '
+            }
+            if (hintArraySeparated[i][j] === '_') {
+                hint[i] += '_ '
+            }
+        } 
+    } 
+    return hint.join('&nbsp;&nbsp;')
 }

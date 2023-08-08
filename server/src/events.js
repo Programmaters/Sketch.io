@@ -1,44 +1,55 @@
 import { Room } from './room.js'
+import { Game } from './game.js'
+import { Canvas } from './canvas.js'
 import { getRandomId, getRoom, addRoom } from './utils.js'
-
 
 /* Game Events */
 function onCreateRoom(conn, data) {
     const roomId = getRandomId()
-    const room = new Room(roomId, conn.io, conn.socket)
+    const canvas = new Canvas()
+    const game = new Game(conn.io, conn.socket, roomId, canvas)
+    const room = new Room(roomId, conn.io, conn.socket, game)
     addRoom(room)
     room.join(conn.socket, data.username)
-    conn.socket.emit('joinedRoom', { roomId, username: data.username })
+    conn.socket.emit('joinedRoom', { roomId, player: { name: data.username, id: conn.socket.id } })
 }
 
 function onJoinRoom(conn, data) {
     const room = getRoom(data.roomId)
     room.join(conn.socket, data.username)
-    conn.socket.emit('joinedRoom', { roomId: data.roomId, players: room.players.map(player => player.name) })
-    conn.socket.broadcast.to(data.roomId).emit('playerJoinedRoom', data.username)
+    conn.socket.emit('joinedRoom', { roomId: data.roomId, players: room.players.map(player => ({ name: player.name, id: player.id })) })
+    conn.socket.emit('updateSettings', room.settings )
+    conn.socket.broadcast.to(data.roomId).emit('playerJoinedRoom', { name: data.username, id: conn.socket.id } )
 }
 
 function onLeaveRoom(conn) {
     const player = conn.room.players.find(player => player.id == conn.socket.id)
-    conn.room.leave(conn.socket, player.name)
-    conn.socket.broadcast.to(conn.roomId).emit('playerLeftRoom', player.name)
+    conn.room.leave(conn.socket, player.id)
+    conn.socket.broadcast.to(conn.roomId).emit('playerLeftRoom', { name: player.name, id: player.id })
 }
 
 function onUpdateSettings(conn, data) {
-    conn.room.updateSettings(data.settings)
+    conn.room.updateSettings(data)
 }
 
-function onStartGame(conn, data) {
+function onStartGame(conn) {
     conn.room.newGame()
-    conn.room.game.startGame(data)
 }
 
+function onSkipTurn(conn) {
+    conn.room.game.endTurn()
+}
+
+function onHint(conn) {
+    if (conn.room.game.hintCounter >= conn.room.settings.hints) return
+    conn.room.game.hintCounter++
+    conn.room.game.sendHint()
+}
 
 /* Chat Events */
 function onMessage(conn, data) {
     conn.room.onMessage(conn.socket.id, data.message)
 }
-
 
 /* Draw Events */
 function onDrawingAction(conn, data) {
@@ -62,17 +73,18 @@ function onUndo(conn) {
     conn.socket.broadcast.to(conn.roomId).emit('canvasData', canvasData)
 }
 
-
 export default {
     'createRoom': onCreateRoom,
     'joinRoom': onJoinRoom,
-    'leaveRoom': onLeaveRoom,
-    // 'disconnect': onLeaveRoom,
     'updateSettings': onUpdateSettings,
     'startGame': onStartGame,
     'message': onMessage,
+    'skipTurn': onSkipTurn,
+    'hint': onHint,
     'drawingAction': onDrawingAction,
     'clearCanvas': onClearCanvas,
     'mouseReleased': onSave,
     'undo': onUndo,
+    'leaveRoom': onLeaveRoom,
+    // 'disconnect': onLeaveRoom
 }

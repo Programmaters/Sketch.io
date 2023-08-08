@@ -1,14 +1,4 @@
-import { Game } from './game.js'
 import { Player } from './player.js'
-
-const defaultSettings = {
-    maxPlayers: 8,
-    language: 'English',
-    drawTime: 60,
-    rounds: 3,
-    wordCount: 2,
-    hints: 2
-}
 
 /**
  * @class Room
@@ -17,13 +7,12 @@ const defaultSettings = {
  */
 export class Room {
 
-    constructor(roomId, io, socket) {
+    constructor(roomId, io, socket, game, canvas) {
         this.roomId = roomId
         this.io = io
         this.socket = socket
-        this.players = []
-        this.settings = defaultSettings
-        this.game = null
+        this.game = game
+        this.canvas = canvas 
     }
 
     /**
@@ -31,8 +20,9 @@ export class Room {
      * @param {Object} data 
      */
     join(socket, username) {
+        if (this.players.length >= this.game.settings.maxPlayers) throw new Error('Room is full')
         const player = new Player(socket, username)
-        this.players.push(player)
+        this.game.players.push(player)
         socket.join(this.roomId)
     }
 
@@ -40,34 +30,40 @@ export class Room {
      * Leaves the room the user is in
      * @param {Object} data
      */
-    leave(socket, username) {
-        this.players = this.players.filter(player => player.username != username)
+    leave(socket, playerId) {
+        this.game.players = this.players.filter(player => player.id != playerId)
         socket.leave(this.roomId)
     }
 
     newGame() {
-        this.game = new Game(this.io, this.socket, this.players, this.settings, this.roomId)
-      
+        this.game.startGame()
     }
 
     onMessage(playerId, message) {
         const player = this.players.find(player => player.id == playerId)
-        if(this.game == null) { // game hasnt started yet
+        if(!this.game.running) {
             this.io.in(this.roomId).emit('message', `${player.name}: ${message}`)
             return
         }
         this.game.onMessage(player, message)
     }
 
-
     /**
      * Updates the settings of the game
      * @param {Object} data
      */
     updateSettings(settings) {
-        this.settings = settings
+        this.game.settings = settings
         this.players.forEach(player => {
-            player.socket.emit('onUpdateSettings', settings)
+            player.socket.emit('updateSettings', settings)
         })
+    }
+
+    get players() {
+        return this.game.players
+    }
+
+    get settings() {
+        return this.game.settings
     }
 }

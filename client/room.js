@@ -1,10 +1,9 @@
-
 function joinRoom(data) {
     renderRoom(data)
     if (data.players) {
         data.players.forEach(playerJoinedRoom)
     } else {
-        playerJoinedRoom(data.username)
+        playerJoinedRoom(data.player)
     }
 }
 
@@ -13,29 +12,27 @@ function leaveRoom() {
     renderHomepage()
 }
 
-function playerJoinedRoom(username) {
+function playerJoinedRoom(player) {
     const el = document.createElement('li')
-    el.innerText = `${username} joined the room`
+    el.innerText = `${player.name} joined the room`
     document.querySelector('#chat').appendChild(el)
-    addPlayerToScoreboard(username)
+    addPlayerToScoreboard(player.name, player.id)
 }
 
-function playerLeftRoom(username) {
+function playerLeftRoom(player) {
 	const el = document.createElement('li')
-	el.innerText = `${username} left the room`
+	el.innerText = `${player.name} left the room`
 	document.querySelector('#chat').appendChild(el)
-    removePlayerFromScoreboard(username)
+    removePlayerFromScoreboard(player.id)
 }
 
-
-function addPlayerToScoreboard(playerName) {
-    renderPlayer(playerName)
+function addPlayerToScoreboard(playerName, playerId) {
+    renderPlayer(playerName, playerId)
 }
 
-function removePlayerFromScoreboard(playerName) {
-    document.querySelector(`#${playerName}`).parentNode.remove()
+function removePlayerFromScoreboard(playerId) {
+    document.querySelector(`#\\${playerId}`).remove()
 }
-
 
 /**
  * Get the selected option of a select element by id
@@ -55,6 +52,24 @@ function readSettings() {
         acc[setting] = getSelectedOptionOf(setting)
         return acc
     }, {})
+}
+
+/**
+ * Update the game settings
+ */
+function updateSettings(settings) {
+    if (!host) {
+        Object.entries(settings).forEach(([key, value]) => {
+             const setting = document.getElementById(key)
+             setting.value = value
+         })
+    }
+    else return
+}
+
+function onDisconnect() {
+    renderHomepage()
+    alert("You have been disconnected from the server")    
 }
 
 const options = {

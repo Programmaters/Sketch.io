@@ -1,4 +1,3 @@
-
 function startGame() {
     renderCanvas()
     const canvas = createCanvas(width, height)
@@ -15,7 +14,7 @@ function onDrawTurn(data) {
     renderDrawTools()
     setDrawMode('draw')
     setTimer(data.time)
-    drawer = true
+    updateRoundNumber(data.round)
 }
 
 function onGuessTurn(data) {
@@ -23,7 +22,7 @@ function onGuessTurn(data) {
     removeDrawTools()
     setDrawMode(null)
     setTimer(data.time)
-    drawer = false
+    updateRoundNumber(data.round)
 }
 
 function correctGuess(word) {
@@ -37,9 +36,15 @@ function closeGuess(message) {
 
 function onEndTurn(data) {
     updateTitle(`The word was: ${data.word}`)
+    stopTimer()
+    data.scores.sort((p1, p2) => p2.score - p1.score)
     data.scores.forEach(obj => {
-        updatePlayerScore(obj.username, obj.score)
+        updatePlayerScore(obj.playerName, obj.playerId, obj.score)
     })
+}
+
+function onHint(hint) {
+    updateTitle(`Guess the word: ${hint}`)
 }
 
 function onRoundEnd() {
@@ -50,10 +55,19 @@ function onGameEnd() {
     updateTitle('Game ended')
 }
 
-function updatePlayerScore(username, score) {
-    document.querySelector('#scoreboard').querySelector(`#${username}`).querySelector('.score').innerText = score
+function updatePlayerScore(playerName, playerId, score) {
+    deletePlayerScore(playerId)
+    renderPlayer(playerName, playerId, score)
 }
 
 function updateTitle(title) {
-    document.querySelector('h1').innerText = title
+    document.querySelector('h1').innerHTML = title
+}
+
+function updateRoundNumber(roundNumber) {
+    document.querySelector('#round-number').innerHTML = `Round ${roundNumber}`
+}
+
+function deletePlayerScore(playerId) {
+    document.getElementById(`${playerId}`).remove()
 }

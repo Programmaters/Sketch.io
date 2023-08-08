@@ -15,7 +15,7 @@ io.on('connection', (socket) => {
             try {
                 handler(conn, data)
             } catch (e) {
-                socket.emit('error', e)
+                socket.emit('error', e.message)
                 console.error(e)
             }
         })

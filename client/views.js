@@ -1,4 +1,3 @@
-
 function renderHomepage() {
 
 	const usernameInput = document.createElement('input')
@@ -23,7 +22,8 @@ function renderHomepage() {
 	document.getElementById('main-content').replaceChildren(usernameInput, createRoomButton, joinRoomDiv)
 
 	document.querySelector('#create-room').onclick = () => {
-		username = document.querySelector('#username').value
+        username = document.querySelector('#username').value
+        checkUsername()
 		socket.emit('createRoom', { username })
 		host = true
 	}
@@ -31,6 +31,7 @@ function renderHomepage() {
 	document.querySelector('#join-room').onclick = () => {
 		const roomId = document.querySelector('#join-room-id').value
 		username = document.querySelector('#username').value
+        checkUsername()
 		socket.emit('joinRoom', { roomId, username })
 		host = false
 	}
@@ -90,8 +91,8 @@ function renderRoomSettings() {
     const parent = document.createElement('div')
     Object.entries(options).forEach(([key, value]) => {
         const div = document.createElement('div')
-        div.onclick = () => { 
-            socket.emit('onUpdateSettings', readSettings())
+        div.onchange = () => { 
+            socket.emit('updateSettings', readSettings())
         }
 
         const label = document.createElement('label')
@@ -124,10 +125,14 @@ function renderCanvas() {
     const drawTools = document.createElement('div')
     drawTools.id = 'draw-tools'
 
+    const roundNumber = document.createElement('h6')
+    roundNumber.id = 'round-number'
+
     const timer = document.createElement('div')
     timer.id = 'timer'
 
     canvasContainer.appendChild(drawTools)
+    canvasContainer.appendChild(roundNumber)
     canvasContainer.appendChild(timer)
     leftDiv.replaceChildren(canvasContainer)
 }
@@ -193,8 +198,19 @@ function renderDrawTools() {
         colorPalette.appendChild(option)
     })
     drawCursor.style.backgroundColor = 'black'
+
+    const hintButton = document.createElement('button')
+    hintButton.id = 'hint-button'
+    hintButton.textContent = 'Hint'
+    hintButton.onclick = () => socket.emit('hint')
+    
+    const skipButton = document.createElement('button')
+    skipButton.id = 'skip-button'
+    skipButton.textContent = 'Skip Turn'
+    skipButton.onclick = () => socket.emit('skipTurn')
+
     const toolsDiv = document.querySelector('#draw-tools')
-    toolsDiv.replaceChildren(drawCursor, eraseButton, clearButton, undoButton, colorPickerButton, fillButton, saveButton, brushSizeInput, colorPalette)
+    toolsDiv.replaceChildren(drawCursor, eraseButton, clearButton, undoButton, colorPickerButton, fillButton, saveButton, brushSizeInput, colorPalette, hintButton, skipButton)
 }
 
 function removeDrawTools() {
@@ -202,9 +218,9 @@ function removeDrawTools() {
     toolsDiv.replaceChildren()
 }
 
-function renderPlayer(playerName) {
+function renderPlayer(playerName, playerId, playerScore = 0) {
     const player = document.createElement('li')
-    player.id = playerName
+    player.id = playerId
 
     const name = document.createElement('span')
     name.className = 'name'
@@ -212,11 +228,18 @@ function renderPlayer(playerName) {
 
     const score = document.createElement('span')
     score.className = 'score'
-    score.innerText = 0
+    score.innerText = playerScore
 
     player.appendChild(name)
     player.appendChild(document.createTextNode(' - '))
     player.appendChild(score)
 
     document.querySelector('#scoreboard').appendChild(player)
+}
+
+function checkUsername() {
+    if (!username) {
+        alert('Username is required')
+        throw new Error('Username is required')
+    }
 }

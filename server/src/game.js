@@ -1,7 +1,14 @@
-import { getRandomWords, getCloseness, wordHint } from './utils.js'
-import { Canvas } from './canvas.js'
+import { getRandomWords, getRandomChars, getCloseness, wordHint, getHint } from './utils.js'
 
 const closeThreshold = 0.75
+const defaultSettings = {
+    maxPlayers: 2,
+    language: 'English',
+    drawTime: 30,
+    rounds: 3,
+    wordCount: 1,
+    hints: 0
+}
 
 /**
  * @class Game
@@ -10,42 +17,45 @@ const closeThreshold = 0.75
  */
 export class Game {
 
-    constructor(io, socket, players, settings, roomId) {
+    currentWord = null
+    hintCounter = 0
+    hints = null
+    hintsToShow = null
+    drawer = null
+    controller = null
+    timeRef = null
+    running = false
+
+    constructor(io, socket, roomId, canvas) {
         this.io = io
         this.socket = socket
-        this.host = socket.id
-        this.players = players
-        this.settings = settings
+        this.players = []
+        this.settings = defaultSettings
         this.roomId = roomId
-        this.canvas = new Canvas()
-        this.currentWord = null
-        this.drawer = null
-        this.controller = null
-        this.timeRef = null
+        this.canvas = canvas
     }
 
     /**
      * Starts the game
      */
     async startGame() {
-        this.resetScores()
- 
+        this.resetGame()
+        this.running = true
         this.socket.broadcast.to(this.roomId).emit('gameStarted')
         for (let round = 0; round < this.settings.rounds; round++) {
             for (let player = 0; player < this.players.length; player++) {
                 console.log(`Round ${round + 1} | Player ${player + 1}`)
-                await this.nextTurn(player, round)
+                await this.play(player, round + 1)
             }
         }
         this.socket.broadcast.to(this.roomId).emit('gameEnded')
     }
 
-
     /**
      * Starts a new turn
      * @param {Integer} playerIndex 
      */
-    async nextTurn(playerIndex, roundNumber) {
+    async play(playerIndex, roundNumber) {
 
         this.canvas.clear()
         this.io.to(this.roomId).emit('clearCanvas')
@@ -55,11 +65,13 @@ export class Game {
         drawer.drawer = true
         this.drawer = drawer
 
-        this.currentWord = getRandomWords(1)[0]
+        this.currentWord = getRandomWords(1, this.settings.language)[0]
+        this.hints = getRandomChars(this.currentWord, this.settings.hints)
+        this.hintsToShow = null
         this.timeRef = new Date()
 
-        drawer.socket.emit('drawTurn', { word: this.currentWord, time: this.settings.drawTime })
-        drawer.socket.broadcast.to(this.roomId).emit('guessTurn', { hint: wordHint(this.currentWord), time: this.settings.drawTime })
+        drawer.socket.emit('drawTurn', { word: this.currentWord, time: this.settings.drawTime, round: roundNumber })
+        drawer.socket.broadcast.to(this.roomId).emit('guessTurn', { hint: wordHint(this.currentWord), time: this.settings.drawTime, round: roundNumber })
     
         try {
             await this.setCancellableTimeout(this.settings.drawTime)
@@ -82,18 +94,18 @@ export class Game {
                 
                 // update player scores 
                 const timeLeft = parseInt(this.settings.drawTime - (new Date() - this.timeRef) / 1000)
-                this.drawer.score += timeLeft
-                player.score += timeLeft * (this.players.length - 1)
+                const answerTime = this.settings.drawTime - timeLeft
+                this.drawer.score += parseInt(answerTime / (this.hintCounter + 1))
+                player.score += answerTime * this.players.length
                 player.guessed = true
     
                 // if everyone guessed, end turn
                 if (this.players.every(player => player.guessed)) {
-                    this.controller.abort() // cancels the timeout
                     this.endTurn()
                 }
             }
         } else {
-            this.sendMessage(message)
+            this.sendMessage(`${player.name}: ${message}`)
             const closeness = getCloseness(guessWord, currentWord)
             if (closeness >= closeThreshold) {
                 if (!player.guessed) player.socket.emit('closeGuess', `${guessWord} is close!`)
@@ -110,19 +122,40 @@ export class Game {
     }
 
     /**
+     * Sends a hint to all guessers in the room
+     */
+    sendHint() {
+        let hint = getHint(this)
+        this.drawer.socket.broadcast.to(this.roomId).emit('showHint', hint)
+    }
+
+    /**
      * Ends the turn
      */
     endTurn() {
         this.io.in(this.roomId).emit('endTurn', { word: this.currentWord, scores: this.getPlayerScores() })
         this.resetGuessed()
+        this.controller.abort()
+        this.hintCounter = 0
     }
 
     /**
      * Ends the game
      */
     endGame() {
-        this.resetScores()
+        this.running = false
         this.io.in(roomId).emit('endGame')
+    }
+
+    resetGame() {
+        this.resetScores()
+        this.resetGuessed()
+        this.currentWord = null
+        this.hints = null
+        this.hintsToShow = null
+        this.drawer = null
+        this.controller = null
+        this.timeRef = null
     }
 
     /**
@@ -143,9 +176,8 @@ export class Game {
     }
 
     getPlayerScores() {
-        return this.players.map(player => ({ username: player.name, score: player.score }))
+        return this.players.map(player => ({ playerName: player.name, playerId: player.id, score: player.score }))
     }
-
 
     /**
      * Cancellable timeout
@@ -166,5 +198,4 @@ export class Game {
             setTimeout(resolve, time * 1000)
         })
     }
-
 }

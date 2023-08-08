@@ -1,4 +1,3 @@
-
 function receiveMessage(text, color) {
     const el = document.createElement('li')
     el.innerHTML = text
@@ -7,7 +6,7 @@ function receiveMessage(text, color) {
 }
 
 function sendMessage() {
-    if (drawer) return
+    if (drawMode != null) return
     const input = document.querySelector('#message')
     socket.emit('message', { message: input.value, username })
     input.value = ""
