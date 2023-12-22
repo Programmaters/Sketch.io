@@ -4,14 +4,17 @@ import events from './events.js'
 
 const http = createServer()
 const io = new Server(http, { cors: { origin: "*" } })
+const port = 8080
+
 export const rooms = {}
 
 io.on('connection', (socket) => {
-    Object.entries(events).forEach(([name, handler]) => {
-        socket.on(name, (data) => {
+    Object.entries(events).forEach(([event, handler]) => {
+        socket.on(event, (data) => {
             const roomId = Array.from(socket.rooms).find(roomId => roomId !== socket.id) // check later
             const room = rooms[roomId]
             const conn = { io, socket, roomId, room }
+            console.log("Received Event", event, data)
             try {
                 handler(conn, data)
             } catch (e) {
@@ -22,4 +25,5 @@ io.on('connection', (socket) => {
     })
 })
 
-io.listen(8080, () => console.log('listening on http://localhost:8080'))
+io.listen(port)
+console.log(`Server listening on port ${port}`)

@@ -12,7 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cookie": "^0.6.0",
     "socket.io": "^4.7.1",
-    "ws": "^7.4.1"
+    "ws": "^7.5.9"
   }
 }

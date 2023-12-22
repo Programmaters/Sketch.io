@@ -32,7 +32,7 @@ describe('Room', () => {
   it('Create and join a room', () => {
 
     clientSocket.on('joinRoom', () => {
-      room.join(clientSocket, 'player1')
+      room.join('player1')
       assert.equal(room.players.length, 1)
       assert.equal(room.game, null)
     })

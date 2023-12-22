@@ -1,6 +1,7 @@
 import { rooms } from './main.js'
 import { readFile } from 'fs/promises'
 import { randomUUID } from 'crypto'
+import {Room} from "./room.js";
 
 const enWords = await readFile('./words-en.txt', 'utf-8').then(x => x.split('\r\n'))
 const ptWords = await readFile('./words-pt.txt', 'utf-8').then(x => x.split('\r\n'))
@@ -66,8 +67,15 @@ export function addRoom(room) {
     rooms[room.roomId] = room
 }
 
+export function getPlayerRoom(playerId, roomId) {
+    const room = getRoom(roomId)
+    const player = room.players.find(player => player.id === playerId)
+    if (!player) return null
+    return { room, player }
+}
+
 export function wordHint(word) {
-    return word.split(' ').map(subWord => '_ '.repeat(subWord.length)).join('&nbsp;&nbsp;')
+    return word.split(' ').map(subWord => '_ '.repeat(subWord.length)).join()
 }
 
 export function getRandomChars(word, nOfChars) {
@@ -118,7 +126,7 @@ export function getHint(turn) {
         turn.hintsToShow[hintCharIndex] = hintChar
     }
 
-    const hintArraySeparated = turn.hintsToShow.join('').split(' ')
+    const hintArraySeparated = turn.hintsToShow.join().split(' ')
     let hint = ['', '']
     for (let i = 0; i < hintArraySeparated.length; i++) {
         for(let j = 0; j < hintArraySeparated[i].length; j++) {
@@ -130,5 +138,5 @@ export function getHint(turn) {
             }
         } 
     } 
-    return hint.join('&nbsp;&nbsp;')
+    return hint.join()
 }
