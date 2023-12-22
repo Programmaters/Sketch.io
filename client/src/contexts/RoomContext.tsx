@@ -1,42 +1,61 @@
 import * as React from 'react';
 import { useState, createContext, useContext } from 'react';
 import {Player} from "../domain/Player";
+import {Room} from "../domain/Room";
 
 type RoomContextType = {
-  players: Player[],
-  roomId: string,
-  join: (players: Player[], roomId: string) => void,
+  room: Room | undefined,
+  joinRoom: (players: Player[], roomId: string) => void,
+  leaveRoom: () => void,
   addPlayer: (player: Player) => void,
-  removePlayer: (player: Player) => void,
+  removePlayer: (playerId: string) => void,
+  setRoomId: (id?: string) => void,
+  isInRoom: () => boolean,
 };
 
 const RoomContext = createContext<RoomContextType>({
-  players: [],
-  roomId: '',
-  join: () => {},
+  room: undefined,
+  joinRoom: () => {},
+  leaveRoom: () => {},
   addPlayer: () => {},
   removePlayer: () => {},
+  setRoomId: () => {},
+  isInRoom: () => false,
 });
 
 export function RoomProvider({ children }: { children: React.ReactNode }) {
-  const [players, setPlayers] = useState<Player[]>([])
-  const [roomId, setRoomId] = useState<string>('')
+  const [room, setRoom] = useState<Room>()
 
-  function join(players: Player[], roomId: string) {
-    setPlayers(players);
-    setRoomId(roomId);
+  function joinRoom(players: Player[], id: string) {
+    setRoom({id, players});
+  }
+
+  function leaveRoom() {
+    setRoom(undefined);
   }
 
   function addPlayer(player: Player) {
-    setPlayers([...players, player]);
+    if (!room) throw new Error('Player not in room');
+    const players =  [...room.players, player]
+    setRoom({...room, players});
   }
 
-  function removePlayer(player: Player) {
-    setPlayers(players.filter(p => p !== player));
+  function removePlayer(playerId: string) {
+    if (!room) throw new Error('Player not in room');
+    const players = room.players.filter(player => player.id !== playerId);
+    setRoom({...room, players});
+  }
+
+  function setRoomId(id?: string) {
+    setRoom({id, players: room?.players || []});
+  }
+
+  function isInRoom() {
+    return !!room;
   }
 
   return (
-    <RoomContext.Provider value={{ players, roomId, join, addPlayer, removePlayer }}>
+    <RoomContext.Provider value={{room, joinRoom, leaveRoom, addPlayer, removePlayer, setRoomId, isInRoom}}>
       {children}
     </RoomContext.Provider>
   );

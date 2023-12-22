@@ -13,7 +13,6 @@ function App() {
         <Routes>
             <Route index element={<Home />} />
             <Route path="/room/:roomId" element={<Room />} />
-            <Route path="/game/:gameId" element={<Game />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -4,13 +4,12 @@ import {socket} from "../../socket/socket";
 import {useNavigate} from "react-router-dom";
 import {useRoom} from "../../contexts/RoomContext";
 import {Player} from "../../domain/Player";
-import {setCookie} from "../../utils/cookies";
 
 function Home() {
   const navigate = useNavigate();
   const [username, setUsername] = React.useState('');
   const [roomId, setRoomId] = React.useState('');
-  const room = useRoom();
+  const { room, joinRoom } = useRoom();
 
   function onCreateRoom() {
     socket.connect();
@@ -23,18 +22,18 @@ function Home() {
       alert('Please enter a username');
       return;
     }
-    if (!roomId) {
+    const rId = room?.id || roomId;
+    if (!rId) {
       alert('Please enter the room id to join');
       return;
     }
     socket.connect();
-    socket.emit('joinRoom', { username, roomId });
+    socket.emit('joinRoom', { username, roomId: rId });
     socket.on('joinedRoom', onJoinedRoom);
   }
 
-  function onJoinedRoom(data: {players: Player[], roomId: string, playerId: string}) {
-    room.join(data.players, data.roomId);
-    setCookie('playerId', data.playerId)
+  function onJoinedRoom(data: {players: Player[], roomId: string}) {
+    joinRoom(data.players, data.roomId);
     navigate(`room/${data.roomId}`);
   }
 
@@ -43,15 +42,18 @@ function Home() {
       socket.off('joinedRoom', onJoinedRoom);
     }
   }, []);
-
   return (
     <div className="Home">
       <h1>Home</h1>
       <input type="text" placeholder="Enter Username" onChange={(e) => setUsername(e.target.value)}/>
-      <button onClick={onCreateRoom}>
-        Create Room
-      </button>
-      <input type="text" placeholder="Enter Room Id" onChange={(e) => setRoomId(e.target.value)}/>
+      {room === undefined &&
+        <>
+          <input type="text" placeholder="Enter Room Id" onChange={(e) => setRoomId(e.target.value)}/>
+          <button onClick={onCreateRoom}>
+              Create Room
+          </button>
+        </>
+      }
       <button onClick={onJoinRoom}>
         Join Room
       </button>

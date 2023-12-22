@@ -1,43 +1,33 @@
 import { Room } from './room.js'
 import { Game } from './game.js'
 import { Canvas } from './canvas.js'
-import {getRandomId, getRoom, addRoom, getPlayerRoom} from './utils.js'
-
-function onReconnect(conn, data) {
-    const roomData = getPlayerRoom(data.playerId, data.roomId)
-    if (roomData) {
-        const { room, player } = roomData
-        player.socket = conn.socket
-        conn.socket.emit('joinedRoom', { roomId: data.roomId, playerId: conn.socket.id, players: room.getPlayers() })
-    } else {
-        throw new Error('Could not join room')
-    }
-}
+import {getRandomId, getRoom, addRoom} from './utils.js'
 
 /* Game Events */
 function onCreateRoom(conn, data) {
     const roomId = getRandomId()
+    const playerId = conn.socket.id
     const canvas = new Canvas()
     const game = new Game(conn.io, conn.socket, roomId, canvas)
     const room = new Room(roomId, conn.io, conn.socket, game)
-    const playerId = conn.socket.id
     addRoom(room)
     room.join(room.socket, data.username)
     conn.socket.emit('joinedRoom', { roomId, playerId, players: [{ name: data.username, id: playerId }] })
 }
 
 function onJoinRoom(conn, data) {
-    const room = getRoom(data.roomId)
-    room.join(data.username)
-    conn.socket.emit('joinedRoom', { roomId: data.roomId, playerId: conn.socket.id, players: room.getPlayers() })
+    const room = getRoom(conn.roomId)
+    room.join(conn.socket, data.username)
+    conn.socket.emit('joinedRoom', { roomId: room.id, playerId: conn.socket.id, players: room.getPlayers() })
     conn.socket.emit('updateSettings', room.settings )
-    conn.socket.broadcast.to(data.roomId).emit('playerJoinedRoom', { name: data.username, id: conn.socket.id } )
+    conn.socket.broadcast.to(room.id).emit('playerJoinedRoom', { player: { name: data.username, id: conn.socket.id } } )
 }
 
 function onLeaveRoom(conn) {
+    if (!conn.room) throw new Error('Leave: Room not found')
     const player = conn.room.players.find(player => player.id === conn.socket.id)
     conn.room.leave(conn.socket, player.id)
-    conn.socket.broadcast.to(conn.roomId).emit('playerLeftRoom', { name: player.name, id: player.id })
+    conn.socket.broadcast.to(conn.roomId).emit('playerLeftRoom', { playerId : player.id })
 }
 
 function onUpdateSettings(conn, data) {
@@ -97,7 +87,5 @@ export default {
     'clearCanvas': onClearCanvas,
     'mouseReleased': onSave,
     'undo': onUndo,
-    'leaveRoom': onLeaveRoom,
-    'reconnect': onReconnect
-    // 'disconnect': onLeaveRoom
+    'disconnecting': onLeaveRoom
 }

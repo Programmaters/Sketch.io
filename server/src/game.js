@@ -2,7 +2,7 @@ import { getRandomWords, getRandomChars, getCloseness, wordHint, getHint } from 
 
 const closeThreshold = 0.75
 const defaultSettings = {
-    maxPlayers: 2,
+    maxPlayers: 3,
     language: 'English',
     drawTime: 30,
     rounds: 3,

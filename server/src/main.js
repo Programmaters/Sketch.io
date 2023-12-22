@@ -11,10 +11,10 @@ export const rooms = {}
 io.on('connection', (socket) => {
     Object.entries(events).forEach(([event, handler]) => {
         socket.on(event, (data) => {
-            const roomId = Array.from(socket.rooms).find(roomId => roomId !== socket.id) // check later
+            const roomId = data?.roomId || Array.from(socket.rooms).find(roomId => roomId !== socket.id)
             const room = rooms[roomId]
-            const conn = { io, socket, roomId, room }
-            console.log("Received Event", event, data)
+            const conn = { io, socket, room, roomId }
+            console.log(event, data)
             try {
                 handler(conn, data)
             } catch (e) {

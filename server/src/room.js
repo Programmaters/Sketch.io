@@ -6,8 +6,8 @@ import { Player } from './player.js'
  */
 export class Room {
 
-    constructor(roomId, io, socket, game, canvas) {
-        this.roomId = roomId
+    constructor(id, io, socket, game, canvas) {
+        this.id = id
         this.io = io
         this.socket = socket
         this.game = game
@@ -18,12 +18,12 @@ export class Room {
         if (this.players.length >= this.game.settings.maxPlayers) throw new Error('Room is full')
         const player = new Player(socket, username)
         this.game.players.push(player)
-        socket.join()
+        socket.join(this.id)
     }
 
     leave(socket, playerId) {
         this.game.players = this.players.filter(player => player.id !== playerId)
-        socket.leave(this.roomId)
+        socket.leave(this.id)
     }
 
     newGame() {
@@ -37,7 +37,7 @@ export class Room {
     onMessage(playerId, message) {
         const player = this.players.find(player => player.id === playerId)
         if(!this.game.running) {
-            this.io.in(this.roomId).emit('message', `${player.name}: ${message}`)
+            this.io.in(this.id).emit('message', { text: message, sender: player.name })
             return
         }
         this.game.onMessage(player, message)

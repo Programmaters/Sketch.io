@@ -4,63 +4,70 @@ import './Room.css';
 import {useNavigate, useParams} from "react-router-dom";
 import {useRoom} from "../../contexts/RoomContext";
 import {Player} from "../../domain/Player";
-import {clearCookie, getCookie, setCookie} from "../../utils/cookies";
 import {socket} from "../../socket/socket";
+import Game from "../game/Game";
+import GameConfig from "../game-config/GameConfig";
+import Players from "./components/players/Players";
+import Chat from "./components/chat/Chat";
+import {useGame} from "../../contexts/GameContext";
 
 function Room() {
   const { roomId } = useParams();
-  const room = useRoom();
   const navigate = useNavigate();
+  const {joinRoom, leaveRoom, addPlayer, removePlayer, setRoomId, isInRoom} = useRoom();
+  const {isInGame} = useGame();
 
   function playerJoinedRoom(data: {player: Player}) {
-    room.addPlayer(data.player);
+    addPlayer(data.player);
+  }
+
+  function playerLeftRoom(data: {playerId: string}) {
+    removePlayer(data.playerId);
   }
 
   function onInvalidUserId() {
-    clearCookie('playerId');
     navigate('/');
     alert('Could not join room');
   }
 
   const eventHandlers = {
+    'joinedRoom': onJoinedRoom,
     'playerJoinedRoom': playerJoinedRoom,
     'invalidUserId': onInvalidUserId,
-    // 'playerLeftRoom': playerLeftRoom,
+    'playerLeftRoom': playerLeftRoom,
     // 'updateSettings': updateSettings,
     // 'gameStarted': startGame,
   };
-  // useSocketListeners(eventHandlers);
+  useSocketListeners(eventHandlers);
 
-  function onJoinedRoom(data: {players: Player[], roomId: string, playerId: string}) {
-    room.join(data.players, data.roomId);
-    setCookie('playerId', data.playerId)
+  function onJoinedRoom(data: {players: Player[], roomId: string}) {
+    joinRoom(data.players, data.roomId);
+  }
+
+  function leave() {
+    socket.disconnect();
+    leaveRoom();
+    navigate('/');
   }
 
   useEffect(() => {
-    if (socket.disconnected) {
-      socket.connect();
-    }
-    if (room.players.length === 0) {
-      const playerId = getCookie('playerId');
-      socket.emit('reconnect', { playerId, roomId });
-      socket.on('joinedRoom', onJoinedRoom);
-    }
-    return () => {
-      socket.off('joinedRoom', onJoinedRoom);
+    if (socket.disconnected) socket.connect();
+    if (!isInRoom()) {
+      setRoomId(roomId);
+      navigate('/');
     }
   }, []);
 
   return (
     <div className="Room">
       <h1>Room {roomId}</h1>
-      <div className="players">
-        {room.players.map(player => <div className="player" key={player.id}>{player.name}</div>)}
-      </div>
-      <button onClick={() => socket.emit('leaveRoom', { playerId: "abc", roomId })}>
-        Leave Room
-      </button>
+      <Players />
+      <Chat />
+      <button onClick={leave}>Leave Room</button>
+      {isInRoom() &&
+        isInGame() ? <Game /> : <GameConfig />
+      }
     </div>
   );
 }
-
 export default Room;

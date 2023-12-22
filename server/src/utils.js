@@ -64,14 +64,7 @@ export function getRoom(id) {
  * @param {Room} room 
  */
 export function addRoom(room) {
-    rooms[room.roomId] = room
-}
-
-export function getPlayerRoom(playerId, roomId) {
-    const room = getRoom(roomId)
-    const player = room.players.find(player => player.id === playerId)
-    if (!player) return null
-    return { room, player }
+    rooms[room.id] = room
 }
 
 export function wordHint(word) {
