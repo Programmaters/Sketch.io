@@ -1,12 +1,13 @@
-import {useRoom} from "../../../contexts/RoomContext";
-import Chat from "../chat/Chat";
 import {useGame} from "../../../contexts/GameContext";
+import "./GameState.css";
 
 function GameState() {
   const {game} = useGame();
   return (
     <div className="GameState">
+      <p>Time: 0 seconds</p>
       <p>Round {game?.round}</p>
+      <p>{/*game?.state*/}</p>
     </div>
   )
 }

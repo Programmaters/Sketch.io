@@ -5,12 +5,12 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useRoom} from "../../contexts/RoomContext";
 import {Player} from "../../domain/Player";
 import {socket} from "../../socket/socket";
-import Game from "../game/Game";
 import GameConfig from "../game-config/GameConfig";
 import Players from "./players/Players";
 import Chat from "./chat/Chat";
 import {useGame} from "../../contexts/GameContext";
 import Canvas from "./canvas/Canvas";
+import GameState from "./game-state/GameState";
 
 function Room() {
   const { roomId } = useParams();
@@ -44,13 +44,7 @@ function Room() {
   function onJoinedRoom(data: {players: Player[], roomId: string}) {
     joinRoom(data.players, data.roomId);
   }
-
-  function leave() {
-    socket.disconnect();
-    leaveRoom();
-    navigate('/');
-  }
-
+  
   useEffect(() => {
     if (socket.disconnected) socket.connect();
     if (!isInRoom()) {
@@ -59,18 +53,18 @@ function Room() {
     }
   }, []);
 
+  if (!isInRoom()) return null;
   return (
     <div className="Room">
-      {isInRoom() &&
-          <>
-            <h1>Room {roomId}</h1>
-            <Players />
-            <Chat />
-            <Canvas />
-            <button onClick={leave}>Leave Room</button>
-            {isInGame() ? <Game /> : <GameConfig />}
-          </>
-      }
+      <h1>Room {roomId}</h1>
+      <div>
+          <GameState />
+      </div>
+      <div className="middle">
+        <Players />
+        {isInGame() ? <Canvas /> : <GameConfig />}
+        <Chat />
+      </div>
     </div>
   );
 }

@@ -1,0 +1,12 @@
+.Players {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    padding: 5vh;
+    flex-flow: column;
+    overflow-y: auto;
+    background: white;
+    width: 10%;
+    height: 80%;
+}

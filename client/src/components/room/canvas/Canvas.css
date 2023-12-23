@@ -1,1 +1,40 @@
+.Canvas {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
+canvas {
+    cursor: none;
+    user-select: none;
+}
+
+#color-palette {
+    display: grid;
+    grid-template-columns: repeat(10, 0fr);
+    grid-gap: 0;
+    width: min-content;
+}
+
+#color-palette div {
+    width: 1em;
+    height: 1em;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+#draw-cursor {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 2px solid grey;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.DrawTools {
+    display: flex;
+    flex-direction: row;
+}

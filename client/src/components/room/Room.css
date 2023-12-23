@@ -1,1 +1,17 @@
+.Room {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 70vw;
+    height: 80vh;
+}
 
+.Room > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    margin: 1vh;
+}

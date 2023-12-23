@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import useSocketListeners from "../../../socket/listeners";
 import {Message} from "../../../domain/Message";
 import {socket} from "../../../socket/socket";
+import './Chat.css';
 
 function Chat() {
   const [messages, setMessages] = useState<Message[]>([]);

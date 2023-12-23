@@ -1,10 +1,10 @@
 import {useRoom} from "../../../contexts/RoomContext";
-
+import "./Players.css";
 
 function Players(){
   const {room} = useRoom();
   return (
-    <div className="players">
+    <div className="Players">
       <h2>Players</h2>
       <ul>
         {room?.players.map(player => (

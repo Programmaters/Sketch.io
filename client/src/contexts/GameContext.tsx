@@ -22,7 +22,8 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   const room = useRoom();
 
   function isInGame() {
-    return !!game;
+    // return !!game;
+    return true;
   }
 
   function startGame(g: Game) {

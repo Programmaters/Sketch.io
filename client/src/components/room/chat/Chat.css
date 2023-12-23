@@ -1,0 +1,11 @@
+.Chat {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    padding: 5vh;
+    background: white;
+    overflow-y: scroll;
+    width: 10%;
+    height: 80%;
+}
