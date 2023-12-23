@@ -7,9 +7,10 @@ import {Player} from "../../domain/Player";
 import {socket} from "../../socket/socket";
 import Game from "../game/Game";
 import GameConfig from "../game-config/GameConfig";
-import Players from "./components/players/Players";
-import Chat from "./components/chat/Chat";
+import Players from "./players/Players";
+import Chat from "./chat/Chat";
 import {useGame} from "../../contexts/GameContext";
+import Canvas from "./canvas/Canvas";
 
 function Room() {
   const { roomId } = useParams();
@@ -60,12 +61,15 @@ function Room() {
 
   return (
     <div className="Room">
-      <h1>Room {roomId}</h1>
-      <Players />
-      <Chat />
-      <button onClick={leave}>Leave Room</button>
       {isInRoom() &&
-        isInGame() ? <Game /> : <GameConfig />
+          <>
+            <h1>Room {roomId}</h1>
+            <Players />
+            <Chat />
+            <Canvas />
+            <button onClick={leave}>Leave Room</button>
+            {isInGame() ? <Game /> : <GameConfig />}
+          </>
       }
     </div>
   );

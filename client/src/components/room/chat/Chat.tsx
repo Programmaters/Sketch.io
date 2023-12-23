@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
-import useSocketListeners from "../../../../socket/listeners";
-import {Message} from "../../../../domain/Message";
-import {socket} from "../../../../socket/socket";
+import useSocketListeners from "../../../socket/listeners";
+import {Message} from "../../../domain/Message";
+import {socket} from "../../../socket/socket";
 
 function Chat() {
   const [messages, setMessages] = useState<Message[]>([]);

@@ -1,4 +1,4 @@
-import {useRoom} from "../../../../contexts/RoomContext";
+import {useRoom} from "../../../contexts/RoomContext";
 
 
 function Players(){

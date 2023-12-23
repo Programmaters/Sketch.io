@@ -1,6 +1,6 @@
-import {useRoom} from "../../../../contexts/RoomContext";
+import {useRoom} from "../../../contexts/RoomContext";
 import Chat from "../chat/Chat";
-import {useGame} from "../../../../contexts/GameContext";
+import {useGame} from "../../../contexts/GameContext";
 
 function GameState() {
   const {game} = useGame();
