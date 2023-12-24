@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import useSocketListeners from "../../../socket/listeners";
+import useSocketListeners from "../../../socket/useSocketListeners";
 import {Message} from "../../../domain/Message";
 import {socket} from "../../../socket/socket";
 import './Chat.css';

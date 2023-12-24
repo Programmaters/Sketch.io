@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import useSocketListeners from "../../socket/listeners";
+import useSocketListeners from "../../socket/useSocketListeners";
 import './Room.css';
 import {useNavigate, useParams} from "react-router-dom";
 import {useRoom} from "../../contexts/RoomContext";
@@ -10,12 +10,12 @@ import Players from "./players/Players";
 import Chat from "./chat/Chat";
 import {useGame} from "../../contexts/GameContext";
 import Canvas from "./canvas/Canvas";
-import GameState from "./game-state/GameState";
+import TopBar from "./top-bar/TopBar";
 
 function Room() {
   const { roomId } = useParams();
   const navigate = useNavigate();
-  const {joinRoom, leaveRoom, addPlayer, removePlayer, setRoomId, isInRoom} = useRoom();
+  const {joinRoom, addPlayer, removePlayer, setRoomId, isInRoom} = useRoom();
   const {isInGame} = useGame();
 
   function playerJoinedRoom(data: {player: Player}) {
@@ -57,10 +57,8 @@ function Room() {
   return (
     <div className="Room">
       <h1>Room {roomId}</h1>
-      <div>
-          <GameState />
-      </div>
-      <div className="middle">
+      <TopBar />
+      <div className="Game">
         <Players />
         {isInGame() ? <Canvas /> : <GameConfig />}
         <Chat />

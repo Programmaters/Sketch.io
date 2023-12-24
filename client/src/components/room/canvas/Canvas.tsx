@@ -2,10 +2,11 @@ import React, {useEffect, useRef, useState} from 'react';
 import p5 from 'p5';
 import Sketch from "react-p5";
 import {socket} from "../../../socket/socket";
-import DrawTools, {DrawMode, DrawOptions} from "./draw/DrawTools";
-import useSocketListeners from "../../../socket/listeners";
-import DrawCursor from "./draw/DrawCursor";
+import DrawTools, {DrawMode, DrawOptions} from "./components/DrawTools";
+import useSocketListeners from "../../../socket/useSocketListeners";
+import DrawCursor from "./components/DrawCursor";
 import './Canvas.css';
+import {useGame} from "../../../contexts/GameContext";
 
 type DrawData = { mode: DrawMode, x: number, y: number, px: number, py: number, color: string, size: number }
 
@@ -23,28 +24,26 @@ function Canvas() {
   const [isDrawing, setIsDrawing] = useState(true);
   const [absoluteX, setAbsoluteX] = useState(0);
   const [absoluteY, setAbsoluteY] = useState(0);
-
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const p5Ref = useRef<p5 | null>(null);
+  const {game, p5, setP5} = useGame();
 
   function setup(p5: p5, canvasParentRef: Element) {
     p5.createCanvas(WIDTH, HEIGHT).parent(canvasParentRef);
     p5.background(255);
     canvasRef.current = canvasParentRef as HTMLCanvasElement;
-    p5Ref.current = p5;
+    setP5(p5);
   }
 
   function handleMouseMove(e: p5) {
     setX(e.mouseX);
     setY(e.mouseY);
+    setPx(x)
+    setPy(y)
 
     const handleMouseIn = () => {
       setMouseInCanvas(true);
-      setPx(e.mouseX);
-      setPy(e.mouseY);
       updateAbsoluteCoordinates()
     };
-
     const handleMouseOut = () => {
       setMouseInCanvas(false);
     }
@@ -58,11 +57,11 @@ function Canvas() {
   function mouseDragged(e: p5) {
     // if(!drawMode) return
     // if (!mouseInCanvas || (!['draw', 'erase'].includes(drawMode))) return
-    setX(prev => prev + (e.mouseX - x) * EASING);
-    setY(prev => prev + (e.mouseY - y) * EASING);
-    drawAction()
+    setX(x + (e.mouseX - x) * EASING);
+    setY(y + (e.mouseY - y) * EASING);
     setPx(x)
     setPy(y)
+    drawAction()
     updateAbsoluteCoordinates()
     if (e.mouseX >= 0 && e.mouseX <= WIDTH && e.mouseY >= 0 && e.mouseY <= HEIGHT) {
       setMouseInCanvas(true);
@@ -71,42 +70,27 @@ function Canvas() {
     }
   }
 
-  function mousePressed(e: p5) {
-    setX(e.mouseX)
-    setY(e.mouseY)
-    setPx(e.mouseX)
-    setPy(e.mouseY)
-  }
-
-  function mouseReleased() {
-    // Your mouseReleased logic here
-  }
-
   function drawAction() {
-    const { mode, color, size } = drawOptions;
-    const data: DrawData = { mode, x, y, px, py, color, size }
-    socket.emit('drawingAction', data)
+    const data = { x, y, px, py, ...drawOptions }
     drawLine(data)
+    socket.emit('drawingAction', data)
   }
+
+  function mousePressed() {}
+  function mouseReleased() {}
 
   function drawLine(data: DrawData) {
-    const p5 = p5Ref.current!
-    p5.stroke(data.color)
-    p5.strokeWeight(data.size)
-    p5.line(data.x, data.y, data.px, data.py)
+    p5?.stroke(data.color)
+    p5?.strokeWeight(data.size)
+    p5?.line(data.x, data.y, data.px, data.py)
   }
 
-  function clearCanvas(p5: p5) {
-    p5.background(255)
-  }
-
-  function saveDraw() {
-    p5Ref.current!.saveCanvas('canvas', 'png')
+  function clearCanvas() {
+    p5?.background(255)
   }
 
   function onCanvasData(data: DrawData[]) {
-    const p5 = p5Ref.current!
-    clearCanvas(p5)
+    clearCanvas()
     data.forEach(drawLine)
   }
 
@@ -119,6 +103,7 @@ function Canvas() {
   const socketListeners = {
     'drawingAction': drawLine,
     'canvasData': onCanvasData,
+    'clearCanvas': clearCanvas,
   }
   useSocketListeners(socketListeners)
 
@@ -134,7 +119,14 @@ function Canvas() {
       {isDrawing &&
           <>
               <DrawCursor x={absoluteX} y = {absoluteY} options={drawOptions} enabled={mouseInCanvas}/>
-              <DrawTools drawOptions={drawOptions} setDrawOptions={setDrawOptions} saveDraw={saveDraw}/>
+              <DrawTools
+                  drawOptions={drawOptions}
+                  setDrawOptions={setDrawOptions}
+                  clearCanvas={() => {
+                    clearCanvas()
+                    socket.emit('clearCanvas')
+                  }}
+              />
           </>
       }
     </div>

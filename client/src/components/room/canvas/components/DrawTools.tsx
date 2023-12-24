@@ -17,10 +17,10 @@ export type DrawOptions = {
 type DrawToolsProps = {
   drawOptions: DrawOptions;
   setDrawOptions: (options: DrawOptions) => void;
-  saveDraw: () => void;
+  clearCanvas: () => void;
 };
 
-function DrawTools({ drawOptions, setDrawOptions, saveDraw }: DrawToolsProps) {
+function DrawTools({ drawOptions, setDrawOptions, clearCanvas }: DrawToolsProps) {
   return (
     <div className="DrawTools">
       <div id="color-palette">
@@ -36,7 +36,7 @@ function DrawTools({ drawOptions, setDrawOptions, saveDraw }: DrawToolsProps) {
         ))}
       </div>
       <button className="fa fa-eraser" onClick={() => setDrawOptions({ ...drawOptions, mode: 'erase' })}></button>
-      <button className="fa fa-trash" onClick={() => socket.emit('clearCanvas')}></button>
+      <button className="fa fa-trash" onClick={clearCanvas}></button>
       <button className="fa fa-undo" onClick={() => socket.emit('undo')}></button>
       <button className="fa fa-eye-dropper" onClick={() => setDrawOptions({ ...drawOptions, mode: 'picker' })}></button>
       <button className="fa fa-fill" onClick={() => setDrawOptions({ ...drawOptions, mode: 'fill' })}></button>
@@ -48,9 +48,6 @@ function DrawTools({ drawOptions, setDrawOptions, saveDraw }: DrawToolsProps) {
         value={drawOptions.size}
         onChange={(e) => setDrawOptions({ ...drawOptions, size: Number(e.target.value) })}
       />
-      {/*<button id="save-button" onClick={saveDraw}>Save</button>*/}
-      {/*<button id="hint-button" onClick={() => socket.emit('hint')}>Hint</button>*/}
-      {/*<button id="skip-button" onClick={() => socket.emit('skipTurn')}>Skip Turn</button>*/}
     </div>
   );
 }
