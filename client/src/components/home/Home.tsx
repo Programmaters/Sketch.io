@@ -1,15 +1,17 @@
 import React, {useEffect} from 'react';
 import './Home.css';
 import {socket} from "../../socket/socket";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useRoom} from "../../contexts/RoomContext";
 import {Player} from "../../domain/Player";
+import {useSession} from "../../contexts/SessionContext";
 
 function Home() {
   const navigate = useNavigate();
-  const [username, setUsername] = React.useState('');
+  const [username, setName] = React.useState('');
   const [roomId, setRoomId] = React.useState('');
   const { room, joinRoom } = useRoom();
+  const { setUsername } = useSession();
 
   function onCreateRoom() {
     socket.connect();
@@ -33,6 +35,7 @@ function Home() {
   }
 
   function onJoinedRoom(data: {players: Player[], roomId: string}) {
+    setUsername(username);
     joinRoom(data.players, data.roomId);
     navigate(`room/${data.roomId}`);
   }
@@ -42,21 +45,20 @@ function Home() {
       socket.off('joinedRoom', onJoinedRoom);
     }
   }, []);
+
   return (
     <div className="Home">
-      <h1>Home</h1>
-      <input type="text" placeholder="Enter Username" onChange={(e) => setUsername(e.target.value)}/>
-      {room === undefined &&
-        <>
-          <input type="text" placeholder="Enter Room Id" onChange={(e) => setRoomId(e.target.value)}/>
-          <button onClick={onCreateRoom}>
-              Create Room
-          </button>
-        </>
-      }
-      <button onClick={onJoinRoom}>
-        Join Room
-      </button>
+      <a href="/"><h1>Sketch.io</h1></a>
+      <div className="content">
+        <input type="text" placeholder="Enter your name" onChange={(e) => setName(e.target.value)}/>
+        <div className="actions">
+          {!room &&
+              <input type="text" placeholder="Enter room id to join" onChange={(e) => setRoomId(e.target.value)}/>
+          }
+          <button onClick={onJoinRoom}>Join</button>
+          {!room && <button onClick={onCreateRoom}>Create</button>}
+        </div>
+      </div>
     </div>
   );
 }

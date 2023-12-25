@@ -3,10 +3,29 @@
     flex-direction: column;
     justify-content: start;
     align-items: start;
-    padding: 5vh;
     flex-flow: column;
     overflow-y: auto;
     background: white;
-    width: 10%;
-    height: 80%;
 }
+
+.Players ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    font-size: 2vh;
+}
+
+.Players li {
+    background: var(--secondary-color);
+    width: 80%;
+    padding: 1vh;
+    border-radius: 10px;
+    color: white;
+    margin: 1vh;
+}
+

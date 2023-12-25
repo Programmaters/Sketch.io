@@ -1,1 +1,36 @@
 
+.Home {
+
+}
+
+.Home > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10vh;
+    background: var(--secondary-color);
+    border-radius: 15px;
+    gap: 5vh;
+}
+
+.Home .actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+}
+
+.Home .actions > * {
+    margin: 0;
+    border-radius: 5px;
+}
+
+.Home .actions button {
+    margin-right: 2vh;
+}
+
+.Home a {
+    color: var(--primary-color);
+}

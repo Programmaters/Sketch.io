@@ -3,10 +3,12 @@ import useSocketListeners from "../../../socket/useSocketListeners";
 import {Message} from "../../../domain/Message";
 import {socket} from "../../../socket/socket";
 import './Chat.css';
+import {useSession} from "../../../contexts/SessionContext";
 
 function Chat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [message, setMessage] = useState('');
+  const {username} = useSession();
 
   function onMessage(msg: Message) {
     setMessages(prevMessages => [...prevMessages, msg])
@@ -40,17 +42,22 @@ function Chat() {
 
   return (
     <div className="Chat">
-      <h2>Chat</h2>
       <ul>
+        <li>
+          {username} is now the room owner!
+        </li>
+        <li>
+          <strong>{username}: </strong>Hello everyone!
+        </li>
         {messages.map((message, index) => (
           <li key={index}>
-            {message.sender}: {message.text}
+            <strong>{message.sender}: </strong> {message.text}
           </li>
         ))}
       </ul>
       <input
         type="text"
-        placeholder="Type your guess here"
+        placeholder="Type your guess here..."
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />

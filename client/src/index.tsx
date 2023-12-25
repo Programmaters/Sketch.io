@@ -4,14 +4,17 @@ import './index.css';
 import App from './components/app/App';
 import {RoomProvider} from "./contexts/RoomContext";
 import {GameProvider} from "./contexts/GameContext";
+import {SessionProvider} from "./contexts/SessionContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <RoomProvider>
-    <GameProvider>
-      <App />
-    </GameProvider>
-  </RoomProvider>
+  <SessionProvider>
+    <RoomProvider>
+      <GameProvider>
+        <App />
+      </GameProvider>
+    </RoomProvider>
+  </SessionProvider>
 );

@@ -5,7 +5,6 @@ function Players(){
   const {room} = useRoom();
   return (
     <div className="Players">
-      <h2>Players</h2>
       <ul>
         {room?.players.map(player => (
           <li key={player.id}>

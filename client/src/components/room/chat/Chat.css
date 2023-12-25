@@ -3,9 +3,31 @@
     flex-direction: column;
     justify-content: start;
     align-items: start;
-    padding: 5vh;
     background: white;
     overflow-y: scroll;
-    width: 10%;
-    height: 80%;
+    position: relative;
+}
+
+.Chat input {
+    width: 80%;
+    position: absolute;
+    bottom: 0;
+    font-size: 1.8vh;
+}
+
+.Chat ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    margin: 1vh 0 0;
+    width: 90%;
+}
+
+.Chat li {
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.Chat {
+    font-size: 1.8vh;
 }
