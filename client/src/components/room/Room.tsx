@@ -1,24 +1,19 @@
 import React, {useEffect} from 'react';
 import useSocketListeners from "../../socket/useSocketListeners";
-import './Room.css';
 import {useNavigate, useParams} from "react-router-dom";
 import {useRoom} from "../../contexts/RoomContext";
-import {Player} from "../../domain/Player";
+import {PlayerType} from "../../domain/PlayerType";
 import {socket} from "../../socket/socket";
-import GameConfig from "../game-config/GameConfig";
-import Players from "./players/Players";
-import Chat from "./chat/Chat";
-import {useGame} from "../../contexts/GameContext";
-import Canvas from "./canvas/Canvas";
 import TopBar from "./top-bar/TopBar";
+import Game from "../game/Game";
+import './Room.css';
 
 function Room() {
   const { roomId } = useParams();
   const navigate = useNavigate();
   const {joinRoom, addPlayer, removePlayer, setRoomId, isInRoom} = useRoom();
-  const {isInGame} = useGame();
 
-  function playerJoinedRoom(data: {player: Player}) {
+  function playerJoinedRoom(data: {player: PlayerType}) {
     addPlayer(data.player);
   }
 
@@ -41,8 +36,13 @@ function Room() {
   };
   useSocketListeners(eventHandlers);
 
-  function onJoinedRoom(data: {players: Player[], roomId: string}) {
+  function onJoinedRoom(data: {players: PlayerType[], roomId: string}) {
     joinRoom(data.players, data.roomId);
+  }
+
+  async function copyRoomLink() {
+    await navigator.clipboard.writeText(window.location.href)
+    alert('Copied room link to clipboard!');
   }
   
   useEffect(() => {
@@ -56,13 +56,15 @@ function Room() {
   if (!isInRoom()) return null;
   return (
     <div className="Room">
-      <h1>Room {roomId}</h1>
-      <TopBar />
-      <div className="Game">
-        <Players />
-        {isInGame() ? <Canvas /> : <GameConfig />}
-        <Chat />
+      <div className="title">
+        <a href="/"><h1>Sketch.io</h1></a>
+        <div>
+          <h1>Room {roomId}</h1>
+          <button className="fa fa-copy" onClick={copyRoomLink}></button>
+        </div>
       </div>
+      <TopBar />
+      <Game />
     </div>
   );
 }

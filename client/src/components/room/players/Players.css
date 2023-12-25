@@ -1,11 +1,5 @@
 .Players {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: start;
-    flex-flow: column;
     overflow-y: auto;
-    background: white;
 }
 
 .Players ul {
@@ -26,6 +20,6 @@
     padding: 1vh;
     border-radius: 10px;
     color: white;
-    margin: 1vh;
+    margin: 0.5vh 0;
 }
 

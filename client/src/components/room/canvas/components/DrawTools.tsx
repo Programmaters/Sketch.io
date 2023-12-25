@@ -6,7 +6,7 @@ const colors = [
   'lightgrey', 'black', 'darkred', 'darkorange', 'gold', 'green', 'blue', 'purple', 'pink', 'brown'
 ]
 
-export type DrawMode = 'draw' | 'erase' | 'picker' | 'fill' | null;
+export type DrawMode = 'draw' | 'picker' | 'fill' | null;
 
 export type DrawOptions = {
   color: string;
@@ -35,7 +35,6 @@ function DrawTools({ drawOptions, setDrawOptions, clearCanvas }: DrawToolsProps)
           ></div>
         ))}
       </div>
-      <button className="fa fa-eraser" onClick={() => setDrawOptions({ ...drawOptions, mode: 'erase' })}></button>
       <button className="fa fa-trash" onClick={clearCanvas}></button>
       <button className="fa fa-undo" onClick={() => socket.emit('undo')}></button>
       <button className="fa fa-eye-dropper" onClick={() => setDrawOptions({ ...drawOptions, mode: 'picker' })}></button>

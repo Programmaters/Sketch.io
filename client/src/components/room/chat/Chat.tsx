@@ -1,16 +1,16 @@
 import {useEffect, useState} from "react";
 import useSocketListeners from "../../../socket/useSocketListeners";
-import {Message} from "../../../domain/Message";
+import {MessageType} from "../../../domain/MessageType";
 import {socket} from "../../../socket/socket";
 import './Chat.css';
 import {useSession} from "../../../contexts/SessionContext";
 
 function Chat() {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<MessageType[]>([]);
   const [message, setMessage] = useState('');
-  const {username} = useSession();
+  const {session} = useSession();
 
-  function onMessage(msg: Message) {
+  function onMessage(msg: MessageType) {
     setMessages(prevMessages => [...prevMessages, msg])
   }
 
@@ -44,10 +44,7 @@ function Chat() {
     <div className="Chat">
       <ul>
         <li>
-          {username} is now the room owner!
-        </li>
-        <li>
-          <strong>{username}: </strong>Hello everyone!
+          {session!.name} is now the room owner!
         </li>
         {messages.map((message, index) => (
           <li key={index}>

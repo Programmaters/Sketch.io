@@ -31,6 +31,7 @@
     margin-right: 2vh;
 }
 
-.Home a {
-    color: var(--primary-color);
+.Home .actions input {
+    width: 20%;
 }
+

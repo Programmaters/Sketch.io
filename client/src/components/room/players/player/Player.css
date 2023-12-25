@@ -1,0 +1,23 @@
+
+.Player {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 5vh;
+}
+
+.Player > p {
+    position: absolute;
+    left: 0;
+    padding: 1vh;
+}
+
+.Player div > p {
+    margin: 0;
+}
+
+.Player div > p:last-child {
+    font-size: smaller;
+}

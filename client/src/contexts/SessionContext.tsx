@@ -1,20 +1,23 @@
 import * as React from 'react';
 import { useState, createContext, useContext } from 'react';
+import {PlayerType} from "../domain/PlayerType";
+
+type SessionType = PlayerType;
 
 type SessionContextType = {
-  username: string,
-  setUsername: (username: string) => void,
+  session?: SessionType,
+  setSession: (session: SessionType) => void,
 };
 
 const SessionContext = createContext<SessionContextType>({
-  username: '',
-  setUsername: () => {},
+  session: undefined,
+  setSession: () => {},
 });
 
 export function SessionProvider({ children }: { children: React.ReactNode }) {
-  const [username, setUsername] = useState<string>('');
+  const [session, setSession] = useState<SessionType>();
   return (
-    <SessionContext.Provider value={{username, setUsername}}>
+    <SessionContext.Provider value={{session, setSession}}>
       {children}
     </SessionContext.Provider>
   );

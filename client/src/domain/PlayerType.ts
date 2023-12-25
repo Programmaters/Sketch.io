@@ -1,5 +1,5 @@
 
-export type Player = {
+export type PlayerType = {
   name: string;
   id: string;
 };

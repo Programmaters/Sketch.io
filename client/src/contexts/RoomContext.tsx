@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { useState, createContext, useContext } from 'react';
-import {Player} from "../domain/Player";
-import {Room} from "../domain/Room";
+import {PlayerType} from "../domain/PlayerType";
+import {RoomType} from "../domain/RoomType";
 
 type RoomContextType = {
-  room: Room | undefined,
-  joinRoom: (players: Player[], roomId: string) => void,
+  room: RoomType | undefined,
+  joinRoom: (players: PlayerType[], roomId: string) => void,
   leaveRoom: () => void,
-  addPlayer: (player: Player) => void,
+  addPlayer: (player: PlayerType) => void,
   removePlayer: (playerId: string) => void,
   setRoomId: (id?: string) => void,
   isInRoom: () => boolean,
@@ -24,9 +24,9 @@ const RoomContext = createContext<RoomContextType>({
 });
 
 export function RoomProvider({ children }: { children: React.ReactNode }) {
-  const [room, setRoom] = useState<Room>()
+  const [room, setRoom] = useState<RoomType>()
 
-  function joinRoom(players: Player[], id: string) {
+  function joinRoom(players: PlayerType[], id: string) {
     setRoom({id, players});
   }
 
@@ -34,7 +34,7 @@ export function RoomProvider({ children }: { children: React.ReactNode }) {
     setRoom(undefined);
   }
 
-  function addPlayer(player: Player) {
+  function addPlayer(player: PlayerType) {
     if (!room) throw new Error('Player not in room');
     const players =  [...room.players, player]
     setRoom({...room, players});

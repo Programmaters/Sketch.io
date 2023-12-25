@@ -1,13 +1,13 @@
 import * as React from 'react';
 import p5 from 'p5';
 import { useState, createContext, useContext } from 'react';
-import {Game} from "../domain/Game";
+import {GameType} from "../domain/GameType";
 import {useRoom} from "./RoomContext";
 
 type GameContextType = {
-  game: Game | undefined,
+  game: GameType | undefined,
   isInGame: () => boolean,
-  startGame: (game: Game) => void,
+  startGame: (game: GameType) => void,
   p5: p5 | null,
   setP5: (p5: p5) => void,
 };
@@ -21,7 +21,7 @@ const GameContext = createContext<GameContextType>({
 });
 
 export function GameProvider({ children }: { children: React.ReactNode }) {
-  const [game, setGame] = useState<Game>()
+  const [game, setGame] = useState<GameType>()
   const [p5, setP5] = useState<p5 | null>(null);
   const room = useRoom();
 
@@ -30,7 +30,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     return true;
   }
 
-  function startGame(g: Game) {
+  function startGame(g: GameType) {
     if (!room) throw new Error('Room is undefined');
     setGame(g);
   }

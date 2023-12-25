@@ -3,11 +3,29 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 60%;
+    height: 100%;
+    padding: 1vh;
 }
 
-canvas {
+.Canvas canvas {
     cursor: none;
     user-select: none;
+    border-radius: 10px;
+}
+
+.Canvas button {
+    width: 0;
+    height: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2vh;
+}
+
+.Canvas input {
+    width: 50%;
+    outline: none;
 }
 
 #color-palette {
@@ -25,11 +43,8 @@ canvas {
     cursor: pointer;
 }
 
-#draw-cursor {
+.DrawCursor {
     position: absolute;
-    width: 10px;
-    height: 10px;
-    border: 2px solid grey;
     border-radius: 50%;
     pointer-events: none;
 }
@@ -37,4 +52,8 @@ canvas {
 .DrawTools {
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 500px;
+    border-radius: 15px;
 }

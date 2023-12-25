@@ -23,6 +23,7 @@ body {
 
 h1 {
   color: white;
+  margin: 0;
 }
 
 input {
@@ -57,6 +58,11 @@ li {
   list-style: none;
 }
 
+a {
+  color: var(--primary-color);
+}
+
+
 ::-webkit-scrollbar-thumb {
   border-radius: 15px;
   background-color: var(--secondary-color);
@@ -69,5 +75,9 @@ li {
 ::-webkit-scrollbar {
   width: 1.5vh;
   border-radius: 15px;
-  background-color: var(--background-color);
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+::selection {
+  background-color: var(--primary-color);
 }

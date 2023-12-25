@@ -1,5 +1,5 @@
 
-export type Message = {
+export type MessageType = {
   text: string,
   sender: string
 }

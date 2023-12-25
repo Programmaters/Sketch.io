@@ -1,17 +1,14 @@
 .Chat {
     display: flex;
     flex-direction: column;
-    justify-content: start;
-    align-items: start;
     background: white;
-    overflow-y: scroll;
     position: relative;
+    padding: 1vh;
+    border-radius: 5px;
 }
 
 .Chat input {
     width: 80%;
-    position: absolute;
-    bottom: 0;
     font-size: 1.8vh;
 }
 
@@ -21,6 +18,8 @@
     text-align: left;
     margin: 1vh 0 0;
     width: 90%;
+    overflow-y: scroll;
+    height: 100%;
 }
 
 .Chat li {

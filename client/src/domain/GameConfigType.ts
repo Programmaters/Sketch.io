@@ -1,5 +1,5 @@
 
-export type GameConfig = {
+export type GameConfigType = {
   maxPlayers: number,
   language: string,
   drawTime: number,

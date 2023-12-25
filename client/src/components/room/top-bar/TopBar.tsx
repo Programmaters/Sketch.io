@@ -6,10 +6,10 @@ import "./TopBar.css";
 function TopBar() {
   const {game, p5} = useGame();
   return (
-    <div className="GameState">
+    <div className="TopBar">
       <p>Time: 0 seconds</p>
-      <p>Round {game?.round}</p>
-      <p>Draw this: _____</p>
+      <p>Round: 1</p>
+      <p>Draw this: _ _ _ _ _</p>
       <button onClick={() => socket.emit('skipTurn')}>Skip Turn</button>
       <button onClick={() => socket.emit('hint')}>Hint</button>
       <button onClick={() => p5?.saveCanvas('canvas', 'png')}>Save</button>

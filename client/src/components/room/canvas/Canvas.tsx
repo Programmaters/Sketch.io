@@ -10,8 +10,8 @@ import {useGame} from "../../../contexts/GameContext";
 
 type DrawData = { mode: DrawMode, x: number, y: number, px: number, py: number, color: string, size: number }
 
-const WIDTH = 500
-const HEIGHT = 350
+const WIDTH = 600
+const HEIGHT = 400
 const EASING = 0.3
 
 function Canvas() {
@@ -25,7 +25,7 @@ function Canvas() {
   const [absoluteX, setAbsoluteX] = useState(0);
   const [absoluteY, setAbsoluteY] = useState(0);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const {game, p5, setP5} = useGame();
+  const {p5, setP5} = useGame();
 
   function setup(p5: p5, canvasParentRef: Element) {
     p5.createCanvas(WIDTH, HEIGHT).parent(canvasParentRef);
@@ -80,6 +80,7 @@ function Canvas() {
   function mouseReleased() {}
 
   function drawLine(data: DrawData) {
+    console.log('drawing line')
     p5?.stroke(data.color)
     p5?.strokeWeight(data.size)
     p5?.line(data.x, data.y, data.px, data.py)

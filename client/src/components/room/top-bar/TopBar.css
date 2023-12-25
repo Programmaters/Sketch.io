@@ -1,9 +1,12 @@
-.GameState {
+.TopBar {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    width: 100%;
-    background: white;
-    grid-area: bar;
+    background: var(--secondary-color);
+    margin: 1vh!important;
+    padding: 0!important;
+    border-radius: 10px;
 }
+
+

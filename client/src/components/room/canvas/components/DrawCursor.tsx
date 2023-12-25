@@ -13,14 +13,11 @@ function DrawCursor({x, y, options, enabled}: DrawCursorProps) {
     <div
       className="DrawCursor"
       style={{
-        position: 'absolute',
         top: y - options.size / 2,
         left: x - options.size / 2,
         width: options.size,
         height: options.size,
         backgroundColor: options.color,
-        borderRadius: options.mode === 'erase' ? '0%' : '50%',
-        pointerEvents: 'none',
       }}
     />
   );
