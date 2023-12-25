@@ -26,16 +26,16 @@
 .Canvas input {
     width: 50%;
     outline: none;
+    padding: 0;
 }
 
-#color-palette {
+.Canvas .ColorPalette {
     display: grid;
     grid-template-columns: repeat(10, 0fr);
     grid-gap: 0;
-    width: min-content;
 }
 
-#color-palette div {
+.Canvas .ColorPalette div {
     width: 1em;
     height: 1em;
     margin: 0;
@@ -43,13 +43,14 @@
     cursor: pointer;
 }
 
-.DrawCursor {
+.Canvas .DrawCursor {
     position: absolute;
     border-radius: 50%;
     pointer-events: none;
+    font-size: 15px;
 }
 
-.DrawTools {
+.Canvas .DrawTools {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;

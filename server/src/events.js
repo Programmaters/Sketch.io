@@ -20,6 +20,7 @@ function onJoinRoom(conn, data) {
     room.join(conn.socket, data.username)
     conn.socket.emit('joinedRoom', { roomId: room.id, playerId: conn.socket.id, players: room.getPlayers() })
     conn.socket.emit('updateSettings', room.settings )
+    conn.socket.emit('canvasData', room.game.canvas.getData())
     conn.socket.broadcast.to(room.id).emit('playerJoinedRoom', { player: { name: data.username, id: conn.socket.id } } )
 }
 

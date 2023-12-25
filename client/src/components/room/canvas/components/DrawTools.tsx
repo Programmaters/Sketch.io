@@ -6,7 +6,7 @@ const colors = [
   'lightgrey', 'black', 'darkred', 'darkorange', 'gold', 'green', 'blue', 'purple', 'pink', 'brown'
 ]
 
-export type DrawMode = 'draw' | 'picker' | 'fill' | null;
+export type DrawMode = 'draw' | 'picker' | 'fill';
 
 export type DrawOptions = {
   color: string;
@@ -23,7 +23,7 @@ type DrawToolsProps = {
 function DrawTools({ drawOptions, setDrawOptions, clearCanvas }: DrawToolsProps) {
   return (
     <div className="DrawTools">
-      <div id="color-palette">
+      <div className="ColorPalette">
         {colors.map(color => (
           <div
             key={color}
@@ -43,7 +43,7 @@ function DrawTools({ drawOptions, setDrawOptions, clearCanvas }: DrawToolsProps)
         id="brush-size"
         type="range"
         min="1"
-        max="100"
+        max="50"
         value={drawOptions.size}
         onChange={(e) => setDrawOptions({ ...drawOptions, size: Number(e.target.value) })}
       />

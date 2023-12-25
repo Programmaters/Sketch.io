@@ -4,7 +4,7 @@ import React from "react";
 import "./TopBar.css";
 
 function TopBar() {
-  const {game, p5} = useGame();
+  const {game} = useGame();
   return (
     <div className="TopBar">
       <p>Time: 0 seconds</p>
@@ -12,9 +12,9 @@ function TopBar() {
       <p>Draw this: _ _ _ _ _</p>
       <button onClick={() => socket.emit('skipTurn')}>Skip Turn</button>
       <button onClick={() => socket.emit('hint')}>Hint</button>
-      <button onClick={() => p5?.saveCanvas('canvas', 'png')}>Save</button>
+      <button id="save-button">Save</button>
     </div>
   )
 }
-
+//  p5?.saveCanvas('canvas', 'png')
 export default TopBar;

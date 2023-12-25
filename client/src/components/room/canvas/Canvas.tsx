@@ -5,8 +5,8 @@ import {socket} from "../../../socket/socket";
 import DrawTools, {DrawMode, DrawOptions} from "./components/DrawTools";
 import useSocketListeners from "../../../socket/useSocketListeners";
 import DrawCursor from "./components/DrawCursor";
+import floodFill from "./floodfill";
 import './Canvas.css';
-import {useGame} from "../../../contexts/GameContext";
 
 type DrawData = { mode: DrawMode, x: number, y: number, px: number, py: number, color: string, size: number }
 
@@ -25,13 +25,17 @@ function Canvas() {
   const [absoluteX, setAbsoluteX] = useState(0);
   const [absoluteY, setAbsoluteY] = useState(0);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const {p5, setP5} = useGame();
+  const p5Ref = useRef<p5 | null>(null);
 
   function setup(p5: p5, canvasParentRef: Element) {
     p5.createCanvas(WIDTH, HEIGHT).parent(canvasParentRef);
+    p5.pixelDensity(1);
     p5.background(255);
     canvasRef.current = canvasParentRef as HTMLCanvasElement;
-    setP5(p5);
+    p5Ref.current = p5;
+    document.getElementById('save-button')!.onclick = () => {
+      p5.saveCanvas('canvas', 'png')
+    }
   }
 
   function handleMouseMove(e: p5) {
@@ -47,7 +51,7 @@ function Canvas() {
     const handleMouseOut = () => {
       setMouseInCanvas(false);
     }
-    if (e.mouseX >= 0 && e.mouseX <= WIDTH! && e.mouseY >= 0 && e.mouseY <= HEIGHT) {
+    if (e.mouseX >= 0 && e.mouseX <= WIDTH && e.mouseY >= 0 && e.mouseY <= HEIGHT) {
       handleMouseIn();
     } else {
       handleMouseOut();
@@ -55,8 +59,7 @@ function Canvas() {
   }
 
   function mouseDragged(e: p5) {
-    // if(!drawMode) return
-    // if (!mouseInCanvas || (!['draw', 'erase'].includes(drawMode))) return
+    if (drawOptions.mode !== 'draw') return
     setX(x + (e.mouseX - x) * EASING);
     setY(y + (e.mouseY - y) * EASING);
     setPx(x)
@@ -76,23 +79,54 @@ function Canvas() {
     socket.emit('drawingAction', data)
   }
 
-  function mousePressed() {}
-  function mouseReleased() {}
+  function mousePressed(e: p5) {
+    if (!mouseInCanvas) return
+    switch (drawOptions.mode) {
+      case 'draw':
+        drawAction()
+        break
+      case 'picker':
+        const color = `rgba(${p5Ref.current!.get(x, y)})`
+        setDrawOptions({ ...drawOptions, color, mode: 'draw' })
+        break
+      case 'fill':
+        const data = { mode: 'fill', x, y, color: drawOptions.color }
+        floodFill(p5Ref.current!, x, y, drawOptions.color, WIDTH, HEIGHT)
+        socket.emit('drawingAction', data)
+        break
+    }
+  }
+  function mouseReleased() {
+    if (mouseInCanvas) {
+      socket.emit('mouseReleased')
+    }
+  }
 
   function drawLine(data: DrawData) {
-    console.log('drawing line')
-    p5?.stroke(data.color)
-    p5?.strokeWeight(data.size)
-    p5?.line(data.x, data.y, data.px, data.py)
+    p5Ref.current!.stroke(data.color)
+    p5Ref.current!.strokeWeight(data.size)
+    p5Ref.current!.line(data.x, data.y, data.px, data.py)
   }
 
   function clearCanvas() {
-    p5?.background(255)
+    p5Ref.current!.background(255)
+  }
+
+  function onDrawingAction(data: DrawData) {
+    switch (data.mode) {
+      case 'draw':
+        drawLine(data)
+        break
+      case 'fill':
+        const {x, y, color} = data
+        floodFill(p5Ref.current!, x, y, color, WIDTH, HEIGHT)
+        break
+    }
   }
 
   function onCanvasData(data: DrawData[]) {
     clearCanvas()
-    data.forEach(drawLine)
+    data.forEach(onDrawingAction)
   }
 
   function updateAbsoluteCoordinates() {
@@ -102,7 +136,7 @@ function Canvas() {
   }
 
   const socketListeners = {
-    'drawingAction': drawLine,
+    'drawingAction': onDrawingAction,
     'canvasData': onCanvasData,
     'clearCanvas': clearCanvas,
   }
@@ -119,7 +153,7 @@ function Canvas() {
       />
       {isDrawing &&
           <>
-              <DrawCursor x={absoluteX} y = {absoluteY} options={drawOptions} enabled={mouseInCanvas}/>
+              <DrawCursor x={absoluteX} y={absoluteY} options={drawOptions} enabled={mouseInCanvas}/>
               <DrawTools
                   drawOptions={drawOptions}
                   setDrawOptions={setDrawOptions}

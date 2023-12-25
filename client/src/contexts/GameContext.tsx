@@ -8,21 +8,16 @@ type GameContextType = {
   game: GameType | undefined,
   isInGame: () => boolean,
   startGame: (game: GameType) => void,
-  p5: p5 | null,
-  setP5: (p5: p5) => void,
 };
 
 const GameContext = createContext<GameContextType>({
   game: undefined,
   isInGame: () => false,
   startGame: () => {},
-  p5: null,
-  setP5: () => {},
 });
 
 export function GameProvider({ children }: { children: React.ReactNode }) {
   const [game, setGame] = useState<GameType>()
-  const [p5, setP5] = useState<p5 | null>(null);
   const room = useRoom();
 
   function isInGame() {
@@ -36,7 +31,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <GameContext.Provider value={{game, isInGame, startGame, p5, setP5}}>
+    <GameContext.Provider value={{game, isInGame, startGame}}>
       {children}
     </GameContext.Provider>
   );

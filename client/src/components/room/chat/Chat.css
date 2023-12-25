@@ -10,6 +10,7 @@
 .Chat input {
     width: 80%;
     font-size: 1.8vh;
+    outline-color: var(--secondary-color);
 }
 
 .Chat ul {
