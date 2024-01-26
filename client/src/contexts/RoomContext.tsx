@@ -1,65 +1,61 @@
 import * as React from 'react';
-import { useState, createContext, useContext } from 'react';
+import {useState, createContext, useContext} from 'react';
 import {PlayerType} from "../domain/PlayerType";
-import {RoomType} from "../domain/RoomType";
+import useSocketListeners from "../socket/useSocketListeners";
 
 type RoomContextType = {
-  room: RoomType | undefined,
+  roomId?: string,
+  players: PlayerType[],
+  isInRoom: boolean,
   joinRoom: (players: PlayerType[], roomId: string) => void,
   leaveRoom: () => void,
-  addPlayer: (player: PlayerType) => void,
-  removePlayer: (playerId: string) => void,
   setRoomId: (id?: string) => void,
-  isInRoom: () => boolean,
   isHost: boolean,
 };
 
 const RoomContext = createContext<RoomContextType>({
-  room: undefined,
+  roomId: undefined,
+  players: [],
+  isInRoom: false,
   joinRoom: () => {},
   leaveRoom: () => {},
-  addPlayer: () => {},
-  removePlayer: () => {},
   setRoomId: () => {},
-  isInRoom: () => false,
   isHost: false,
 });
 
 export function RoomProvider({ children }: { children: React.ReactNode }) {
-  const [room, setRoom] = useState<RoomType>()
+  const [isInRoom, setIsInRoom] = useState(false);
+  const [roomId, setRoomId] = useState<string>();
+  const [players, setPlayers] = useState<PlayerType[]>([]);
   const [isHost, setIsHost] = useState(false);
 
   function joinRoom(players: PlayerType[], id: string) {
-    setRoom({id, players});
+    setIsInRoom(true);
+    setRoomId(id);
+    setPlayers(players);
     if (players.length === 1) setIsHost(true)
   }
 
   function leaveRoom() {
-    setRoom(undefined);
+    setRoomId(undefined);
+    setIsInRoom(false);
   }
 
-  function addPlayer(player: PlayerType) {
-    if (!room) throw new Error('Player not in room');
-    const players =  [...room.players, player]
-    setRoom({...room, players});
+  function playerJoinedRoom({player}: {player: PlayerType}) {
+    setPlayers(players => [...players, player])
   }
 
-  function removePlayer(playerId: string) {
-    if (!room) throw new Error('Player not in room');
-    const players = room.players.filter(player => player.id !== playerId);
-    setRoom({...room, players});
+  function playerLeftRoom({playerId}: {playerId: string}) {
+    setPlayers(players => players.filter(player => player.id !== playerId))
   }
 
-  function setRoomId(id?: string) {
-    setRoom({id, players: room?.players || []});
-  }
-
-  function isInRoom() {
-    return !!room;
-  }
+  useSocketListeners({
+    'playerJoinedRoom': playerJoinedRoom,
+    'playerLeftRoom': playerLeftRoom,
+  });
 
   return (
-    <RoomContext.Provider value={{room, joinRoom, leaveRoom, addPlayer, removePlayer, setRoomId, isInRoom, isHost}}>
+    <RoomContext.Provider value={{roomId, players, isInRoom, joinRoom, leaveRoom, setRoomId, isHost}}>
       {children}
     </RoomContext.Provider>
   );

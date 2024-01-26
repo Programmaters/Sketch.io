@@ -1,7 +1,7 @@
 import { Room } from './room.js'
 import { Game } from './game.js'
 import { Canvas } from './canvas.js'
-import {getRandomId, getRoom, addRoom, wordHint} from './utils.js'
+import {getRandomId, getRoom, addRoom, hideWord} from './utils.js'
 
 /* Game Events */
 function onCreateRoom(conn, data) {
@@ -21,11 +21,10 @@ function onJoinRoom(conn, data) {
     conn.socket.emit('joinedRoom', { roomId: room.id, playerId: conn.socket.id, players: room.getPlayers(), config: room.gameConfig })
     conn.socket.emit('canvasData', room.game.canvas.getData())
     conn.socket.broadcast.to(room.id).emit('playerJoinedRoom', { player: { name: data.username, id: conn.socket.id } } )
-    const game = room.game
-    if (game.running) {
+    if (room.game.running) {
         conn.socket.emit('gameStarted')
-        conn.socket.emit('guessTurn', { word: wordHint(game.currentWord), round: game.round })
-        conn.socket.emit('canvasData', game.canvas.getData())
+        conn.socket.emit('guessTurn', { word: hideWord(room.game.currentWord), round: room.game.round })
+        conn.socket.emit('canvasData', room.game.canvas.getData())
     }
 }
 

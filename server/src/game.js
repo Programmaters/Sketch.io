@@ -1,4 +1,4 @@
-import { getRandomWords, getRandomChars, getCloseness, wordHint, getHint } from './utils.js'
+import {getRandomWords, getCloseness, hideWord, getHint} from './utils.js'
 import { readFile } from 'node:fs/promises'
 
 const closeThreshold = 0.75
@@ -17,10 +17,8 @@ async function loadGameConfig() {
  */
 export class Game {
     currentWord = null
-    hintCounter = 0
     round = 1
-    hints = null
-    hintsToShow = null
+    hint = ''
     drawer = null
     controller = null
     timeRef = null
@@ -47,8 +45,9 @@ export class Game {
                 console.log(`Round ${round} | Player ${player}`)
                 await this.play(player, round)
             }
+            this.endRound()
         }
-        this.socket.broadcast.to(this.roomId).emit('gameEnded')
+        this.endGame()
     }
 
     /**
@@ -63,40 +62,37 @@ export class Game {
         drawer.guessed = true
         drawer.drawer = true
         this.drawer = drawer
-
         this.currentWord = getRandomWords(1, this.gameConfig.language)[0]
-        this.hints = getRandomChars(this.currentWord, this.gameConfig.hints)
-        this.hintsToShow = null
         this.timeRef = new Date()
 
         drawer.socket.emit('drawTurn', { word: this.currentWord, round: roundNumber })
-        drawer.socket.broadcast.to(this.roomId).emit('guessTurn', { word: wordHint(this.currentWord), round: roundNumber })
+        drawer.socket.broadcast.to(this.roomId).emit('guessTurn', { word: hideWord(this.currentWord), round: roundNumber })
     
         try {
             await this.setCancellableTimeout(this.gameConfig.drawTime)
         } catch {}
         
         this.endTurn()
-
         await this.setTimeout(5) // wait for 5 seconds before starting new turn
     }
 
     onMessage(player, message) {
         const guessWord = message.toLowerCase().trim()
-        if (guessWord === '') return false
+        if (guessWord === '' || this.drawer.id === player.id) return false
 
         const currentWord = this.currentWord.toLowerCase()
         if (guessWord === currentWord) {
             if (!player.guessed) {
-                player.socket.emit('correctGuess', { text: `You guessed it right!`, word: this.currentWord })
-                player.socket.broadcast.emit('playerGuessed', { text: `${player.name} has guessed the word!` })
-                
+
                 // update player scores 
                 const timeLeft = parseInt(this.gameConfig.drawTime - (new Date() - this.timeRef) / 1000)
                 const answerTime = this.gameConfig.drawTime - timeLeft
                 this.drawer.score += parseInt(answerTime / (this.hintCounter + 1))
                 player.score += answerTime * this.players.length
                 player.guessed = true
+
+                player.socket.emit('correctGuess', { text: `You guessed it right!`, word: this.currentWord })
+                player.socket.broadcast.emit('playerGuessed', { player: { name: player.name, id: player.id}, score: player.score})
     
                 // if everyone guessed, end turn
                 if (this.players.every(player => player.guessed)) {
@@ -117,8 +113,12 @@ export class Game {
      * Sends a hint to all guessers in the room
      */
     sendHint() {
-        let hint = getHint(this)
-        this.drawer.socket.broadcast.to(this.roomId).emit('showHint', hint)
+        const hintsGiven = this.hint.split('').filter(letter => letter !== '_' && letter !== ' ').length
+        if (hintsGiven >= this.gameConfig.hints) return
+        const hint = getHint(this.currentWord, this.hint)
+        this.hint = hint
+        console.log('hint', hint)
+        this.drawer.socket.broadcast.to(this.roomId).emit('showHint', { hint })
     }
 
     /**
@@ -128,7 +128,11 @@ export class Game {
         this.io.in(this.roomId).emit('endTurn', { word: this.currentWord, scores: this.getPlayerScores() })
         this.resetGuessed()
         this.controller.abort()
-        this.hintCounter = 0
+        this.hint = ''
+    }
+
+    endRound() {
+        this.io.in(this.roomId).emit('endRound')
     }
 
     /**
@@ -136,15 +140,14 @@ export class Game {
      */
     endGame() {
         this.running = false
-        this.io.in(roomId).emit('endGame')
+        this.io.in(this.roomId).emit('endGame')
     }
 
     resetGame() {
         this.resetScores()
         this.resetGuessed()
         this.currentWord = null
-        this.hints = null
-        this.hintsToShow = null
+        this.hints = ''
         this.drawer = null
         this.controller = null
         this.timeRef = null
@@ -168,7 +171,10 @@ export class Game {
     }
 
     getPlayerScores() {
-        return this.players.map(player => ({ playerName: player.name, playerId: player.id, score: player.score }))
+        return this.players.reduce((acc, player) => {
+            acc[player.id] = player.score;
+            return acc;
+        }, {});
     }
 
     /**

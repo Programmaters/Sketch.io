@@ -6,13 +6,14 @@ import './Chat.css';
 import {useSession} from "../../contexts/SessionContext";
 import {useRoom} from "../../contexts/RoomContext";
 import {useGame} from "../../contexts/GameContext";
+import {PlayerType} from "../../domain/PlayerType";
 
 function Chat() {
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [message, setMessage] = useState('');
   const {session} = useSession();
   const {isHost} = useRoom()
-  const {setWord} = useGame()
+  const {setWord, isDrawing} = useGame()
 
   function sendMessage() {
     if (message.length > 0) {
@@ -35,12 +36,16 @@ function Chat() {
     setWord(msg.word)
   }
 
-  const eventHandlers = {
+  function onPlayerGuessed ({player}: {player: PlayerType}) {
+    setMessages(prevMessages => [...prevMessages, {text: `${player.name} has guessed the word!`, type: 'message'}])
+  }
+
+  useSocketListeners({
     'message': onMessage,
     'closeGuess': onCloseGuess,
     'correctGuess': onCorrectGuess,
-  };
-  useSocketListeners(eventHandlers);
+    'playerGuessed': onPlayerGuessed,
+  });
 
   function onKeyDown(e: KeyboardEvent) {
     if (e.key === 'Enter') {
@@ -76,6 +81,7 @@ function Chat() {
         placeholder="Type your guess here..."
         value={message}
         onChange={(e) => setMessage(e.target.value)}
+        disabled={isDrawing}
       />
     </div>
   )

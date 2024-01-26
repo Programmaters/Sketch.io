@@ -11,7 +11,7 @@ function Game() {
   return (
     <div className="Game">
       <Players/>
-      {isInGame() ? <Canvas/> : <GameConfig/>}
+      {isInGame ? <Canvas/> : <GameConfig/>}
       <Chat/>
     </div>
   );

@@ -5,16 +5,17 @@ import "./Player.css";
 type PlayerProps = {
   player: PlayerType;
   index: number;
+  score: number;
 }
 
-function Player({player, index}: PlayerProps) {
+function Player({player, index, score}: PlayerProps) {
   const {session} = useSession();
   return (
     <li className="Player">
       <p>#{index}</p>
       <div>
         <p>{player.name} {session!.id === player.id && "(You)"}</p>
-        <p>0 points</p>
+        <p>{score} points</p>
       </div>
     </li>
   );

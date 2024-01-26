@@ -1,23 +1,37 @@
 import {useGame} from "../../contexts/GameContext";
 import {socket} from "../../socket/socket";
-import React from "react";
+import React, {useState} from "react";
 import "./TopBar.css";
 import Timer from "../../utils/Timer";
 
 function TopBar() {
-  const {gameState, timer} = useGame();
+  const {round, gameState, timer, isDrawing, isInGame} = useGame();
+
+  function onSkipTurn() {
+    socket.emit('skipTurn');
+  }
+
+  function onHint() {
+    socket.emit('hint');
+  }
 
   return (
     <div className="TopBar">
       <div>
         <Timer seconds={timer}/>
-        <p>Round: 1</p>
+        <p>Round: {round}</p>
       </div>
       <p>{gameState}</p>
       <div>
-        <button onClick={() => socket.emit('skipTurn')}>Skip Turn</button>
-        <button onClick={() => socket.emit('hint')}>Hint</button>
-        <button id="save-button">Save</button>
+        {isDrawing &&
+          <>
+            <button onClick={onSkipTurn}>Skip Turn</button>
+            <button onClick={onHint}>Hint</button>
+          </>
+        }
+        {isInGame &&
+          <button id="save-button">Save</button>
+        }
       </div>
     </div>
   )

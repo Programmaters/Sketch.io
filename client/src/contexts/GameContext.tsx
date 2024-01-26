@@ -1,13 +1,15 @@
 import * as React from 'react';
-import {useState, createContext, useContext, useEffect} from 'react';
-import {GameType} from "../domain/GameType";
+import {useState, createContext, useContext} from 'react';
 import {useRoom} from "./RoomContext";
 import {GameConfigType} from "../domain/GameConfigType";
 import {socket} from "../socket/socket";
 import useSocketListeners from "../socket/useSocketListeners";
+import {ScoresType} from "../domain/ScoresType";
+import {PlayerType} from "../domain/PlayerType";
+import {spaceLetters} from "../utils/Utils";
 
 type NewTurnType = { word: string, round: number }
-type EndTurnType = { word: string, scores: number[] }
+type EndTurnType = { word: string, scores: ScoresType }
 
 const defaultGameConfig: GameConfigType = {
   maxPlayers: 8,
@@ -19,93 +21,111 @@ const defaultGameConfig: GameConfigType = {
 }
 
 type GameContextType = {
-  game?: GameType,
+  round: number;
+  word: string;
   gameState: string,
   gameConfig: GameConfigType,
   setGameConfig: (config: GameConfigType) => void,
-  isInGame: () => boolean,
   startGame: () => void,
+  isInGame: boolean,
   isDrawing: boolean,
   timer: number,
   setWord: (word: string) => void,
+  scores: ScoresType,
 };
 
 const GameContext = createContext<GameContextType>({
-  game: undefined,
+  round: 1,
+  word: '',
   gameState: '',
   gameConfig: defaultGameConfig,
   setGameConfig: () => {},
-  isInGame: () => false,
   startGame: () => {},
+  isInGame: false,
   isDrawing: false,
   timer: 0,
   setWord: () => {},
+  scores: {},
 });
 
 export function GameProvider({ children }: { children: React.ReactNode }) {
-  const [game, setGame] = useState<GameType>();
+  const [word, setWord] = useState('');
+  const [round, setRound] = useState(1);
   const [gameConfig, setGameConfig] = useState<GameConfigType>(defaultGameConfig);
+  const [isInGame, setIsInGame] = useState(false);
   const [isDrawing, setIsDrawing] = useState(false);
   const [timer, setTimer] = useState(0);
   const [gameState, setGameState] = useState('Waiting to start...');
+  const [scores, setScores] = useState<ScoresType>({});
   const room = useRoom();
 
   function updateGameConfig(data: {gameConfig: GameConfigType}) {
     setGameConfig(data.gameConfig);
   }
 
-  function isInGame() {
-    return game !== undefined;
-  }
-
   function startGame() {
     if (!room) throw new Error('Room is undefined');
     if (!gameConfig) throw new Error('Game config is undefined');
+    setIsInGame(true);
     socket.emit('startGame');
   }
 
-
-  function onDrawTurn ({word, round}: NewTurnType) {
-    setGame({...game, word, round, state: 'drawing' } as GameType)
+  function onDrawTurn({word, round}: NewTurnType) {
+    setWord(word)
+    setRound(round)
     setIsDrawing(true)
-    setTimer(gameConfig!.drawTime)
+    setTimer(gameConfig.drawTime)
     setGameState('Draw this: ' + word)
   }
 
-  function onGuessTurn ({word, round}: NewTurnType) {
-    setGame({...game, word, round, state: 'guessing' } as GameType)
+  function onGuessTurn({word, round}: NewTurnType) {
+    setWord(word)
+    setRound(round)
     setIsDrawing(false)
-    setTimer(gameConfig!.drawTime)
-    setGameState('Guess this: ' + word)
+    setTimer(gameConfig.drawTime)
+    setGameState('Guess this:  ' + spaceLetters(word))
   }
 
-  function onEndTurn ({word, scores}: EndTurnType) {
-    setGame({...game, word } as GameType)
+  function onPlayerGuessed({player, score}: {player: PlayerType, score: number}) {
+    setScores({...scores, [player.id]: score})
+  }
+
+  function onShowHint({hint}: {hint: string}) {
+    setGameState('Guess this:  ' + spaceLetters(hint))
+  }
+
+  function onCorrectGuess({word}: {word: string}) {
+    setGameState('Guess this:  ' + word)
+  }
+
+  function onEndTurn({word, scores}: EndTurnType) {
     setIsDrawing(false)
     setTimer(0)
-    setGameState('Turn ended')
+    setGameState('The word was:  ' + word)
+    setScores(scores)
   }
 
   function onEndRound () {
-    setGameState('Round ended')
+    setRound(prev => prev + 1)
   }
 
-  function setWord(word: string) {
-    setGame({...game, word } as GameType)
-  }
-
-  const eventHandlers = {
+  useSocketListeners({
     'updateGameConfig': updateGameConfig,
     'gameStarted': startGame,
     'drawTurn': onDrawTurn,
     'guessTurn': onGuessTurn,
+    'playerGuessed': onPlayerGuessed,
+    'showHint': onShowHint,
     'endTurn': onEndTurn,
     'endRound': onEndRound,
-  };
-  useSocketListeners(eventHandlers);
+    'correctGuess': onCorrectGuess
+  });
 
   return (
-    <GameContext.Provider value={{game, gameConfig, setGameConfig, isInGame, startGame, isDrawing, timer, gameState, setWord}}>
+    <GameContext.Provider value={{
+      word, round, gameConfig, setGameConfig, isInGame,
+      startGame, isDrawing, timer, gameState, setWord, scores
+    }}>
       {children}
     </GameContext.Provider>
   );

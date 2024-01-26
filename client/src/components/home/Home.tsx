@@ -11,10 +11,10 @@ import {useGame} from "../../contexts/GameContext";
 function Home() {
   const navigate = useNavigate();
   const [username, setUsername] = React.useState('');
-  const [roomId, setRoomId] = React.useState('');
-  const { room, joinRoom } = useRoom();
-  const { setSession } = useSession();
-  const { setGameConfig } = useGame();
+  const [roomIdField, setRoomIdField] = React.useState('');
+  const {roomId, joinRoom} = useRoom();
+  const {setSession} = useSession();
+  const {setGameConfig} = useGame();
 
   function onCreateRoom() {
     if (!username) {
@@ -31,13 +31,13 @@ function Home() {
       alert('Please enter a username');
       return;
     }
-    const rId = room?.id || roomId;
-    if (!rId) {
+    const id = roomId || roomIdField;
+    if (!id) {
       alert('Please enter the room id to join');
       return;
     }
     socket.connect();
-    socket.emit('joinRoom', { username, roomId: rId });
+    socket.emit('joinRoom', { username, roomId: id });
     socket.on('joinedRoom', onJoinedRoom);
   }
 
@@ -60,11 +60,11 @@ function Home() {
       <div className="content">
         <input type="text" placeholder="Enter your name" onChange={(e) => setUsername(e.target.value)}/>
         <div className="actions">
-          {!room &&
-              <input type="text" placeholder="Room id" onChange={(e) => setRoomId(e.target.value)}/>
+          {!roomId &&
+              <input type="text" placeholder="Room id" onChange={(e) => setRoomIdField(e.target.value)}/>
           }
           <button onClick={onJoinRoom}>Join</button>
-          {!room && <button onClick={onCreateRoom}>Create</button>}
+          {!roomId && <button onClick={onCreateRoom}>Create</button>}
         </div>
       </div>
     </div>

@@ -146,12 +146,11 @@ function Canvas() {
     setDrawOptions({ ...drawOptions, size: Math.max(1, Math.min(100, newSize)) });
   }
 
-  const socketListeners = {
+  useSocketListeners({
     'drawingAction': onDrawingAction,
     'canvasData': onCanvasData,
     'clearCanvas': clearCanvas,
-  }
-  useSocketListeners(socketListeners)
+  })
 
   return (
     <div className="Canvas" onWheel={handleWheel}>

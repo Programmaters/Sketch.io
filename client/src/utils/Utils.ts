@@ -9,3 +9,8 @@ export function toCamelCase(input: string): string {
   const camelCaseWords = [first, ...rest];
   return camelCaseWords.join('');
 }
+
+export function spaceLetters(input: string): string {
+  const words = input.split('');
+  return words.join(' ');
+}
