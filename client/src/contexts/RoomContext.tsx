@@ -11,6 +11,7 @@ type RoomContextType = {
   removePlayer: (playerId: string) => void,
   setRoomId: (id?: string) => void,
   isInRoom: () => boolean,
+  isHost: boolean,
 };
 
 const RoomContext = createContext<RoomContextType>({
@@ -21,13 +22,16 @@ const RoomContext = createContext<RoomContextType>({
   removePlayer: () => {},
   setRoomId: () => {},
   isInRoom: () => false,
+  isHost: false,
 });
 
 export function RoomProvider({ children }: { children: React.ReactNode }) {
   const [room, setRoom] = useState<RoomType>()
+  const [isHost, setIsHost] = useState(false);
 
   function joinRoom(players: PlayerType[], id: string) {
     setRoom({id, players});
+    if (players.length === 1) setIsHost(true)
   }
 
   function leaveRoom() {
@@ -55,7 +59,7 @@ export function RoomProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <RoomContext.Provider value={{room, joinRoom, leaveRoom, addPlayer, removePlayer, setRoomId, isInRoom}}>
+    <RoomContext.Provider value={{room, joinRoom, leaveRoom, addPlayer, removePlayer, setRoomId, isInRoom, isHost}}>
       {children}
     </RoomContext.Provider>
   );

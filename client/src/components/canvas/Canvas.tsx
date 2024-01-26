@@ -1,18 +1,20 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import p5 from 'p5';
 import Sketch from "react-p5";
-import {socket} from "../../../socket/socket";
+import {socket} from "../../socket/socket";
+import useSocketListeners from "../../socket/useSocketListeners";
 import DrawTools, {DrawMode, DrawOptions} from "./components/DrawTools";
-import useSocketListeners from "../../../socket/useSocketListeners";
 import DrawCursor from "./components/DrawCursor";
 import floodFill from "./floodfill";
 import './Canvas.css';
+import {useGame} from "../../contexts/GameContext";
 
 type DrawData = { mode: DrawMode, x: number, y: number, px: number, py: number, color: string, size: number }
 
 const WIDTH = 600
 const HEIGHT = 400
 const EASING = 0.3
+const WHEEL_SENSITIVITY = 15
 
 function Canvas() {
   const [x, setX] = useState(0);
@@ -21,11 +23,13 @@ function Canvas() {
   const [py, setPy] = useState(0);
   const [mouseInCanvas, setMouseInCanvas] = useState(false);
   const [drawOptions, setDrawOptions] = useState<DrawOptions>({color: 'black', size: 5, mode: 'draw'});
-  const [isDrawing, setIsDrawing] = useState(true);
+  const {isDrawing} = useGame();
   const [absoluteX, setAbsoluteX] = useState(0);
   const [absoluteY, setAbsoluteY] = useState(0);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const p5Ref = useRef<p5 | null>(null);
+
+
 
   function setup(p5: p5, canvasParentRef: Element) {
     p5.createCanvas(WIDTH, HEIGHT).parent(canvasParentRef);
@@ -39,6 +43,7 @@ function Canvas() {
   }
 
   function handleMouseMove(e: p5) {
+    if (!isDrawing) return
     setX(e.mouseX);
     setY(e.mouseY);
     setPx(x)
@@ -59,12 +64,12 @@ function Canvas() {
   }
 
   function mouseDragged(e: p5) {
-    if (drawOptions.mode !== 'draw') return
+    if (!isDrawing) return
     setX(x + (e.mouseX - x) * EASING);
     setY(y + (e.mouseY - y) * EASING);
     setPx(x)
     setPy(y)
-    drawAction()
+    if (drawOptions.mode === 'draw') drawAction()
     updateAbsoluteCoordinates()
     if (e.mouseX >= 0 && e.mouseX <= WIDTH && e.mouseY >= 0 && e.mouseY <= HEIGHT) {
       setMouseInCanvas(true);
@@ -79,8 +84,8 @@ function Canvas() {
     socket.emit('drawingAction', data)
   }
 
-  function mousePressed(e: p5) {
-    if (!mouseInCanvas) return
+  function mousePressed() {
+    if (!mouseInCanvas || !isDrawing) return
     switch (drawOptions.mode) {
       case 'draw':
         drawAction()
@@ -97,6 +102,7 @@ function Canvas() {
     }
   }
   function mouseReleased() {
+    if (!isDrawing) return
     if (mouseInCanvas) {
       socket.emit('mouseReleased')
     }
@@ -135,6 +141,11 @@ function Canvas() {
     setAbsoluteY(top + y)
   }
 
+  function handleWheel(e: React.WheelEvent) {
+    const newSize = drawOptions.size - e.deltaY / WHEEL_SENSITIVITY;
+    setDrawOptions({ ...drawOptions, size: Math.max(1, Math.min(100, newSize)) });
+  }
+
   const socketListeners = {
     'drawingAction': onDrawingAction,
     'canvasData': onCanvasData,
@@ -143,7 +154,7 @@ function Canvas() {
   useSocketListeners(socketListeners)
 
   return (
-    <div className="Canvas">
+    <div className="Canvas" onWheel={handleWheel}>
       <Sketch
         setup={setup}
         mouseMoved={handleMouseMove}

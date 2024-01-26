@@ -1,5 +1,5 @@
-import {PlayerType} from "../../../../domain/PlayerType";
-import {useSession} from "../../../../contexts/SessionContext";
+import {PlayerType} from "../../../domain/PlayerType";
+import {useSession} from "../../../contexts/SessionContext";
 import "./Player.css";
 
 type PlayerProps = {

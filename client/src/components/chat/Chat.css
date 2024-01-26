@@ -5,6 +5,7 @@
     position: relative;
     padding: 1vh;
     border-radius: 5px;
+    font-size: 1.8vh;
 }
 
 .Chat input {
@@ -26,8 +27,6 @@
 .Chat li {
     word-wrap: break-word;
     white-space: normal;
+    font-weight: 500;
 }
 
-.Chat {
-    font-size: 1.8vh;
-}

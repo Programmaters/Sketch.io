@@ -15,7 +15,7 @@ export class Room {
     }
 
     join(socket, username) {
-        if (this.players.length >= this.game.settings.maxPlayers) throw new Error('Room is full')
+        if (this.players.length >= this.game.gameConfig.maxPlayers) throw new Error('Room is full')
         const player = new Player(socket, username)
         this.game.players.push(player)
         socket.join(this.id)
@@ -34,27 +34,20 @@ export class Room {
         return this.players.map(player => ({ name: player.name, id: player.id }));
     }
 
-    onMessage(playerId, message) {
-        const player = this.players.find(player => player.id === playerId)
-        if(!this.game.running) {
-            this.io.in(this.id).emit('message', { text: message, sender: player.name })
-            return
-        }
-        this.game.onMessage(player, message)
+    onMessage(player, message) {
+        if(!this.game.running) return true
+        return this.game.onMessage(player, message)
     }
 
-    updateSettings(settings) {
-        this.game.settings = settings
-        this.players.forEach(player => {
-            player.socket.emit('updateSettings', settings)
-        })
+    updateGameConfig(gameConfig) {
+        this.game.gameConfig = gameConfig
     }
 
     get players() {
         return this.game.players
     }
 
-    get settings() {
-        return this.game.settings
+    get gameConfig() {
+        return this.game.gameConfig
     }
 }

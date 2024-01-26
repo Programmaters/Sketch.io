@@ -1,4 +1,4 @@
-import {useRoom} from "../../../contexts/RoomContext";
+import {useRoom} from "../../contexts/RoomContext";
 import "./Players.css";
 import Player from "./player/Player";
 

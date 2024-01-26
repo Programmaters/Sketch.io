@@ -4,14 +4,14 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useRoom} from "../../contexts/RoomContext";
 import {PlayerType} from "../../domain/PlayerType";
 import {socket} from "../../socket/socket";
-import TopBar from "./top-bar/TopBar";
+import TopBar from "../top-bar/TopBar";
 import Game from "../game/Game";
 import './Room.css';
 
 function Room() {
   const { roomId } = useParams();
   const navigate = useNavigate();
-  const {joinRoom, addPlayer, removePlayer, setRoomId, isInRoom} = useRoom();
+  const {addPlayer, removePlayer, setRoomId, isInRoom} = useRoom();
 
   function playerJoinedRoom(data: {player: PlayerType}) {
     addPlayer(data.player);
@@ -26,24 +26,24 @@ function Room() {
     alert('Could not join room');
   }
 
-  const eventHandlers = {
-    'joinedRoom': onJoinedRoom,
-    'playerJoinedRoom': playerJoinedRoom,
-    'invalidUserId': onInvalidUserId,
-    'playerLeftRoom': playerLeftRoom,
-    // 'updateSettings': updateSettings,
-    // 'gameStarted': startGame,
-  };
-  useSocketListeners(eventHandlers);
-
-  function onJoinedRoom(data: {players: PlayerType[], roomId: string}) {
-    joinRoom(data.players, data.roomId);
-  }
-
   async function copyRoomLink() {
     await navigator.clipboard.writeText(window.location.href)
     alert('Copied room link to clipboard!');
   }
+
+  function onDisconnect() {
+    setRoomId(undefined)
+    alert('Disconnected from server');
+    navigate('/');
+  }
+
+  const eventHandlers = {
+    'playerJoinedRoom': playerJoinedRoom,
+    'invalidUserId': onInvalidUserId,
+    'playerLeftRoom': playerLeftRoom,
+    'disconnect': onDisconnect,
+  };
+  useSocketListeners(eventHandlers);
   
   useEffect(() => {
     if (socket.disconnected) socket.connect();

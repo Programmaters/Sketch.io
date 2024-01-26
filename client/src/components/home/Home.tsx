@@ -5,6 +5,8 @@ import {Link, useNavigate} from "react-router-dom";
 import {useRoom} from "../../contexts/RoomContext";
 import {PlayerType} from "../../domain/PlayerType";
 import {useSession} from "../../contexts/SessionContext";
+import {GameConfigType} from "../../domain/GameConfigType";
+import {useGame} from "../../contexts/GameContext";
 
 function Home() {
   const navigate = useNavigate();
@@ -12,6 +14,7 @@ function Home() {
   const [roomId, setRoomId] = React.useState('');
   const { room, joinRoom } = useRoom();
   const { setSession } = useSession();
+  const { setGameConfig } = useGame();
 
   function onCreateRoom() {
     if (!username) {
@@ -38,9 +41,10 @@ function Home() {
     socket.on('joinedRoom', onJoinedRoom);
   }
 
-  function onJoinedRoom(data: {players: PlayerType[], roomId: string}) {
+  function onJoinedRoom(data: {players: PlayerType[], roomId: string, config: GameConfigType}) {
     setSession({ name: username, id: socket.id });
     joinRoom(data.players, data.roomId);
+    setGameConfig(data.config);
     navigate(`room/${data.roomId}`);
   }
 

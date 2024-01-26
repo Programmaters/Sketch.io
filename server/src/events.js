@@ -1,7 +1,7 @@
 import { Room } from './room.js'
 import { Game } from './game.js'
 import { Canvas } from './canvas.js'
-import {getRandomId, getRoom, addRoom} from './utils.js'
+import {getRandomId, getRoom, addRoom, wordHint} from './utils.js'
 
 /* Game Events */
 function onCreateRoom(conn, data) {
@@ -12,16 +12,21 @@ function onCreateRoom(conn, data) {
     const room = new Room(roomId, conn.io, conn.socket, game)
     addRoom(room)
     room.join(room.socket, data.username)
-    conn.socket.emit('joinedRoom', { roomId, playerId, players: [{ name: data.username, id: playerId }] })
+    conn.socket.emit('joinedRoom', { roomId, playerId, players: [{ name: data.username, id: playerId }], config: room.gameConfig  })
 }
 
 function onJoinRoom(conn, data) {
     const room = getRoom(conn.roomId)
     room.join(conn.socket, data.username)
-    conn.socket.emit('joinedRoom', { roomId: room.id, playerId: conn.socket.id, players: room.getPlayers() })
-    conn.socket.emit('updateSettings', room.settings )
+    conn.socket.emit('joinedRoom', { roomId: room.id, playerId: conn.socket.id, players: room.getPlayers(), config: room.gameConfig })
     conn.socket.emit('canvasData', room.game.canvas.getData())
     conn.socket.broadcast.to(room.id).emit('playerJoinedRoom', { player: { name: data.username, id: conn.socket.id } } )
+    const game = room.game
+    if (game.running) {
+        conn.socket.emit('gameStarted')
+        conn.socket.emit('guessTurn', { word: wordHint(game.currentWord), round: game.round })
+        conn.socket.emit('canvasData', game.canvas.getData())
+    }
 }
 
 function onLeaveRoom(conn) {
@@ -31,11 +36,13 @@ function onLeaveRoom(conn) {
     conn.socket.broadcast.to(conn.roomId).emit('playerLeftRoom', { playerId : player.id })
 }
 
-function onUpdateSettings(conn, data) {
-    conn.room.updateSettings(data)
+function onUpdateGameConfig(conn, data) {
+    conn.room.updateGameConfig(data)
+    conn.socket.broadcast.to(conn.roomId).emit('updateGameConfig', data)
 }
 
 function onStartGame(conn) {
+    if (conn.room.game.running) return // !!
     conn.room.newGame()
 }
 
@@ -44,14 +51,18 @@ function onSkipTurn(conn) {
 }
 
 function onHint(conn) {
-    if (conn.room.game.hintCounter >= conn.room.settings.hints) return
+    if (conn.room.game.hintCounter >= conn.room.gameConfig.hints) return
     conn.room.game.hintCounter++
     conn.room.game.sendHint()
 }
 
 /* Chat Events */
 function onMessage(conn, data) {
-    conn.room.onMessage(conn.socket.id, data.message)
+    const player = conn.room.players.find(player => player.id === conn.socket.id)
+    const sendMessageToRoom = conn.room.onMessage(player, data.message)
+    if (sendMessageToRoom) {
+        conn.socket.broadcast.to(conn.roomId).emit('message', { text: data.message, sender: player.name })
+    }
 }
 
 /* Draw Events */
@@ -79,7 +90,7 @@ function onUndo(conn) {
 export default {
     'createRoom': onCreateRoom,
     'joinRoom': onJoinRoom,
-    'updateSettings': onUpdateSettings,
+    'updateGameConfig': onUpdateGameConfig,
     'startGame': onStartGame,
     'message': onMessage,
     'skipTurn': onSkipTurn,

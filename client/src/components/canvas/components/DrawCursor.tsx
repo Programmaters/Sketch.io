@@ -30,7 +30,6 @@ function DrawCursor({x, y, options, enabled}: DrawCursorProps) {
     ...colorPickerStyle,
     top: drawModeStyle.top,
     left: drawModeStyle.left,
-    color: options.color,
   }
   const styles = {
     'draw': drawModeStyle,

@@ -10,6 +10,16 @@
     color: white;
 }
 
+.TopBar > * {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1vh;
+    align-items: center;
+    width: 100%;
+}
+
+
 .TopBar button {
     background: var(--background-color);
 }
@@ -18,3 +28,4 @@
     background: white;
     color: var(--background-color);
 }
+
