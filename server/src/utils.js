@@ -3,8 +3,8 @@ import {readFile} from 'fs/promises'
 import {randomUUID} from 'crypto'
 import {Room} from "./room.js";
 
-const enWords = await readFile('./words-en.txt', 'utf-8').then(x => x.split('\r\n'))
-const ptWords = await readFile('./words-pt.txt', 'utf-8').then(x => x.split('\r\n'))
+const enWords = await readFile('./words-en.txt', 'utf-8').then(x => x.split('\n'))
+const ptWords = await readFile('./words-pt.txt', 'utf-8').then(x => x.split('\n'))
 
 const dictionary = {
   'English': enWords,
@@ -13,8 +13,6 @@ const dictionary = {
 
 /**
  * Gets n number of random words
- * @param {Integer} numberOfNWords 
- * @returns array of n random words
  */
 export function getRandomWords(n, language) {
     const words = dictionary[language]
@@ -68,7 +66,6 @@ export function addRoom(room) {
 }
 
 export function hideWord(word) {
-    console.log(word)
     return word.replace(/\S/g, '_');
 }
 

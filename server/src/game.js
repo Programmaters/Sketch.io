@@ -117,7 +117,6 @@ export class Game {
         if (hintsGiven >= this.gameConfig.hints) return
         const hint = getHint(this.currentWord, this.hint)
         this.hint = hint
-        console.log('hint', hint)
         this.drawer.socket.broadcast.to(this.roomId).emit('showHint', { hint })
     }
 
