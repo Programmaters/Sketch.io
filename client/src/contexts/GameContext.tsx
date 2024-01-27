@@ -7,8 +7,10 @@ import useSocketListeners from "../socket/useSocketListeners";
 import {ScoresType} from "../domain/ScoresType";
 import {PlayerType} from "../domain/PlayerType";
 import {spaceLetters} from "../utils/Utils";
+import {useSession} from "./SessionContext";
+import Player from "../components/players/player/Player";
 
-type NewTurnType = { word: string, round: number }
+type NewTurnType = { word: string, round: number, drawer: string }
 type EndTurnType = { word: string, scores: ScoresType }
 
 const defaultGameConfig: GameConfigType = {
@@ -30,6 +32,8 @@ type GameContextType = {
   isInGame: boolean,
   isDrawing: boolean,
   timer: number,
+  drawer?: string,
+  turns: number,
   setWord: (word: string) => void,
   scores: ScoresType,
   playAgain: () => void,
@@ -44,6 +48,8 @@ const GameContext = createContext<GameContextType>({
   isDrawing: false,
   timer: 0,
   scores: {},
+  drawer: undefined,
+  turns: 0,
   setGameConfig: () => {},
   startGame: () => {},
   setWord: () => {},
@@ -57,7 +63,9 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   const [isInGame, setIsInGame] = useState(false);
   const [isDrawing, setIsDrawing] = useState(false);
   const [timer, setTimer] = useState(0);
+  const [turns, setTurns] = useState(0);
   const [gameState, setGameState] = useState('Waiting to start...');
+  const [drawer, setDrawer] = useState<string>();
   const [scores, setScores] = useState<ScoresType>({});
   const {roomId, isHost} = useRoom();
 
@@ -75,6 +83,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   function playAgain() {
     setIsInGame(false)
     setRound(1)
+    setScores({})
     setGameState('Waiting to start...')
   }
 
@@ -95,14 +104,19 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     setWord(word)
     setRound(round)
     setIsDrawing(true)
+    setDrawer(socket.id)
+    setTurns(prev => prev + 1)
     startTimer()
     setGameState('Draw this: ' + word)
+
   }
 
-  function onGuessTurn({word, round}: NewTurnType) {
+  function onGuessTurn({word, round, drawer}: NewTurnType) {
     setWord(word)
     setRound(round)
+    setDrawer(drawer)
     setIsDrawing(false)
+    setTurns(prev => prev + 1)
     startTimer()
     setGameState('Guess this:  ' + spaceLetters(word))
   }
@@ -159,7 +173,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   return (
     <GameContext.Provider value={{
       word, round, gameConfig, setGameConfig, isInGame, playAgain,
-      startGame, isDrawing, timer, gameState, setWord, scores
+      startGame, isDrawing, timer, gameState, setWord, scores, drawer, turns
     }}>
       {children}
     </GameContext.Provider>

@@ -21,3 +21,21 @@
 .Player div > p:last-child {
     font-size: smaller;
 }
+
+.Player > i {
+    position: absolute;
+    right: 0;
+    padding: 2vh;
+}
+
+.Player > div > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.Player > div > div > i {
+    font-size: smaller;
+    padding: 1vh;
+}

@@ -23,6 +23,7 @@ export class Game {
     controller = null
     timeRef = null
     running = false
+    inTurn = false
 
     constructor(io, socket, roomId, canvas) {
         this.io = io
@@ -54,6 +55,7 @@ export class Game {
      * Starts a new turn
      */
     async play(playerIndex, roundNumber) {
+        this.inTurn = true
         this.round = roundNumber
         this.canvas.clear()
         this.io.to(this.roomId).emit('clearCanvas')
@@ -66,7 +68,7 @@ export class Game {
         this.timeRef = new Date()
 
         drawer.socket.emit('drawTurn', { word: this.currentWord, round: roundNumber })
-        drawer.socket.broadcast.to(this.roomId).emit('guessTurn', { word: hideWord(this.currentWord), round: roundNumber })
+        drawer.socket.broadcast.to(this.roomId).emit('guessTurn', { word: hideWord(this.currentWord), round: roundNumber, drawer: this.drawer.id })
     
         try {
             await this.setCancellableTimeout(this.gameConfig.drawTime)
@@ -77,6 +79,7 @@ export class Game {
     }
 
     onMessage(player, message) {
+        if (!this.inTurn) return true
         const guessWord = message.toLowerCase().trim()
         if (guessWord === '' || this.drawer.id === player.id) return false
 
@@ -86,9 +89,8 @@ export class Game {
 
                 // update player scores 
                 const timeLeft = parseInt(this.gameConfig.drawTime - (new Date() - this.timeRef) / 1000)
-                const answerTime = this.gameConfig.drawTime - timeLeft
-                this.drawer.score += parseInt(answerTime / (this.getHintsGiven() + 1))
-                player.score += answerTime * this.players.length
+                this.drawer.score += parseInt(timeLeft / (this.getHintsGiven() + 1))
+                player.score += timeLeft * this.players.length
                 player.guessed = true
 
                 // broadcast correct guess
@@ -130,6 +132,7 @@ export class Game {
      * Ends the turn
      */
     endTurn() {
+        this.inTurn = false
         this.hint = ''
         this.resetGuessed()
         this.controller.abort()

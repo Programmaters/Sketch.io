@@ -41,10 +41,10 @@ function Home() {
     socket.on('joinedRoom', onJoinedRoom);
   }
 
-  function onJoinedRoom(data: {players: PlayerType[], roomId: string, config: GameConfigType}) {
+  function onJoinedRoom(data: {players: PlayerType[], roomId: string, config: GameConfigType, host: string}) {
     setSession({ name: username, id: socket.id });
-    joinRoom(data.players, data.roomId);
     setGameConfig(data.config);
+    joinRoom(data.players, data.roomId, data.host);
     navigate(`room/${data.roomId}`);
   }
 

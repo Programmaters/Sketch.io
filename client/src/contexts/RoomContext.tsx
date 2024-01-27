@@ -2,14 +2,16 @@ import * as React from 'react';
 import {useState, createContext, useContext} from 'react';
 import {PlayerType} from "../domain/PlayerType";
 import useSocketListeners from "../socket/useSocketListeners";
+import {socket} from "../socket/socket";
 
 type RoomContextType = {
   roomId?: string,
   players: PlayerType[],
   isInRoom: boolean,
-  joinRoom: (players: PlayerType[], roomId: string) => void,
+  joinRoom: (players: PlayerType[], roomId: string, host?: string) => void,
   leaveRoom: () => void,
   setRoomId: (id?: string) => void,
+  host?: string,
   isHost: boolean,
 };
 
@@ -20,6 +22,7 @@ const RoomContext = createContext<RoomContextType>({
   joinRoom: () => {},
   leaveRoom: () => {},
   setRoomId: () => {},
+  host: undefined,
   isHost: false,
 });
 
@@ -28,12 +31,14 @@ export function RoomProvider({ children }: { children: React.ReactNode }) {
   const [roomId, setRoomId] = useState<string>();
   const [players, setPlayers] = useState<PlayerType[]>([]);
   const [isHost, setIsHost] = useState(false);
+  const [host, setHost] = useState<string>();
 
-  function joinRoom(players: PlayerType[], id: string) {
+  function joinRoom(players: PlayerType[], roomId: string, host?: string) {
     setIsInRoom(true);
-    setRoomId(id);
+    setRoomId(roomId);
     setPlayers(players);
-    if (players.length === 1) setIsHost(true)
+    setHost(host ?? socket.id);
+    setIsHost(host === undefined);
   }
 
   function leaveRoom() {
@@ -55,7 +60,7 @@ export function RoomProvider({ children }: { children: React.ReactNode }) {
   });
 
   return (
-    <RoomContext.Provider value={{roomId, players, isInRoom, joinRoom, leaveRoom, setRoomId, isHost}}>
+    <RoomContext.Provider value={{roomId, players, isInRoom, joinRoom, leaveRoom, setRoomId, isHost, host}}>
       {children}
     </RoomContext.Provider>
   );

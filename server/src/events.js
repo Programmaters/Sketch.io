@@ -19,12 +19,12 @@ function onCreateRoom(conn, data) {
 function onJoinRoom(conn, data) {
     const room = getRoom(conn.roomId)
     room.join(conn.socket, data.username)
-    conn.socket.emit('joinedRoom', { roomId: room.id, playerId: conn.socket.id, players: room.getPlayers(), config: room.gameConfig })
+    conn.socket.emit('joinedRoom', { roomId: room.id, playerId: conn.socket.id, players: room.getPlayers(), config: room.gameConfig, host: room.socket.id })
     conn.socket.emit('canvasData', room.game.canvas.getData())
     conn.socket.broadcast.to(room.id).emit('playerJoinedRoom', { player: { name: data.username, id: conn.socket.id } } )
     if (room.game.running) {
         conn.socket.emit('gameStarted')
-        conn.socket.emit('guessTurn', { word: hideWord(room.game.currentWord), round: room.game.round })
+        conn.socket.emit('guessTurn', { word: hideWord(room.game.currentWord), round: room.game.round, drawer: room.game.drawer.id })
         conn.socket.emit('canvasData', room.game.canvas.getData())
     }
 }
