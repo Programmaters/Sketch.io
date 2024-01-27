@@ -9,7 +9,9 @@ function Players(){
   return (
     <div className="Players">
       <ul>
-        {players.map((player, index) =>
+        {players
+          .sort((a, b) => scores[b.id] - scores[a.id])
+          .map((player, index) =>
           <Player player = {player} index={index+1} score={scores[player.id] ?? 0} key={player.id}/>
         )}
       </ul>

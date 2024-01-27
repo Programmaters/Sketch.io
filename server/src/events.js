@@ -2,6 +2,7 @@ import { Room } from './room.js'
 import { Game } from './game.js'
 import { Canvas } from './canvas.js'
 import {getRandomId, getRoom, addRoom, hideWord} from './utils.js'
+import {rooms} from "./main.js";
 
 /* Game Events */
 function onCreateRoom(conn, data) {
@@ -33,6 +34,16 @@ function onLeaveRoom(conn) {
     const player = conn.room.players.find(player => player.id === conn.socket.id)
     conn.room.leave(conn.socket, player.id)
     conn.socket.broadcast.to(conn.roomId).emit('playerLeftRoom', { playerId : player.id })
+    if (conn.room.players.length === 0) { // delete room when no players left
+        delete rooms[conn.roomId]
+        return
+    }
+    if (conn.room.game.drawer.id === player.id) { // skip turn when drawer leaves
+        conn.room.game.endTurn()
+    }
+    if (conn.room.socket.id === player.id) { // select new host when host leaves
+        conn.room.socket = conn.room.players[0].socket
+    }
 }
 
 function onUpdateGameConfig(conn, data) {
@@ -42,6 +53,7 @@ function onUpdateGameConfig(conn, data) {
 
 function onStartGame(conn) {
     if (conn.room.game.running) throw new Error('Game already running')
+    if (conn.room.players.length < 2) throw new Error('Not enough players')
     conn.room.newGame()
 }
 

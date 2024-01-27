@@ -48,4 +48,12 @@ export class Canvas {
     getData() {
         return this.canvasData
     }
+
+    /**
+     * Clear the canvas timeline
+     */
+    clearHistory() {
+        this.canvasTimeline = []
+        this.prevCanvasData = []
+    }
 }

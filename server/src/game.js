@@ -130,10 +130,11 @@ export class Game {
      * Ends the turn
      */
     endTurn() {
-        this.io.in(this.roomId).emit('endTurn', { word: this.currentWord, scores: this.getPlayerScores() })
+        this.hint = ''
         this.resetGuessed()
         this.controller.abort()
-        this.hint = ''
+        this.canvas.clearHistory()
+        this.io.in(this.roomId).emit('endTurn', { word: this.currentWord, scores: this.getPlayerScores() })
     }
 
     endRound() {

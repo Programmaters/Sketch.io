@@ -12,7 +12,7 @@ const wordCountOptions = [1, 2, 3, 4, 5];
 const hintsOptions = [0, 1, 2, 3, 4];
 
 function GameConfig() {
-  const {isHost} = useRoom()
+  const {isHost, players} = useRoom()
   const {gameConfig, startGame} = useGame()
   const {maxPlayers, language, drawTime, rounds, wordCount, hints} = gameConfig!;
   return (
@@ -25,7 +25,7 @@ function GameConfig() {
         <GameConfigOption icon="bars" label="Word Count" value={wordCount} values={wordCountOptions}/>
         <GameConfigOption icon="question" label="Hints" value={hints} values={hintsOptions}/>
       </div>
-      <button onClick={startGame} disabled={!isHost}>Start Game</button>
+      <button onClick={startGame} disabled={!isHost || players.length < 2}>Start Game</button>
     </div>
   );
 }

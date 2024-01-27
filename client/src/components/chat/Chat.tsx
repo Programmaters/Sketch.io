@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import useSocketListeners from "../../socket/useSocketListeners";
 import {MessageType} from "../../domain/MessageType";
 import {socket} from "../../socket/socket";
@@ -14,6 +14,13 @@ function Chat() {
   const {session} = useSession();
   const {isHost} = useRoom()
   const {setWord, isDrawing} = useGame()
+  const messagesEndRef = useRef<HTMLLIElement>(null);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages]);
 
   function sendMessage() {
     if (message.length > 0) {
@@ -75,6 +82,7 @@ function Chat() {
             )}
           </li>
         ))}
+        <li ref={messagesEndRef} />
       </ul>
       <input
         type="text"
