@@ -14,7 +14,7 @@ io.on('connection', (socket) => {
             const roomId = data?.roomId || Array.from(socket.rooms).find(roomId => roomId !== socket.id)
             const room = rooms[roomId]
             const conn = { io, socket, room, roomId }
-            console.log(event, data)
+            console.log(event)
             try {
                 handler(conn, data)
             } catch (e) {

@@ -37,7 +37,6 @@ export class Game {
      * Starts the game
      */
     async startGame() {
-        console.log('Starting game')
         this.resetGame()
         this.running = true
         this.socket.broadcast.to(this.roomId).emit('gameStarted')
@@ -63,7 +62,7 @@ export class Game {
         drawer.guessed = true
         drawer.drawer = true
         this.drawer = drawer
-        this.currentWord = 'Hello World'//getRandomWords(1, this.gameConfig.language)[0]
+        this.currentWord = getRandomWords(1, this.gameConfig.language)[0]
         this.timeRef = new Date()
 
         drawer.socket.emit('drawTurn', { word: this.currentWord, round: roundNumber })
