@@ -37,6 +37,7 @@ export class Game {
      * Starts the game
      */
     async startGame() {
+        console.log('Starting game')
         this.resetGame()
         this.running = true
         this.socket.broadcast.to(this.roomId).emit('gameStarted')
@@ -62,7 +63,7 @@ export class Game {
         drawer.guessed = true
         drawer.drawer = true
         this.drawer = drawer
-        this.currentWord = getRandomWords(1, this.gameConfig.language)[0]
+        this.currentWord = 'Hello World'//getRandomWords(1, this.gameConfig.language)[0]
         this.timeRef = new Date()
 
         drawer.socket.emit('drawTurn', { word: this.currentWord, round: roundNumber })
@@ -87,13 +88,15 @@ export class Game {
                 // update player scores 
                 const timeLeft = parseInt(this.gameConfig.drawTime - (new Date() - this.timeRef) / 1000)
                 const answerTime = this.gameConfig.drawTime - timeLeft
-                this.drawer.score += parseInt(answerTime / (this.hintCounter + 1))
+                this.drawer.score += parseInt(answerTime / (this.getHintsGiven() + 1))
                 player.score += answerTime * this.players.length
                 player.guessed = true
 
+                // broadcast correct guess
                 player.socket.emit('correctGuess', { text: `You guessed it right!`, word: this.currentWord })
-                player.socket.broadcast.emit('playerGuessed', { player: { name: player.name, id: player.id}, score: player.score})
-    
+                player.socket.broadcast.emit('playerGuessed', { player: { name: player.name, id: player.id}})
+                this.io.in(this.roomId).emit('updateScore', { [player.id]: player.score, [this.drawer.id]: this.drawer.score })
+
                 // if everyone guessed, end turn
                 if (this.players.every(player => player.guessed)) {
                     this.endTurn()
@@ -109,11 +112,15 @@ export class Game {
         return true
     }
 
+    getHintsGiven() {
+        return this.hint.split('').filter(letter => letter !== '_' && letter !== ' ').length
+    }
+
     /**
      * Sends a hint to all guessers in the room
      */
     sendHint() {
-        const hintsGiven = this.hint.split('').filter(letter => letter !== '_' && letter !== ' ').length
+        const hintsGiven = this.getHintsGiven()
         if (hintsGiven >= this.gameConfig.hints) return
         const hint = getHint(this.currentWord, this.hint)
         this.hint = hint

@@ -19,9 +19,22 @@
     width: 100%;
 }
 
+.TopBar > * > * {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1vh;
+    align-items: center;
+    width: 100%;
+}
+
+.TopBar i {
+    margin-top: 2px;
+}
 
 .TopBar button {
     background: var(--background-color);
+    max-width: 10vh;
 }
 
 .TopBar button:hover {
@@ -29,3 +42,6 @@
     color: var(--background-color);
 }
 
+.TopBar p {
+    white-space: pre;
+}

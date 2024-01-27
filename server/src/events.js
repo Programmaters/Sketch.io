@@ -36,12 +36,12 @@ function onLeaveRoom(conn) {
 }
 
 function onUpdateGameConfig(conn, data) {
-    conn.room.updateGameConfig(data)
+    conn.room.updateGameConfig(data.gameConfig)
     conn.socket.broadcast.to(conn.roomId).emit('updateGameConfig', data)
 }
 
 function onStartGame(conn) {
-    if (conn.room.game.running) return // !!
+    if (conn.room.game.running) throw new Error('Game already running')
     conn.room.newGame()
 }
 

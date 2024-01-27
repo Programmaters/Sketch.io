@@ -1,0 +1,31 @@
+
+.Leaderboard {
+    color: white;
+    width: 20vw;
+}
+
+.Leaderboard > {
+    width: 20vw;
+}
+
+
+.Leaderboard h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.Leaderboard table {
+    width: 10vw;
+    border-collapse: collapse;
+}
+
+.Leaderboard th,
+.Leaderboard td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.Leaderboard button {
+    margin-top: 10vh;
+}

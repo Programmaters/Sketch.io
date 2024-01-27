@@ -2,9 +2,10 @@ import {rooms} from './main.js'
 import {readFile} from 'fs/promises'
 import {randomUUID} from 'crypto'
 import {Room} from "./room.js";
+import os from 'os'
 
-const enWords = await readFile('./words-en.txt', 'utf-8').then(x => x.split('\n'))
-const ptWords = await readFile('./words-pt.txt', 'utf-8').then(x => x.split('\n'))
+const enWords = await readFile('./words-en.txt', 'utf-8').then(x => x.split(os.EOL))
+const ptWords = await readFile('./words-pt.txt', 'utf-8').then(x => x.split(os.EOL))
 
 const dictionary = {
   'English': enWords,
@@ -45,9 +46,6 @@ export function getRandomId() {
 
 /**
  * Gets a room by id and throws an error if it doesn't exist
- * @param {Socket} socket 
- * @param {String} id 
- * @returns room
  */
 export function getRoom(id) {
     const room = rooms[id]

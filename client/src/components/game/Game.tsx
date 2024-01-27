@@ -5,14 +5,23 @@ import Canvas from "../canvas/Canvas";
 import GameConfig from "../game-config/GameConfig";
 import Chat from "../chat/Chat";
 import {useGame} from "../../contexts/GameContext";
+import Leaderboard from "../leaderboard/Leaderboard";
 
 function Game() {
-  const {isInGame} = useGame();
+  const {isInGame, gameState} = useGame();
   return (
     <div className="Game">
-      <Players/>
-      {isInGame ? <Canvas/> : <GameConfig/>}
-      <Chat/>
+      {gameState === 'Game over!' ?
+        <>
+          <Leaderboard/>
+        </>
+      :
+        <>
+          <Players/>
+            {isInGame ? <Canvas/> : <GameConfig/>}
+          <Chat/>
+        </>
+      }
     </div>
   );
 }

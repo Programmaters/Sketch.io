@@ -32,6 +32,7 @@ type GameContextType = {
   timer: number,
   setWord: (word: string) => void,
   scores: ScoresType,
+  playAgain: () => void,
 };
 
 const GameContext = createContext<GameContextType>({
@@ -39,13 +40,14 @@ const GameContext = createContext<GameContextType>({
   word: '',
   gameState: '',
   gameConfig: defaultGameConfig,
-  setGameConfig: () => {},
-  startGame: () => {},
   isInGame: false,
   isDrawing: false,
   timer: 0,
-  setWord: () => {},
   scores: {},
+  setGameConfig: () => {},
+  startGame: () => {},
+  setWord: () => {},
+  playAgain: () => {},
 });
 
 export function GameProvider({ children }: { children: React.ReactNode }) {
@@ -57,24 +59,43 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   const [timer, setTimer] = useState(0);
   const [gameState, setGameState] = useState('Waiting to start...');
   const [scores, setScores] = useState<ScoresType>({});
-  const room = useRoom();
+  const {roomId, isHost} = useRoom();
 
   function updateGameConfig(data: {gameConfig: GameConfigType}) {
     setGameConfig(data.gameConfig);
   }
 
   function startGame() {
-    if (!room) throw new Error('Room is undefined');
+    if (!roomId) throw new Error('Room is undefined');
     if (!gameConfig) throw new Error('Game config is undefined');
-    setIsInGame(true);
-    socket.emit('startGame');
+    if (isHost) socket.emit('startGame');
+    onGameStarted()
+  }
+
+  function playAgain() {
+    setIsInGame(false)
+    setRound(1)
+    setGameState('Waiting to start...')
+  }
+
+  function onGameStarted() {
+    setIsInGame(true)
+    setRound(1)
+    setGameState('Waiting to start...')
+  }
+
+  function startTimer() {
+    setGameConfig(current => {
+      setTimer(current.drawTime)
+      return current
+    })
   }
 
   function onDrawTurn({word, round}: NewTurnType) {
     setWord(word)
     setRound(round)
     setIsDrawing(true)
-    setTimer(gameConfig.drawTime)
+    startTimer()
     setGameState('Draw this: ' + word)
   }
 
@@ -82,12 +103,8 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     setWord(word)
     setRound(round)
     setIsDrawing(false)
-    setTimer(gameConfig.drawTime)
+    startTimer()
     setGameState('Guess this:  ' + spaceLetters(word))
-  }
-
-  function onPlayerGuessed({player, score}: {player: PlayerType, score: number}) {
-    setScores({...scores, [player.id]: score})
   }
 
   function onShowHint({hint}: {hint: string}) {
@@ -98,32 +115,50 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     setGameState('Guess this:  ' + word)
   }
 
-  function onEndTurn({word, scores}: EndTurnType) {
+  function onUpdateScore(newScores: ScoresType) {
+    setScores(prev => ({...prev, ...newScores}))
+  }
+
+  function onEndTurn({word}: EndTurnType) {
     setIsDrawing(false)
     setTimer(0)
     setGameState('The word was:  ' + word)
-    setScores(scores)
   }
 
-  function onEndRound () {
+  function onEndRound() {
     setRound(prev => prev + 1)
+  }
+
+  function onEndGame() {
+    setGameState('Game over!')
+    setIsInGame(false)
+  }
+
+  function onDisconnect() {
+    setIsInGame(false)
+    setIsDrawing(false)
+    setTimer(0)
+    setGameState('Waiting to start...')
+    setScores({})
   }
 
   useSocketListeners({
     'updateGameConfig': updateGameConfig,
-    'gameStarted': startGame,
+    'gameStarted': onGameStarted,
     'drawTurn': onDrawTurn,
     'guessTurn': onGuessTurn,
-    'playerGuessed': onPlayerGuessed,
     'showHint': onShowHint,
+    'correctGuess': onCorrectGuess,
+    'updateScore': onUpdateScore,
     'endTurn': onEndTurn,
     'endRound': onEndRound,
-    'correctGuess': onCorrectGuess
+    'endGame': onEndGame,
+    'disconnect': onDisconnect
   });
 
   return (
     <GameContext.Provider value={{
-      word, round, gameConfig, setGameConfig, isInGame,
+      word, round, gameConfig, setGameConfig, isInGame, playAgain,
       startGame, isDrawing, timer, gameState, setWord, scores
     }}>
       {children}
