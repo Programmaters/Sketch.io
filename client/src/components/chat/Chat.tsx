@@ -90,7 +90,7 @@ function Chat() {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         disabled={isDrawing}
-        maxLength={20}
+        maxLength={50}
       />
     </div>
   )
