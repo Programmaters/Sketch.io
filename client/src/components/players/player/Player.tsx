@@ -40,7 +40,7 @@ function Player({player, index, score, isHost, isDrawing}: PlayerProps) {
         <p>{score} points</p>
       </div>
       {isDrawing && <i className="fa fa-pencil"></i>}
-      {guessed && <i className="fa fa-check"></i>}
+      {guessed && !isDrawing && <i className="fa fa-check"></i>}
     </li>
   );
 }

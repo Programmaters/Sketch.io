@@ -11,7 +11,7 @@ import {useSession} from "./SessionContext";
 import Player from "../components/players/player/Player";
 
 type NewTurnType = { word: string, round: number, drawer: string }
-type EndTurnType = { word: string, scores: ScoresType }
+type EndTurnType = { word: string } | undefined
 
 const defaultGameConfig: GameConfigType = {
   maxPlayers: 8,
@@ -34,9 +34,11 @@ type GameContextType = {
   timer: number,
   drawer?: string,
   turns: number,
+  choosingWords: string[],
   setWord: (word: string) => void,
   scores: ScoresType,
   playAgain: () => void,
+  chooseWord: (word: string) => void,
 };
 
 const GameContext = createContext<GameContextType>({
@@ -50,10 +52,12 @@ const GameContext = createContext<GameContextType>({
   scores: {},
   drawer: undefined,
   turns: 0,
+  choosingWords: [],
   setGameConfig: () => {},
   startGame: () => {},
   setWord: () => {},
   playAgain: () => {},
+  chooseWord: () => {},
 });
 
 export function GameProvider({ children }: { children: React.ReactNode }) {
@@ -62,6 +66,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   const [gameConfig, setGameConfig] = useState<GameConfigType>(defaultGameConfig);
   const [isInGame, setIsInGame] = useState(false);
   const [isDrawing, setIsDrawing] = useState(false);
+  const [choosingWords, setChoosingWords] = useState<string[]>([]);
   const [timer, setTimer] = useState(0);
   const [turns, setTurns] = useState(0);
   const [gameState, setGameState] = useState('Waiting to start...');
@@ -100,15 +105,34 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     })
   }
 
+  function onChoosingWord({drawer, time}: {drawer: string, time: number}) {
+    setGameState(`${drawer} is choosing a word!`)
+    setTimer(time)
+    setTurns(prev => prev + 1)
+  }
+
+  function onChooseWord({words, time}: {words: string[], time: number}) {
+    setIsDrawing(true)
+    setChoosingWords(words)
+    setTimer(time)
+    setGameState('Choose a word!')
+    setTurns(prev => prev + 1)
+  }
+
+  function chooseWord(word: string) {
+    if (!roomId) throw new Error('Room is undefined');
+    if (!gameConfig) throw new Error('Game config is undefined');
+    setChoosingWords([])
+    socket.emit('wordChosen', {word})
+  }
+
   function onDrawTurn({word, round}: NewTurnType) {
     setWord(word)
     setRound(round)
     setIsDrawing(true)
     setDrawer(socket.id)
-    setTurns(prev => prev + 1)
     startTimer()
     setGameState('Draw this: ' + word)
-
   }
 
   function onGuessTurn({word, round, drawer}: NewTurnType) {
@@ -116,13 +140,12 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     setRound(round)
     setDrawer(drawer)
     setIsDrawing(false)
-    setTurns(prev => prev + 1)
     startTimer()
     setGameState('Guess this:  ' + spaceLetters(word))
   }
 
   function onShowHint({hint}: {hint: string}) {
-    setGameState('Guess this:  ' + spaceLetters(hint))
+    setGameState(prev => prev.startsWith('Draw this:') ? prev : 'Guess this:  ' + spaceLetters(hint))
   }
 
   function onCorrectGuess({word}: {word: string}) {
@@ -133,10 +156,10 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     setScores(prev => ({...prev, ...newScores}))
   }
 
-  function onEndTurn({word}: EndTurnType) {
+  function onEndTurn(data: EndTurnType) {
     setIsDrawing(false)
     setTimer(0)
-    setGameState('The word was:  ' + word)
+    if (data?.word) setGameState('The word was:  ' + data.word)
   }
 
   function onEndRound() {
@@ -159,6 +182,8 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   useSocketListeners({
     'updateGameConfig': updateGameConfig,
     'gameStarted': onGameStarted,
+    'chooseWord': onChooseWord,
+    'choosingWord': onChoosingWord,
     'drawTurn': onDrawTurn,
     'guessTurn': onGuessTurn,
     'showHint': onShowHint,
@@ -173,7 +198,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   return (
     <GameContext.Provider value={{
       word, round, gameConfig, setGameConfig, isInGame, playAgain,
-      startGame, isDrawing, timer, gameState, setWord, scores, drawer, turns
+      startGame, isDrawing, timer, gameState, setWord, scores, drawer, turns, choosingWords, chooseWord
     }}>
       {children}
     </GameContext.Provider>

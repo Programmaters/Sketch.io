@@ -39,3 +39,15 @@
     font-size: smaller;
     padding: 1vh;
 }
+
+.Player .fa-crown {
+    color: gold;
+}
+
+.Player .fa-pencil {
+    color: white;
+}
+
+.Player .fa-check {
+    color: limegreen;
+}

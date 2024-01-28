@@ -54,9 +54,15 @@ export function RoomProvider({ children }: { children: React.ReactNode }) {
     setPlayers(players => players.filter(player => player.id !== playerId))
   }
 
+  function newHost({host}: {host: string}) {
+    setHost(host);
+    setIsHost(host === socket.id);
+  }
+
   useSocketListeners({
     'playerJoinedRoom': playerJoinedRoom,
     'playerLeftRoom': playerLeftRoom,
+    'newHost': newHost,
   });
 
   return (

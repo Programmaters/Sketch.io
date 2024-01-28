@@ -1,7 +1,9 @@
-import {getRandomWords, getCloseness, hideWord, getHint} from './utils.js'
-import { readFile } from 'node:fs/promises'
+import {getCloseness, getHint, getRandomWords, hideWord} from './utils.js'
+import {readFile} from 'node:fs/promises'
 
 const closeThreshold = 0.75
+const chooseWordTime = 10
+const nextTurnTime = 5
 const defaultConfig = await loadGameConfig()
 
 async function loadGameConfig() {
@@ -43,39 +45,59 @@ export class Game {
         this.socket.broadcast.to(this.roomId).emit('gameStarted')
         for (let round = 1; round <= this.gameConfig.rounds; round++) {
             for (let player = 0; player < this.players.length; player++) {
-                console.log(`Round ${round} | Player ${player}`)
-                await this.play(player, round)
+                this.round = round
+                const choseWord = await this.chooseWord(player)
+                if (choseWord) await this.play()
             }
             this.endRound()
         }
         this.endGame()
     }
 
-    /**
-     * Starts a new turn
-     */
-    async play(playerIndex, roundNumber) {
-        this.inTurn = true
-        this.round = roundNumber
+    async chooseWord(playerIndex) {
         this.canvas.clear()
         this.io.to(this.roomId).emit('clearCanvas')
         this.resetGuessed()
+        const words = getRandomWords(this.gameConfig.wordCount, this.gameConfig.language)
         const drawer = this.players[playerIndex]
         drawer.guessed = true
         drawer.drawer = true
         this.drawer = drawer
-        this.currentWord = getRandomWords(1, this.gameConfig.language)[0]
-        this.timeRef = new Date()
+        drawer.socket.emit('chooseWord', { words, time: chooseWordTime })
+        drawer.socket.broadcast.to(this.roomId).emit('choosingWord', { drawer: drawer.name, time: chooseWordTime })
 
-        drawer.socket.emit('drawTurn', { word: this.currentWord, round: roundNumber })
-        drawer.socket.broadcast.to(this.roomId).emit('guessTurn', { word: hideWord(this.currentWord), round: roundNumber, drawer: this.drawer.id })
-    
+        try {
+            this.currentWord = await new Promise((resolve, reject) => {
+                const id = setTimeout(() => {
+                    if (this.currentWord === null) reject(new Error('Word not chosen'))
+                }, chooseWordTime * 1000)
+                drawer.socket.on('wordChosen', ({word}) => {
+                    clearTimeout(id)
+                    resolve(word)
+                })
+            })
+        } catch {}
+        if (this.currentWord === null) {
+            this.endTurn()
+            return false
+        }
+        return true
+    }
+
+    /**
+     * Starts a new turn
+     */
+    async play() {
+        this.inTurn = true
+        this.timeRef = new Date()
+        this.drawer.socket.emit('drawTurn', { word: this.currentWord, round: this.round })
+        this.drawer.socket.broadcast.to(this.roomId).emit('guessTurn', { word: hideWord(this.currentWord), round: this.round, drawer: this.drawer.id })
         try {
             await this.setCancellableTimeout(this.gameConfig.drawTime)
         } catch {}
         
         this.endTurn()
-        await this.setTimeout(5) // wait for 5 seconds before starting new turn
+        await this.setTimeout(nextTurnTime) // wait for 5 seconds before starting new turn
     }
 
     onMessage(player, message) {
@@ -132,10 +154,15 @@ export class Game {
      * Ends the turn
      */
     endTurn() {
+        if (this.currentWord === null) { // drawer did not choose a word in time
+            this.io.in(this.roomId).emit('endTurn')
+            return
+        }
         this.inTurn = false
+        this.currentWord = null
         this.hint = ''
         this.resetGuessed()
-        this.controller.abort()
+        this.controller?.abort()
         this.canvas.clearHistory()
         this.io.in(this.roomId).emit('endTurn', { word: this.currentWord, scores: this.getPlayerScores() })
     }

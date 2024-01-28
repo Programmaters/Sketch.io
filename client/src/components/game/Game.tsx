@@ -6,9 +6,10 @@ import GameConfig from "../game-config/GameConfig";
 import Chat from "../chat/Chat";
 import {useGame} from "../../contexts/GameContext";
 import Leaderboard from "../leaderboard/Leaderboard";
+import ChooseWord from "../choose-word/ChooseWord";
 
 function Game() {
-  const {isInGame, gameState} = useGame();
+  const {isInGame, gameState, isDrawing, choosingWords} = useGame();
   return (
     <div className="Game">
       {gameState === 'Game over!' ?
@@ -18,7 +19,12 @@ function Game() {
       :
         <>
           <Players/>
-            {isInGame ? <Canvas/> : <GameConfig/>}
+            {isInGame && isDrawing && choosingWords.length !== 0
+              ? <ChooseWord/>
+              : isInGame
+                ? <Canvas/>
+                : <GameConfig/>
+            }
           <Chat/>
         </>
       }

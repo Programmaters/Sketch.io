@@ -38,11 +38,13 @@ function onLeaveRoom(conn) {
         delete rooms[conn.roomId]
         return
     }
-    if (conn.room.game.drawer.id === player.id) { // skip turn when drawer leaves
+    if (conn.room.game.drawer !== null && conn.room.game.drawer.id === player.id) { // skip turn when drawer leaves
         conn.room.game.endTurn()
     }
     if (conn.room.socket.id === player.id) { // select new host when host leaves
-        conn.room.socket = conn.room.players[0].socket
+        const newHost = conn.room.players[0]
+        conn.room.socket = newHost.socket
+        conn.socket.broadcast.to(conn.roomId).emit('newHost', { host: newHost.id })
     }
 }
 

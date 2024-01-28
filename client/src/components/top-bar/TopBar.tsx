@@ -24,7 +24,7 @@ function TopBar() {
               <Timer seconds={timer}/>
               <i className={'fa fa-clock'}></i>
             </div>
-            <p>Round: {round}/{gameConfig.rounds}</p>
+            <p>Round {round} of {gameConfig.rounds}</p>
           </>
         }
       </div>
