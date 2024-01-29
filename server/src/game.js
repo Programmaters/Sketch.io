@@ -102,7 +102,7 @@ export class Game {
     onMessage(player, message) {
         if (!this.inTurn) return true
         const guessWord = message.toLowerCase().trim()
-        if (guessWord === '' || this.drawer.id === player.id) return false
+        if (guessWord === '' || this.drawer.id === player.id || player.guessed) return false
 
         const currentWord = this.currentWord.toLowerCase()
         if (guessWord === currentWord) {

@@ -149,7 +149,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   }
 
   function onCorrectGuess({word}: {word: string}) {
-    setGameState('Guess this:  ' + word)
+    setGameState('You guessed the word:  ' + word)
   }
 
   function onUpdateScore(newScores: ScoresType) {

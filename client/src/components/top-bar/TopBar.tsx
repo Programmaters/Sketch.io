@@ -6,12 +6,14 @@ import Timer from "../../utils/Timer";
 
 function TopBar() {
   const {round, gameState, timer, isDrawing, isInGame, gameConfig} = useGame();
+  const [hintsGiven, setHintsGiven] = useState(0);
 
   function onSkipTurn() {
     socket.emit('skipTurn');
   }
 
   function onHint() {
+    setHintsGiven(prev => prev + 1)
     socket.emit('hint');
   }
 
@@ -33,13 +35,12 @@ function TopBar() {
         {isDrawing &&
           <>
             <button onClick={onSkipTurn}>Skip</button>
-            <button onClick={onHint}>Hint</button>
+            <button onClick={onHint} disabled={hintsGiven >= gameConfig.hints}>Hint</button>
           </>
         }
         {isInGame &&
           <button id="save-button">Save</button>
         }
-
       </div>
     </div>
   )

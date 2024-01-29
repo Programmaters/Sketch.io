@@ -13,7 +13,7 @@ function Chat() {
   const [message, setMessage] = useState('');
   const {session} = useSession();
   const {players, host} = useRoom()
-  const {setWord, isDrawing} = useGame()
+  const {setWord, isDrawing, gameState} = useGame()
   const messagesEndRef = useRef<HTMLLIElement>(null);
 
   useEffect(() => {
@@ -119,7 +119,7 @@ function Chat() {
         placeholder="Type your guess here..."
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        disabled={isDrawing}
+        disabled={isDrawing || gameState.startsWith('You guessed the word')}
         maxLength={50}
       />
     </div>
