@@ -46,12 +46,12 @@ export function RoomProvider({ children }: { children: React.ReactNode }) {
     setIsInRoom(false);
   }
 
-  function playerJoinedRoom({player}: {player: PlayerType}) {
+  function playerJoinedRoom(player: PlayerType) {
     setPlayers(players => [...players, player])
   }
 
-  function playerLeftRoom({playerId}: {playerId: string}) {
-    setPlayers(players => players.filter(player => player.id !== playerId))
+  function playerLeftRoom({id}: PlayerType) {
+    setPlayers(players => players.filter(player => player.id !== id))
   }
 
   function newHost({host}: {host: string}) {

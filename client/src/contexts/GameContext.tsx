@@ -167,8 +167,9 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   }
 
   function onEndGame() {
-    setGameState('Game over!')
     setIsInGame(false)
+    setIsDrawing(false)
+    setGameState('Game over!')
   }
 
   function onDisconnect() {

@@ -58,10 +58,10 @@ function Home() {
     <div className="Home">
       <a href="/"><h1>Sketch.io</h1></a>
       <div className="content">
-        <input type="text" placeholder="Enter your name" onChange={(e) => setUsername(e.target.value)}/>
+        <input type="text" placeholder="Enter your name" onChange={(e) => setUsername(e.target.value)} maxLength={18}/>
         <div className="actions">
           {!roomId &&
-              <input type="text" placeholder="Room id" onChange={(e) => setRoomIdField(e.target.value)}/>
+              <input type="text" placeholder="Room id" onChange={(e) => setRoomIdField(e.target.value)} maxLength={8}/>
           }
           <button onClick={onJoinRoom}>Join</button>
           {!roomId && <button onClick={onCreateRoom}>Create</button>}

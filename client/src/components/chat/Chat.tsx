@@ -12,7 +12,7 @@ function Chat() {
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [message, setMessage] = useState('');
   const {session} = useSession();
-  const {isHost} = useRoom()
+  const {players, host} = useRoom()
   const {setWord, isDrawing} = useGame()
   const messagesEndRef = useRef<HTMLLIElement>(null);
 
@@ -31,7 +31,7 @@ function Chat() {
   }
 
   function onMessage(msg: MessageType) {
-    setMessages(prevMessages => [...prevMessages, {...msg, type: 'message'}])
+    setMessages(prevMessages => [...prevMessages, {...msg}])
   }
 
   function onCloseGuess(msg: MessageType) {
@@ -44,7 +44,27 @@ function Chat() {
   }
 
   function onPlayerGuessed ({player}: {player: PlayerType}) {
-    setMessages(prevMessages => [...prevMessages, {text: `${player.name} has guessed the word!`, type: 'message'}])
+    setMessages(prevMessages => [...prevMessages, {text: `${player.name} has guessed the word!`}])
+  }
+
+  function onEndTurn(data: { word: string, everyoneGuessed?: boolean } | undefined) {
+    if (!data) return;
+    setMessages(prevMessages => [...prevMessages, {text: `The word was '${data?.word}'`, type: 'event'}])
+    if (data?.everyoneGuessed) {
+      setMessages(prevMessages => [...prevMessages, {text: `Everyone guessed the word!`, type: 'correct'}])
+    }
+  }
+
+  function onPlayerJoinedRoom({name}: PlayerType) {
+    setMessages(prevMessages => [...prevMessages, {text: `${name} has joined the room`, type: 'event'}])
+  }
+
+  function onPlayerLeftRoom({name}: PlayerType) {
+    setMessages(prevMessages => [...prevMessages, {text: `${name} has left the room`, type: 'event'}])
+  }
+
+  function onGameStarted() {
+    setMessages(prevMessages => [...prevMessages, {text: `The game has started!`, type: 'event'}])
   }
 
   useSocketListeners({
@@ -52,6 +72,10 @@ function Chat() {
     'closeGuess': onCloseGuess,
     'correctGuess': onCorrectGuess,
     'playerGuessed': onPlayerGuessed,
+    'gameStarted': onGameStarted,
+    'playerJoinedRoom': onPlayerJoinedRoom,
+    'playerLeftRoom': onPlayerLeftRoom,
+    'endTurn': onEndTurn,
   });
 
   function onKeyDown(e: KeyboardEvent) {
@@ -67,12 +91,18 @@ function Chat() {
     };
   }, [message]);
 
+  const hostName = players.find(player => player.id === host)?.name
+  const messageColors: Record<string, string> = {
+    correct: 'green',
+    close: 'yellow',
+    event: 'var(--primary-color)'
+  }
   return (
     <div className="Chat">
       <ul>
-        {isHost && <li>{session!.name} is now the room owner!</li>}
+        {<li>{hostName} is now the room owner!</li>}
         {messages.map((message, index) => (
-          <li key={index} style={{color: message.type === 'correct' ? 'green' : message.type === 'close' ? 'yellow' : 'black'}}>
+          <li key={index} style={{color: message.type ? messageColors[message.type] : 'black'}}>
             {message.sender ? (
               <>
                 <strong>{message.sender}: </strong> {message.text}

@@ -1,4 +1,5 @@
 .Players {
+    max-height: 400px;
     overflow-y: auto;
 }
 
@@ -16,7 +17,7 @@
 
 .Players li {
     background: var(--secondary-color);
-    width: 80%;
+    width: 90%;
     padding: 1vh;
     border-radius: 10px;
     color: white;

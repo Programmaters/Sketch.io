@@ -2,7 +2,7 @@ import {getCloseness, getHint, getRandomWords, hideWord} from './utils.js'
 import {readFile} from 'node:fs/promises'
 
 const closeThreshold = 0.75
-const chooseWordTime = 10
+const chooseWordTime = 15
 const nextTurnTime = 5
 const defaultConfig = await loadGameConfig()
 
@@ -95,7 +95,6 @@ export class Game {
         try {
             await this.setCancellableTimeout(this.gameConfig.drawTime)
         } catch {}
-        
         this.endTurn()
         await this.setTimeout(nextTurnTime) // wait for 5 seconds before starting new turn
     }
@@ -122,7 +121,7 @@ export class Game {
 
                 // if everyone guessed, end turn
                 if (this.players.every(player => player.guessed)) {
-                    this.endTurn()
+                    this.controller.abort() // end turn
                 }
             }
             return false
@@ -158,13 +157,13 @@ export class Game {
             this.io.in(this.roomId).emit('endTurn')
             return
         }
+        this.io.in(this.roomId).emit('endTurn', { word: this.currentWord, everyoneGuessed: this.players.every(player => player.guessed) })
         this.inTurn = false
         this.currentWord = null
         this.hint = ''
         this.resetGuessed()
         this.controller?.abort()
         this.canvas.clearHistory()
-        this.io.in(this.roomId).emit('endTurn', { word: this.currentWord, scores: this.getPlayerScores() })
     }
 
     endRound() {

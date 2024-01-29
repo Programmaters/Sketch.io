@@ -2,8 +2,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 70vw;
+    width: 80vw;
     height: 60vh;
+    max-height: 60vh;
 }
 
 .Room > div {

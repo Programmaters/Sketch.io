@@ -21,7 +21,7 @@ function onJoinRoom(conn, data) {
     room.join(conn.socket, data.username)
     conn.socket.emit('joinedRoom', { roomId: room.id, playerId: conn.socket.id, players: room.getPlayers(), config: room.gameConfig, host: room.socket.id })
     conn.socket.emit('canvasData', room.game.canvas.getData())
-    conn.socket.broadcast.to(room.id).emit('playerJoinedRoom', { player: { name: data.username, id: conn.socket.id } } )
+    conn.socket.broadcast.to(room.id).emit('playerJoinedRoom', { name: data.username, id: conn.socket.id } )
     if (room.game.running) {
         conn.socket.emit('gameStarted')
         conn.socket.emit('guessTurn', { word: hideWord(room.game.currentWord), round: room.game.round, drawer: room.game.drawer.id })
@@ -33,9 +33,13 @@ function onLeaveRoom(conn) {
     if (!conn.room) throw new Error('Leave: Room not found')
     const player = conn.room.players.find(player => player.id === conn.socket.id)
     conn.room.leave(conn.socket, player.id)
-    conn.socket.broadcast.to(conn.roomId).emit('playerLeftRoom', { playerId : player.id })
+    conn.socket.broadcast.to(conn.roomId).emit('playerLeftRoom', { name: player.name, id: player.id })
     if (conn.room.players.length === 0) { // delete room when no players left
         delete rooms[conn.roomId]
+        return
+    }
+    if (conn.room.players.length === 1 && conn.room.game.running) { // end game when only one player left
+        conn.room.game.endGame()
         return
     }
     if (conn.room.game.drawer !== null && conn.room.game.drawer.id === player.id) { // skip turn when drawer leaves

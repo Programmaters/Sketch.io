@@ -3,9 +3,11 @@
     flex-direction: column;
     background: white;
     position: relative;
-    padding: 1vh;
     border-radius: 5px;
     font-size: 1.8vh;
+    max-height: 400px;
+    overflow: hidden;
+    margin-left: 1vh;
 }
 
 .Chat input {
